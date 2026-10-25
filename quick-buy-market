@@ -1,0 +1,870 @@
+local v1 = game
+
+do
+end
+
+local v2 = v1.GetService(v1, "Players")
+
+do
+end
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+
+do
+end
+
+local userInputService = (game:GetService("UserInputService"))
+local localPlayer = v2.LocalPlayer
+
+do
+end
+
+local v3 = (require((replicatedStorage:WaitForChild("Modules")):WaitForChild("Packets")))
+
+local v4 = {
+  Gold = { 597, 15, 1 },
+  ["Crystal Chunk"] = { 436, 18, 1 },
+  Log = { 320, 6, 2 },
+  Wood = { 1, 5, 4 },
+  Leaves = { 166, 5, 4 },
+  ["Ice Cube"] = { 183, 10, 3 },
+  Stone = { 336, 8, 3 },
+  Obsidian = { 306, 14, 1 },
+  ["Cooked Meat"] = { 643, 9, 2 },
+  Bloodfruit = { 94, 9, 5 },
+  Berry = { 35, 9, 9 },
+  Bluefruit = { 377, 9, 6 },
+  Adurite = { 418, 12, 1 },
+  Steel = { 174, 9, 1 },
+  Iron = { 177, 7, 1 },
+  Lemon = { 99, 9, 6 },
+  Jelly = { 604, 13, 2 },
+  Hide = { 345, 8, 1 },
+  ["Fire Hide"] = { 324, 18, 1 },
+  Rope = { 973, 12, 2 },
+}
+
+local v5 = {}
+local v6, v7, v8, v9, v10, v11, v12, v13, v14
+
+for key, value in pairs(v4) do
+  v5[value[1]] = { key, value[2], value[3] }
+end
+
+local autoCompleteFrame = (Instance.new("Frame"))
+autoCompleteFrame.Name = "AutoCompleteFrame"
+autoCompleteFrame.Size = UDim2.new(0, 200, 0, 120)
+autoCompleteFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+autoCompleteFrame.BorderSizePixel = 1
+autoCompleteFrame.BorderColor3 = Color3.fromRGB(100, 100, 100)
+autoCompleteFrame.Visible = false
+autoCompleteFrame.ZIndex = 2
+
+local autoCompleteList = (Instance.new("ScrollingFrame"))
+autoCompleteList.Name = "AutoCompleteList"
+autoCompleteList.Size = UDim2.new(1, 0, 1, 0)
+autoCompleteList.BackgroundTransparency = 1
+autoCompleteList.CanvasSize = UDim2.new(0, 0, 0, 0)
+autoCompleteList.ScrollBarThickness = 6
+autoCompleteList.Parent = autoCompleteFrame
+
+local autoCompleteLayout = Instance.new("UIListLayout")
+autoCompleteLayout.Name = "AutoCompleteLayout"
+autoCompleteLayout.SortOrder = Enum.SortOrder.LayoutOrder
+autoCompleteLayout.Padding = UDim.new(0, 2)
+autoCompleteLayout.Parent = autoCompleteList
+
+local marketBuyerGUI = Instance.new("ScreenGui")
+marketBuyerGUI.Name = "MarketBuyerGUI"
+marketBuyerGUI.ResetOnSpawn = false
+marketBuyerGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local mainFrame = (Instance.new("Frame"))
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 400, 0, 250)
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BorderSizePixel = 2
+mainFrame.BorderColor3 = Color3.fromRGB(0, 150, 255)
+mainFrame.Visible = false
+mainFrame.Active = true
+mainFrame.Parent = marketBuyerGUI
+
+local title = Instance.new("TextLabel")
+title.Name = "Title"
+title.Size = UDim2.new(1, 0, 0, 40)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundColor3 = Color3.fromRGB(0, 100, 200)
+title.Text = "Quick buy market"
+title.TextColor3 = Color3.new(1, 1, 1)
+title.TextSize = 20
+title.Font = Enum.Font.GothamBold
+title.Active = true
+title.Parent = mainFrame
+
+local infoFrame = Instance.new("Frame")
+infoFrame.Name = "InfoFrame"
+infoFrame.Size = UDim2.new(1, -20, 0, 60)
+infoFrame.Position = UDim2.new(0, 10, 0, 50)
+infoFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+infoFrame.BorderSizePixel = 1
+infoFrame.BorderColor3 = Color3.fromRGB(100, 100, 100)
+infoFrame.Parent = mainFrame
+
+local priceLabel = (Instance.new("TextLabel"))
+priceLabel.Name = "PriceLabel"
+priceLabel.Size = UDim2.new(1, 0, 0, 25)
+priceLabel.Position = UDim2.new(0, 0, 0, 5)
+priceLabel.BackgroundTransparency = 1
+priceLabel.Text = "Total Price: 0 coins"
+priceLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+priceLabel.TextSize = 16
+priceLabel.Font = Enum.Font.GothamBold
+priceLabel.Parent = infoFrame
+
+local receivedLabel = (Instance.new("TextLabel"))
+receivedLabel.Name = "ReceivedLabel"
+receivedLabel.Size = UDim2.new(1, 0, 0, 25)
+receivedLabel.Position = UDim2.new(0, 0, 0, 30)
+receivedLabel.BackgroundTransparency = 1
+receivedLabel.Text = "You will receive: 0 items"
+receivedLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+receivedLabel.TextSize = 14
+receivedLabel.Font = Enum.Font.Gotham
+receivedLabel.Parent = infoFrame
+
+local itemLabel = Instance.new("TextLabel")
+itemLabel.Name = "ItemLabel"
+itemLabel.Size = UDim2.new(0, 100, 0, 25)
+itemLabel.Position = UDim2.new(0, 10, 0, 120)
+itemLabel.BackgroundTransparency = 1
+itemLabel.Text = "Item Name/ID:"
+itemLabel.TextColor3 = Color3.new(1, 1, 1)
+itemLabel.TextSize = 14
+itemLabel.Font = Enum.Font.GothamBold
+itemLabel.TextXAlignment = Enum.TextXAlignment.Left
+itemLabel.Parent = mainFrame
+
+local itemBox = (Instance.new("TextBox"))
+itemBox.Name = "ItemBox"
+itemBox.Size = UDim2.new(1, -120, 0, 30)
+itemBox.Position = UDim2.new(0, 110, 0, 118)
+itemBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+itemBox.TextColor3 = Color3.new(1, 1, 1)
+itemBox.TextSize = 14
+itemBox.Font = Enum.Font.Gotham
+itemBox.PlaceholderText = "Enter item name or ID"
+itemBox.Parent = mainFrame
+itemBox.Text = "Gold"
+
+autoCompleteFrame.Parent = mainFrame
+autoCompleteFrame.Position = UDim2.new(0, 110, 0, 148)
+autoCompleteFrame.Size = UDim2.new(1, -120, 0, 120)
+
+local amountLabel = Instance.new("TextLabel")
+amountLabel.Name = "AmountLabel"
+amountLabel.Size = UDim2.new(0, 100, 0, 25)
+amountLabel.Position = UDim2.new(0, 10, 0, 155)
+amountLabel.BackgroundTransparency = 1
+amountLabel.Text = "Amount:"
+amountLabel.TextColor3 = Color3.new(1, 1, 1)
+amountLabel.TextSize = 14
+amountLabel.Font = Enum.Font.GothamBold
+amountLabel.TextXAlignment = Enum.TextXAlignment.Left
+amountLabel.Parent = mainFrame
+
+local amountBox = (Instance.new("TextBox"))
+amountBox.Name = "AmountBox"
+amountBox.Size = UDim2.new(1, -120, 0, 30)
+amountBox.Position = UDim2.new(0, 110, 0, 153)
+amountBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+amountBox.TextColor3 = Color3.new(1, 1, 1)
+amountBox.TextSize = 14
+amountBox.Font = Enum.Font.Gotham
+amountBox.PlaceholderText = "Enter amount to buy"
+amountBox.Parent = mainFrame
+amountBox.Text = "1"
+
+local buyButton = (Instance.new("TextButton"))
+buyButton.Name = "BuyButton"
+buyButton.Size = UDim2.new(1, -20, 0, 40)
+buyButton.Position = UDim2.new(0, 10, 0, 195)
+buyButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+buyButton.TextColor3 = Color3.new(1, 1, 1)
+buyButton.TextSize = 18
+buyButton.Font = Enum.Font.GothamBold
+buyButton.Text = "Quick Buy"
+buyButton.Parent = mainFrame
+
+local closeButton = (Instance.new("TextButton"))
+closeButton.Name = "CloseButton"
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -30, 0, 5)
+closeButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.TextSize = 18
+closeButton.Font = Enum.Font.GothamBold
+closeButton.Text = "X"
+closeButton.Active = true
+closeButton.Parent = mainFrame
+
+local v15 = localPlayer
+marketBuyerGUI.Parent = localPlayer:WaitForChild("PlayerGui")
+local v16 = false
+local size = mainFrame.Size
+local position = closeButton.Position
+local v17
+
+local function f1()
+  v16 = not v16
+
+  if v16 then
+    for index, value2 in ipairs(v17) do
+      value2.Visible = false
+    end
+
+    autoCompleteFrame.Visible = false
+    mainFrame.Size = UDim2.new(0, closeButton.Size.X.Offset, 0, closeButton.Size.Y.Offset)
+
+    closeButton.Position = UDim2.new(0, 0, 0, 0)
+    closeButton.Text = "+"
+    closeButton.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
+  else
+    for index2, value3 in ipairs(v17) do
+      value3.Visible = true
+    end
+
+    mainFrame.Size = size
+
+    closeButton.Position = position
+    closeButton.Text = "X"
+    closeButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+  end
+
+  return
+end
+
+v17 = { title, infoFrame, itemLabel, itemBox, amountLabel, amountBox, buyButton }
+local v18 = f1
+
+local function f2(p1, p2)
+  local v19 = p1
+  local v20 = p2
+  local v21 = false
+  local v22, v23, v24, position2, position3
+
+  local function f3(p3)
+    local v25 = p3.Position - position2
+
+    p2.Position = UDim2.new(
+      position3.X.Scale, position3.X.Offset + v25.X, position3.Y.Scale,
+      position3.Y.Offset + v25.Y
+    )
+
+    return
+  end
+
+  do
+  end
+
+  p1.InputBegan:Connect(function(input)
+    local v26 = input
+
+    do
+    end
+
+    local v27 = input.UserInputType == Enum.UserInputType.MouseButton1
+      or input.UserInputType == Enum.UserInputType.Touch
+
+    local v28
+
+    if v27 then
+      if not p2.Visible then
+        return
+      else
+        v21 = true
+        position2 = input.Position
+        position3 = p2.Position
+
+        do
+        end
+
+        input.Changed:Connect(function()
+          if input.UserInputState == Enum.UserInputState.End then
+            v21 = false
+          end
+
+          return
+        end)
+
+        ::L3729980::
+        return
+      end
+    else
+      goto L3729980
+    end
+  end)
+
+  do
+  end
+
+  local v29
+
+  p1.InputChanged:Connect(function(input2)
+    local v30 = input2
+
+    do
+    end
+
+    do
+    end
+
+    if input2.UserInputType == Enum.UserInputType.MouseMovement
+      or input2.UserInputType == Enum.UserInputType.Touch then
+      v29 = input2
+    end
+
+    return
+  end)
+
+  do
+  end
+
+  userInputService.InputChanged:Connect(function(input3)
+    local v31 = input3
+
+    do
+    end
+
+    do
+    end
+
+    if input3 == v29 and v21 then
+      f3(input3)
+    end
+
+    return
+  end)
+
+  return
+end
+
+f2(title, mainFrame)
+f2(closeButton, mainFrame)
+
+do
+end
+
+closeButton.MouseButton1Click:Connect(function()
+  if mainFrame.Visible then
+    f1()
+  end
+
+  return
+end)
+
+do
+end
+
+userInputService.InputBegan:Connect(function(input4, p4)
+  local v32 = input4
+
+  if p4 then
+    return
+  else
+    if input4.KeyCode == Enum.KeyCode.Z then
+      if mainFrame.Parent then
+        f1()
+      end
+    end
+
+    return
+  end
+end)
+
+local v33 = {}
+local v34 = 1
+
+local function f4()
+  local v35 = autoCompleteList
+  local v36, v37, v38
+
+  for index3, value4 in ipairs(autoCompleteList:GetChildren()) do
+    if (value4:IsA("TextButton")) then
+      value4:Destroy()
+    end
+  end
+
+  do
+  end
+
+  local lower = itemBox.Text:lower()
+  local v39 = {}
+
+  for key2, value5 in pairs(v4) do
+    do
+    end
+
+    if ((key2:lower()):sub(1, #lower)) == lower then
+      table.insert(v39, key2)
+    end
+  end
+
+  table.sort(v39)
+  v33 = v39
+  v34 = 1
+
+  if #v39 == 0 then
+    autoCompleteFrame.Visible = false
+    return
+  else
+    autoCompleteFrame.Visible = true
+    autoCompleteFrame.Size = UDim2.new(1, -120, 0, math.min(120, 30 * #v39 + 10))
+
+    for index4, value6 in ipairs(v39) do
+      local v40 = value6
+
+      local textButton
+      textButton = Instance.new("TextButton")
+      textButton.Name = v40
+      textButton.Size = UDim2.new(1, 0, 0, 28)
+
+      local v41
+      v41 = index4 == v34
+
+      local color
+      color = v41
+      color = v41 and Color3.fromRGB(70, 70, 90)
+
+      local v42
+      v42 = color
+
+      do
+      end
+
+      textButton.BackgroundColor3 = color or Color3.fromRGB(50, 50, 50)
+      textButton.Text = v40
+      textButton.TextColor3 = Color3.new(1, 1, 1)
+      textButton.TextSize = 14
+      textButton.Font = Enum.Font.Gotham
+      textButton.AutoButtonColor = false
+
+      do
+      end
+
+      textButton.MouseButton1Click:Connect(function()
+        itemBox.Text = v40
+        autoCompleteFrame.Visible = false
+        return
+      end)
+
+      textButton.Parent = autoCompleteList
+    end
+
+    autoCompleteList.CanvasSize = UDim2.new(0, 0, 0, #v39 * 30)
+    return
+  end
+end
+
+local function f5()
+  local v43 = 1
+  local v44 = autoCompleteList
+
+  for index5, value7 in ipairs(autoCompleteList:GetChildren()) do
+    if (value7:IsA("TextButton")) then
+      if v43 == v34 then
+        value7.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
+      else
+        value7.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+      end
+
+      v43 = v43 + 1
+    end
+  end
+
+  return
+end
+
+do
+end
+
+itemBox.FocusLost:Connect(function()
+  task.wait(0.1)
+
+  if autoCompleteFrame.Visible then
+    autoCompleteFrame.Visible = false
+  end
+
+  return
+end)
+
+do
+end
+
+itemBox.Focused:Connect(function()
+  f4()
+  return
+end)
+
+local v45 = itemBox
+
+do
+end
+
+;(itemBox:GetPropertyChangedSignal("Text")):Connect(function()
+  f4()
+  return
+end)
+
+do
+end
+
+userInputService.InputBegan:Connect(function(input5, p5)
+  local v46 = input5
+  local v47, v48
+
+  if p5 then
+    return
+  else
+    if not autoCompleteFrame.Visible then
+      return
+    else
+      local keyCode
+      keyCode = input5.KeyCode
+
+      if keyCode == Enum.KeyCode.Up then
+        v34 = v34 - 1
+
+        if v34 < 1 then
+          v34 = #v33
+        end
+
+        f5()
+      else
+        if keyCode == Enum.KeyCode.Down then
+          v34 = v34 + 1
+
+          if v34 > #v33 then
+            v34 = 1
+          end
+
+          f5()
+        else
+          do
+          end
+
+          do
+          end
+
+          if keyCode == Enum.KeyCode.Return or keyCode == Enum.KeyCode.Tab then
+            if #v33 >= v34 then
+              itemBox.Text = v33[v34]
+            end
+
+            autoCompleteFrame.Visible = false
+          else
+            if keyCode == Enum.KeyCode.Escape then
+              autoCompleteFrame.Visible = false
+            end
+          end
+        end
+      end
+
+      return
+    end
+  end
+end)
+
+local f6
+
+local function f7()
+  local text = itemBox.Text
+  local v49 = not text
+  local v50 = tonumber(amountBox.Text)
+  local v51 = v49
+  local v52, v53
+
+  if not v49 then
+    local v54
+    v54 = text == ""
+
+    local v55
+    v55 = v54
+
+    if not v54 then
+      do
+      end
+
+      do
+      end
+
+      v55 = not v50 or v50 < 1
+    end
+
+    v51 = v55
+  end
+
+  if v51 then
+    priceLabel.Text = "Total Price: 0 coins"
+    receivedLabel.Text = "You will receive: 0 items"
+    return
+  else
+    local v56
+    v56 = f6(text)
+
+    if not v56 then
+      priceLabel.Text = "Total Price: Item not found!"
+      priceLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+
+      receivedLabel.Text = "You will receive: 0 items"
+      return
+    else
+      priceLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+
+      local received
+      received = v56.received
+
+      priceLabel.Text = string.format("Total Price: %d coins", v56.price * v50)
+      receivedLabel.Text = string.format("You will receive: %d %s", received * v50, v56.name)
+      return
+    end
+  end
+end
+
+function f6(p6)
+  do
+  end
+
+  do
+  end
+
+  local sS = ((tostring(p6)):lower()):match("^%s*(.-)%s*$")
+  local v57
+
+  for key3, value8 in pairs(v4) do
+    if (key3:lower()) == sS then
+      return {
+        id = value8[1],
+        price = value8[2],
+        received = value8[3],
+        name = key3,
+      }
+    end
+  end
+
+  local v58 = tonumber(sS)
+
+  do
+  end
+
+  if v58 and v5[v58] then
+    return {
+      id = v5[v58][1],
+      price = v5[v58][2],
+      received = v5[v58][3],
+      name = v5[v58][1],
+    }
+  else
+    return nil
+  end
+end
+
+local v59 = f7
+
+do
+end
+
+itemBox.Changed:Connect(function(p7)
+  if p7 == "Text" then
+    f7()
+  end
+
+  return
+end)
+
+do
+end
+
+amountBox.Changed:Connect(function(p8)
+  if p8 == "Text" then
+    f7()
+  end
+
+  return
+end)
+
+local function f8(p9)
+  local v60 = p9
+
+  do
+  end
+
+  local mainGui = localPlayer.PlayerGui:FindFirstChild("MainGui")
+  local v61, v62, v63
+
+  if not mainGui then
+    return nil
+  else
+    local rightPanel
+    rightPanel = mainGui:FindFirstChild("RightPanel")
+
+    local v64
+    v64 = rightPanel
+
+    if rightPanel then
+      do
+      end
+
+      local inventory
+      inventory = mainGui.RightPanel:FindFirstChild("Inventory")
+
+      local list
+      list = inventory
+
+      if inventory then
+        do
+        end
+
+        list = mainGui.RightPanel.Inventory:FindFirstChild("List")
+      end
+
+      v64 = list
+    end
+
+    local v65
+    v65 = v64
+
+    if v65 then
+      local findFirstChild
+      findFirstChild = v65:FindFirstChild(p9)
+
+      local v66
+      v66 = findFirstChild
+
+      do
+      end
+
+      if findFirstChild and findFirstChild:FindFirstChild("QuantityImage") then
+        do
+        end
+
+        return (tonumber((findFirstChild.QuantityImage:FindFirstChild("QuantityText")).Text))
+          or 0
+      else
+        ::L2268928::
+        return 0
+      end
+    else
+      goto L2268928
+    end
+  end
+end
+
+do
+end
+
+buyButton.MouseButton1Click:Connect(function()
+  local text2 = itemBox.Text
+  local v67 = not text2
+  local v68 = tonumber(amountBox.Text)
+  local v69 = v67
+  local v70, v71
+
+  if not v67 then
+    local v72
+    v72 = text2 == ""
+
+    local v73
+    v73 = v72
+
+    if not v72 then
+      do
+      end
+
+      do
+      end
+
+      v73 = not v68 or v68 < 1
+    end
+
+    v69 = v73
+  end
+
+  local v74
+
+  if v69 then
+    return
+  else
+    v74 = (f6(text2))
+
+    if not v74 then
+      return
+    else
+      buyButton.Interactable = false
+      buyButton.Text = "Buying..."
+      buyButton.BackgroundColor3 = Color3.fromRGB(150, 150, 0)
+
+      local v75
+      v75 = ((f8(v74.name)) or 0) + v68 * v74.received
+
+      local 
+
+      local function f9(p10, p11)
+        local v76 = p11
+        local v77 = p10
+        local v78
+
+        for i = 1, p10 do
+          do
+          end
+
+          if not (localPlayer.PlayerGui:FindFirstChild("MainGui")) then
+            return false
+          else
+            pcall(function()
+              v3.PurchaseFromShop.send(v74.id, 1)
+              return
+            end)
+
+            task.wait(p11)
+          end
+        end
+
+        return true
+      end
+
+      f9(v68, 0.02)
+
+      task.wait(0.5)
+
+      local v79
+      v79 = f8(v74.name)
+
+      if v79 then
+        local v80
+        v80 = v75 - v79
+
+        if v80 > 0 then
+          local v81
+          v81 = math.ceil(v80 / v74.received)
+
+          buyButton.Text = "Recovering (" .. v81 .. ")..."
+          buyButton.BackgroundColor3 = Color3.fromRGB(200, 100, 0)
+
+          f9(v81, 0.045)
+        end
+      end
+
+      buyButton.Text = "Quick Buy"
+      buyButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+      buyButton.Interactable = true
+
+      return
+    end
+  end
+end)
+
+f1()
+mainFrame.Visible = true
+f7()
+return
