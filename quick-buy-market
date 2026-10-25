@@ -297,11 +297,10 @@ local function f2(p1, p2)
           return
         end)
 
-        ::L3729980::
         return
       end
     else
-      goto L3729980
+      return
     end
   end)
 
@@ -659,7 +658,7 @@ function f6(p6)
 
   if v58 and v5[v58] then
     return {
-      id = v5[v58][1],
+      id = v58,
       price = v5[v58][2],
       received = v5[v58][3],
       name = v5[v58][1],
@@ -748,14 +747,13 @@ local function f8(p9)
         do
         end
 
-        return (tonumber((findFirstChild.QuantityImage:FindFirstChild("QuantityText")).Text))
-          or 0
+        local quantityText = findFirstChild.QuantityImage:FindFirstChild("QuantityText")
+        return quantityText and tonumber(quantityText.Text) or 0
       else
-        ::L2268928::
         return 0
       end
     else
-      goto L2268928
+      return 0
     end
   end
 end
@@ -806,8 +804,6 @@ buyButton.MouseButton1Click:Connect(function()
 
       local v75
       v75 = ((f8(v74.name)) or 0) + v68 * v74.received
-
-      local 
 
       local function f9(p10, p11)
         local v76 = p11
