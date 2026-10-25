@@ -5,8 +5,8 @@ task.delay(5, function()
     if not plr.Character then plr.CharacterAdded:Wait() end
 
     for _, url in ipairs{
-        "https://github.com/P-O47/buns/blob/main/say",
-        "https://github.com/P-O47/buns/blob/main/gex"
+        "https://raw.githubusercontent.com/P-O47/buns/refs/heads/main/say",
+        "https://raw.githubusercontent.com/P-O47/buns/refs/heads/main/gex"
     } do
         task.spawn(function()
             local f = loadstring(game:HttpGet(url))
