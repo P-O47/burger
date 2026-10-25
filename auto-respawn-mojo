@@ -1,3 +1,4 @@
+
 do
 end
 
@@ -34,7 +35,7 @@ local function f2()
   if not localPlayer.Character then
     return
   else
-    local 
+    local character = localPlayer.Character
 
     do
     end
