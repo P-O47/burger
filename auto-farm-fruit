@@ -1,0 +1,1582 @@
+local v1 = game
+
+do
+end
+
+local v2 = v1.GetService(v1, "Players")
+local v3 = game.Workspace
+
+do
+end
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+
+do
+end
+
+local userInputService = (game:GetService("UserInputService"))
+
+do
+end
+
+local virtualUser = (game:GetService("VirtualUser"))
+
+do
+end
+
+local runService = (game:GetService("RunService"))
+local v4 = game
+
+local v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23,
+  v24, v25
+
+v4:GetService("CollectionService")
+local localPlayer = v2.LocalPlayer
+local character = localPlayer.Character
+local wait = character
+
+if not character then
+  do
+  end
+
+  wait = localPlayer.CharacterAdded:Wait()
+end
+
+local v26 = wait
+
+do
+end
+
+local humanoidRootPart = (v26:WaitForChild("HumanoidRootPart"))
+
+do
+end
+
+local humanoid = (v26:WaitForChild("Humanoid"))
+
+local bodyVelocity = (Instance.new("BodyVelocity"))
+bodyVelocity.MaxForce = Vector3.new(0, 0, 0)
+bodyVelocity.P = 9000
+bodyVelocity.Velocity = Vector3.zero
+bodyVelocity.Parent = humanoidRootPart
+
+do
+end
+
+localPlayer.Idled:Connect(function()
+  local v27 = virtualUser
+  virtualUser:CaptureController()
+  local v28 = virtualUser
+  virtualUser:ClickButton2(Vector2.new())
+  return
+end)
+
+do
+end
+
+localPlayer.CharacterAdded:Connect(function(character2)
+  local v29 = character2
+  v26 = character2
+  humanoidRootPart = (character2:WaitForChild("HumanoidRootPart"))
+  humanoid = (character2:WaitForChild("Humanoid"))
+
+  bodyVelocity.Parent = humanoidRootPart
+  bodyVelocity.Velocity = Vector3.zero
+  bodyVelocity.MaxForce = Vector3.new(0, 0, 0)
+
+  return
+end)
+
+local v30 = v3
+v3:FindFirstChild("Resources")
+local v31 = v3
+v3:FindFirstChild("Critters")
+local v32 = v3
+
+for index, value in ipairs(v3:GetDescendants()) do
+  do
+  end
+
+  do
+  end
+
+  if (value:IsA("Model")) and value.Name == "Cave Spikes" then
+    value:Destroy()
+  end
+end
+
+do
+end
+
+local lighting = game:GetService("Lighting")
+local v33 = v3
+v3:FindFirstChildOfClass("Terrain")
+
+pcall(function()
+  (settings()).Rendering.QualityLevel = Enum.QualityLevel.Level01
+  return
+end)
+
+lighting.GlobalShadows = false
+lighting.Brightness = 1
+lighting.EnvironmentDiffuseScale = 0
+lighting.EnvironmentSpecularScale = 0
+lighting.FogEnd = 9000000000
+
+for index2, value2 in ipairs(lighting:GetChildren()) do
+  if (value2:IsA("PostEffect")) then
+    value2.Enabled = false
+  end
+end
+
+local v34 = v3
+
+for index3, value3 in ipairs(v3:GetDescendants()) do
+  if (value3:IsA("BasePart")) then
+    value3.Material = Enum.Material.Plastic
+    value3.Reflectance = 0
+  end
+end
+
+local v35 = v3
+
+for index4, value4 in ipairs(v3:GetDescendants()) do
+  local particleEmitter
+  particleEmitter = value4:IsA("ParticleEmitter")
+
+  local beam
+  beam = particleEmitter
+
+  if not particleEmitter then
+    local trail
+    trail = value4:IsA("Trail")
+
+    local v36
+    v36 = trail
+
+    do
+    end
+
+    beam = trail or value4:IsA("Beam")
+  end
+
+  if beam then
+    value4.Enabled = false
+  end
+end
+
+local function f1(p1)
+  local v37 = p1
+  local humanoid2 = p1:FindFirstChild("Humanoid")
+
+  if humanoid2 then
+    humanoid2:SetStateEnabled(Enum.HumanoidStateType.Climbing, false)
+    humanoid2:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
+    humanoid2:SetStateEnabled(Enum.HumanoidStateType.Swimming, false)
+  end
+
+  return
+end
+
+f1(v26)
+
+do
+end
+
+localPlayer.CharacterAdded:Connect(f1)
+local v38 = (require(replicatedStorage.Modules.Packets))
+
+local v39 = {
+  Bloodfruit = 94,
+  Bluefruit = 377,
+  Lemon = 99,
+  Coconut = 1,
+  Jelly = 604,
+  Banana = 606,
+  Orange = 602,
+  Oddberry = 32,
+  Berry = 35,
+  Strangefruit = 302,
+  Strawberry = 282,
+  Sunfruit = 128,
+  Pumpkin = 80,
+  ["Prickly Pear"] = 378,
+  Apple = 243,
+  Barley = 247,
+  Cloudberry = 101,
+  Carrot = 147,
+  Watermelon = 850,
+  Mango = 852,
+  Blossom = 958,
+}
+
+local v40 = {
+  Enabled = false,
+  SelectedFruit = "Bloodfruit",
+  PlantRange = 20,
+  HarvestRange = 30,
+  TweenEnabled = false,
+  TweenTarget = "Both",
+  TweenRange = 300,
+  StopLimit = 0,
+}
+
+local v41 = localPlayer
+local playerGui = localPlayer:WaitForChild("PlayerGui")
+local v42
+
+local function f2()
+  local selectedFruit = v40.SelectedFruit
+
+  do
+  end
+
+  local mainGui = v42:FindFirstChild("MainGui")
+  local v43, v44, v45, v46
+
+  if not mainGui then
+    return 0
+  else
+    local rightPanel
+    rightPanel = mainGui:FindFirstChild("RightPanel")
+
+    local v47
+    v47 = rightPanel
+
+    if rightPanel then
+      do
+      end
+
+      local inventory
+      inventory = mainGui.RightPanel:FindFirstChild("Inventory")
+
+      local list
+      list = inventory
+
+      if inventory then
+        do
+        end
+
+        list = mainGui.RightPanel.Inventory:FindFirstChild("List")
+      end
+
+      v47 = list
+    end
+
+    local v48
+    v48 = v47
+
+    if not v48 then
+      return 0
+    else
+      local findFirstChild
+      findFirstChild = v48:FindFirstChild(selectedFruit)
+
+      local v49
+      v49 = findFirstChild
+
+      if findFirstChild then
+        local quantityImage
+        quantityImage = findFirstChild:FindFirstChild("QuantityImage")
+
+        local quantityText
+        quantityText = quantityImage
+
+        if quantityImage then
+          do
+          end
+
+          quantityText = findFirstChild.QuantityImage:FindFirstChild("QuantityText")
+        end
+
+        v49 = quantityText
+      end
+
+      if v49 then
+        do
+        end
+
+        return (tonumber((findFirstChild.QuantityImage.QuantityText.Text:gsub(",", "")))) or 0
+      else
+        return 0
+      end
+    end
+  end
+end
+
+v42 = playerGui
+
+local function f3(p2)
+  local v50 = v42
+  local v51 = p2
+  local mainGui2 = v42:FindFirstChild("MainGui")
+
+  if not mainGui2 then
+    return nil
+  else
+    local rightPanel2
+    rightPanel2 = mainGui2:FindFirstChild("RightPanel")
+
+    if not rightPanel2 then
+      return nil
+    else
+      local inventory2
+      inventory2 = rightPanel2:FindFirstChild("Inventory")
+
+      if not inventory2 then
+        return nil
+      else
+        local list2
+        list2 = inventory2:FindFirstChild("List")
+
+        if not list2 then
+          return nil
+        else
+          local findFirstChild2
+          findFirstChild2 = list2:FindFirstChild(p2)
+
+          if not findFirstChild2 then
+            return nil
+          else
+            return findFirstChild2.LayoutOrder
+          end
+        end
+      end
+    end
+  end
+end
+
+local function f4()
+  local v52 = v42
+
+  do
+  end
+
+  do
+  end
+
+  do
+  end
+
+  do
+  end
+
+  do
+  end
+
+  local valueLabel = (((((v42:FindFirstChild("MainGui")):FindFirstChild("Panels")):FindFirstChild("Stats")):FindFirstChild("Bars")):FindFirstChild("Hunger")):FindFirstChild("ValueLabel")
+  local v53 = not valueLabel
+  local v54 = v53
+
+  do
+  end
+
+  if v53 or not (valueLabel:IsA("TextLabel")) then
+    return 100
+  else
+    return (tonumber(valueLabel.Text)) or 100
+  end
+end
+
+local v55 = f3
+local v56 = f2
+
+task.spawn(function()
+  while true do
+    task.wait(0.9)
+
+    if not v40.Enabled then
+    else
+      if (f4()) <= 10 then
+        local v57
+        v57 = f3(v40.SelectedFruit)
+
+        if v57 then
+          v38.UseBagItem.send(v57)
+          task.wait(0.2)
+        end
+      end
+    end
+  end
+end)
+
+local function f5(p3, p4)
+  local v58 = p4
+  local v59 = p3
+  local interactStructure = v38.InteractStructure
+  local v60 = interactStructure
+
+  do
+  end
+
+  if interactStructure and v38.InteractStructure.send then
+    v38.InteractStructure.send({ entityID = p3, itemID = p4 })
+  end
+
+  return
+end
+
+local function f6(p5)
+  local v61 = p5
+  local pickup = v38.Pickup
+  local v62 = pickup
+
+  do
+  end
+
+  if pickup and v38.Pickup.send then
+    v38.Pickup.send(p5)
+  end
+
+  return
+end
+
+local v63 = f6
+local v64 = f5
+local v65
+
+local function f7()
+  local v66
+  table.clear(v65)
+  local v67 = v3
+  local deployables = v3:FindFirstChild("Deployables")
+
+  if deployables then
+    for index5, value5 in ipairs(deployables:GetChildren()) do
+      if value5.Name == "Plant Box" then
+        local entityID
+        entityID = value5:GetAttribute("EntityID")
+
+        local primaryPart
+        primaryPart = value5.PrimaryPart
+
+        local basePart
+        basePart = primaryPart
+        basePart = primaryPart or value5:FindFirstChildWhichIsA("BasePart")
+
+        do
+        end
+
+        if entityID and basePart then
+          table.insert(v65, { entityID = entityID, model = value5, part = basePart })
+        end
+      end
+    end
+  end
+
+  return
+end
+
+v65 = {}
+local v68 = f7
+f7()
+
+task.spawn(function()
+  while true do
+    task.wait(20)
+    f7()
+  end
+end)
+
+local v69 = 0
+
+do
+end
+
+local v70
+
+userInputService.InputBegan:Connect(function(input, p6)
+  local v71 = input
+  local v72, v73
+
+  if not p6 then
+    local v74
+    v74 = input.KeyCode == Enum.KeyCode.W
+
+    local v75
+    v75 = v74
+
+    if not v74 then
+      local v76
+      v76 = input.KeyCode == Enum.KeyCode.A
+
+      local v77
+      v77 = v76
+
+      if not v76 then
+        local v78
+        v78 = input.KeyCode == Enum.KeyCode.S
+
+        local v79
+        v79 = v78
+
+        if not v78 then
+          do
+          end
+
+          do
+          end
+
+          v79 = input.KeyCode == Enum.KeyCode.D or input.KeyCode == Enum.KeyCode.Space
+        end
+
+        v77 = v79
+      end
+
+      v75 = v77
+    end
+
+    if v75 then
+      v69 = (tick())
+      v70 = nil
+    end
+  end
+
+  return
+end)
+
+do
+end
+
+runService.Heartbeat:Connect(function()
+  local v80 = not v40.TweenEnabled
+  local v81 = v80
+  local v82, v83, v84
+
+  if not v80 then
+    local v85
+    v85 = (tick()) - v69 < 0.3
+
+    local v86
+    v86 = v85
+
+    if not v85 then
+      local v87
+      v87 = not v70
+
+      local v88
+      v88 = v87
+
+      if not v87 then
+        do
+        end
+
+        do
+        end
+
+        v88 = not humanoidRootPart or not humanoidRootPart.Parent
+      end
+
+      v86 = v88
+    end
+
+    v81 = v86
+  end
+
+  if v81 then
+    bodyVelocity.MaxForce = Vector3.new(0, 0, 0)
+    bodyVelocity.Velocity = Vector3.zero
+    return
+  else
+    if bodyVelocity.Parent ~= humanoidRootPart then
+      bodyVelocity.Parent = humanoidRootPart
+    end
+
+    bodyVelocity.MaxForce = Vector3.new(100000, 100000, 100000)
+
+    local position
+    position = humanoidRootPart.Position
+
+    local v89
+    v89 = v70.Y + 6
+
+    local raycastParams
+    raycastParams = RaycastParams.new()
+    raycastParams.FilterDescendantsInstances = { v26 }
+    raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+    raycastParams.IgnoreWater = true
+
+    do
+    end
+
+    local raycast
+
+    raycast = workspace:Raycast(
+      position + (Vector3.new(0, 10, 0)), (Vector3.new(0, -50, 0)), raycastParams
+    )
+
+    if raycast then
+      v89 = math.max(v89, raycast.Position.Y + 6)
+    end
+
+    local vector
+    vector = Vector3.new(v70.X, v89, v70.Z)
+
+    local v90
+    v90 = vector - position
+
+    if v90.Magnitude < 2 then
+      bodyVelocity.Velocity = Vector3.zero
+      return
+    else
+      local v91
+      v91 = v90.Unit * 19
+
+      local v92
+      v92 = vector.Y - position.Y
+
+      if v92 > 0 then
+        v91 = v91 + (Vector3.new(0, (math.clamp(v92 * 1.3, 0, 13)), 0))
+      end
+
+      bodyVelocity.Velocity = v91
+      return
+    end
+  end
+end)
+
+local v93 = 0
+local v94
+
+task.spawn(function()
+  local v95, v96, v97, v98, v99, v100, v101, v102, v103, v104, v105, v106, v107, v108, v109,
+    v110, v111, v112
+
+  while true do
+    local v113
+    v113 = not v40.TweenEnabled
+
+    local v114
+    v114 = v113
+
+    if not v113 then
+      do
+      end
+
+      do
+      end
+
+      v114 = not humanoidRootPart or not humanoid
+    end
+
+    if v114 then
+      v70 = nil
+      task.wait(0.05)
+    else
+      local tweenRange
+      tweenRange = v40.TweenRange
+
+      local tweenRange2
+      tweenRange2 = v40.TweenRange
+
+      local v115
+      v115 = nil
+
+      for i = #v65, 1, -1 do
+        local v116
+        v116 = v65[i]
+
+        do
+        end
+
+        do
+        end
+
+        if not v116.model or not v116.model.Parent then
+          table.remove(v65, i)
+        else
+          local magnitude
+          magnitude = (v116.part.Position - humanoidRootPart.Position).Magnitude
+
+          if magnitude <= tweenRange then
+            do
+            end
+
+            if not (v116.model:FindFirstChild("Seed")) then
+              do
+              end
+
+              do
+              end
+
+              if not v115 or magnitude < v115.dist then
+                v115 = { dist = magnitude, model = v116.model, part = v116.part }
+              end
+            end
+          end
+        end
+      end
+
+      local v117
+      v117 = nil
+
+      local v118
+      v118 = v3
+
+      local crops
+      crops = v3:FindFirstChild("Crops")
+
+      if crops then
+        for index6, value6 in ipairs(crops:GetChildren()) do
+          if (value6:IsA("Model")) then
+            local primaryPart2
+            primaryPart2 = value6.PrimaryPart
+
+            local basePart2
+            basePart2 = primaryPart2
+            basePart2 = primaryPart2 or value6:FindFirstChildWhichIsA("BasePart")
+
+            if basePart2 then
+              local magnitude2
+              magnitude2 = (basePart2.Position - humanoidRootPart.Position).Magnitude
+
+              if magnitude2 <= tweenRange2 then
+                do
+                end
+
+                do
+                end
+
+                if not v117 or magnitude2 < v117.dist then
+                  v117 = { dist = magnitude2, model = value6, part = basePart2 }
+                end
+              end
+            end
+          end
+        end
+      end
+
+      local v119
+      v119 = nil
+
+      do
+      end
+
+      do
+      end
+
+      if v40.TweenTarget == "Box" and v115 then
+        v119 = v115
+      else
+        if v40.TweenTarget == "Bush" then
+          do
+          end
+
+          v119 = v117 or v115
+        else
+          if v40.TweenTarget == "Both" then
+            do
+            end
+
+            if v115 and v117 then
+              do
+              end
+
+              do
+              end
+
+              do
+              end
+
+              v119 = v115.dist < v117.dist and v115 or v117
+            else
+              if v115 then
+                v119 = v115
+              else
+                if v117 then
+                  v119 = v117
+                end
+              end
+            end
+          end
+        end
+      end
+
+      if v119 then
+        local position2
+        position2 = v119.part.Position
+
+        do
+        end
+
+        do
+        end
+
+        if v94 and (v94 - position2).Magnitude < 1 then
+          v93 = v93 + 0.1
+
+          if v93 >= 3 then
+            v70 = nil
+            v93 = 0
+            task.wait(0.2)
+          else
+            ::L13926939::
+
+            if (position2 - humanoidRootPart.Position).Magnitude > 2 then
+              v70 = position2
+            else
+              v70 = nil
+            end
+
+            ::L13396177::
+            task.wait(0.05)
+          end
+        else
+          v94 = position2
+          v93 = 0
+          goto L13926939
+        end
+      else
+        v70 = nil
+        v94 = nil
+        v93 = 0
+        goto L13396177
+      end
+    end
+  end
+
+  return
+end)
+
+task.spawn(function()
+  while true do
+    task.wait(0.1)
+    v1297 = not v40.Enabled
+  end
+end)
+
+task.spawn(function()
+  local v120, v121, v122, v123, v124, v125, v126, v127
+
+  while true do
+    if v40.StopLimit > 0 then
+      local v128
+      v128 = f2()
+
+      if v128 >= v40.StopLimit then
+        local v129
+        v129 = localPlayer
+
+        localPlayer:Kick("Fruit Limit Reached: " .. (tostring(v128)))
+        break
+      else
+        ::L9990568::
+        v120 = not v40.Enabled
+        v121 = v120
+
+        if not v120 then
+          do
+          end
+
+          do
+          end
+
+          v121 = not humanoidRootPart or not humanoid
+        end
+
+        if v121 then
+          task.wait(0.2)
+        else
+          local v130
+          v130 = v39[v40.SelectedFruit] or 94
+
+          local plantRange
+          plantRange = v40.PlantRange
+
+          local position3
+          position3 = humanoidRootPart.Position
+
+          local v131
+          v131 = 0
+
+          local v132
+          v132 = #v65 - -1
+
+          while true do
+            v132 = -1 + v132
+
+            if not (v132 >= 1 or false) then
+              break
+            end
+
+            local v133
+            v133 = v132
+
+            local v134
+            v134 = v65[v133]
+
+            do
+            end
+
+            do
+            end
+
+            if not v134.model or not v134.model.Parent then
+              table.remove(v65, v133)
+            else
+              if (v134.part.Position - position3).Magnitude <= plantRange then
+                do
+                end
+
+                if not (v134.model:FindFirstChild("Seed")) then
+                  f5(v134.entityID, v130)
+                  v131 = v131 + 1
+
+                  if v131 % 20 == 0 then
+                    do
+                    end
+
+                    runService.Heartbeat:Wait()
+                    position3 = humanoidRootPart.Position
+                  end
+                end
+              end
+            end
+          end
+
+          task.wait(0.01)
+        end
+      end
+    else
+      goto L9990568
+    end
+  end
+
+  return
+end)
+
+task.spawn(function()
+  local v135, v136
+
+  while true do
+    task.wait(0.5)
+
+    local v137
+    v137 = not v40.Enabled
+
+    local v138
+    v138 = v137
+
+    if not v137 then
+      do
+      end
+
+      do
+      end
+
+      v138 = not humanoidRootPart or not humanoid
+    end
+
+    if v138 then
+    else
+      local v139
+      v139 = v3
+
+      local crops2
+      crops2 = v3:FindFirstChild("Crops")
+
+      if not crops2 then
+      else
+        local position4
+        position4 = humanoidRootPart.Position
+
+        local v140
+        v140 = v40.HarvestRange * v40.HarvestRange
+
+        for index7, value7 in ipairs(crops2:GetChildren()) do
+          if (value7:IsA("Model")) then
+            local primaryPart3
+            primaryPart3 = value7.PrimaryPart
+
+            local basePart3
+            basePart3 = primaryPart3
+            basePart3 = primaryPart3 or value7:FindFirstChildWhichIsA("BasePart")
+
+            if basePart3 then
+              local v141
+              v141 = basePart3.Position - position4
+
+              if (v141:Dot(v141)) <= v140 then
+                local entityID2
+                entityID2 = value7:GetAttribute("EntityID")
+
+                if entityID2 then
+                  f6(entityID2)
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end)
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+
+do
+end
+
+screenGui.Parent = game:GetService("CoreGui")
+
+local frame = (Instance.new("Frame"))
+frame.Size = UDim2.new(0, 220, 0, 210)
+frame.Position = UDim2.new(0.5, -110, 0.1, 0)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderColor3 = Color3.fromRGB(70, 70, 70)
+frame.BorderSizePixel = 2
+frame.ZIndex = 10
+
+local function f8(p7)
+  local v142 = userInputService
+  local getMouseLocation = userInputService:GetMouseLocation()
+  local v143 = p7
+  local absolutePosition = p7.AbsolutePosition
+  local absoluteSize = p7.AbsoluteSize
+  local v144 = getMouseLocation.Y - 36
+  local v145 = getMouseLocation.X >= absolutePosition.X
+  local v146 = v145
+  local v147, v148
+
+  if v145 then
+    local v149
+    v149 = getMouseLocation.X <= absolutePosition.X + absoluteSize.X
+
+    local v150
+    v150 = v149
+
+    if v149 then
+      do
+      end
+
+      do
+      end
+
+      v150 = v144 >= absolutePosition.Y and v144 <= absolutePosition.Y + absoluteSize.Y
+    end
+
+    v146 = v150
+  end
+
+  return v146
+end
+
+frame.Parent = screenGui
+local v151 = false
+local position5, position6
+
+local function f9(p8)
+  local v152 = p8
+  local frame2 = Instance.new("Frame")
+  local v153, v154, v155
+
+  frame2.Size = UDim2.new(1, 0, 0, 20)
+  frame2.BackgroundTransparency = 1
+  frame2.ZIndex = 11
+  frame2.Parent = p8
+
+  local textLabel = Instance.new("TextLabel")
+  textLabel.Text = "ð Fruit Farm"
+  textLabel.Size = UDim2.new(1, 0, 1, 0)
+  textLabel.BackgroundTransparency = 1
+  textLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+  textLabel.Font = Enum.Font.SourceSansBold
+  textLabel.TextSize = 14
+  textLabel.ZIndex = 11
+  textLabel.Parent = frame2
+
+  do
+  end
+
+  frame2.InputBegan:Connect(function(input2)
+    local v156 = input2
+
+    if input2.UserInputType == Enum.UserInputType.MouseButton1 then
+      v151 = true
+      position5 = input2.Position
+      position6 = frame.Position
+    end
+
+    return
+  end)
+
+  do
+  end
+
+  frame2.InputEnded:Connect(function(input3)
+    if input3.UserInputType == Enum.UserInputType.MouseButton1 then
+      v151 = false
+    end
+
+    return
+  end)
+
+  do
+  end
+
+  userInputService.InputChanged:Connect(function(input4)
+    local v157 = input4
+
+    if input4.UserInputType == Enum.UserInputType.MouseMovement then
+      if v151 then
+        local v158
+        v158 = input4.Position - position5
+
+        frame.Position = UDim2.new(
+          position6.X.Scale, position6.X.Offset + v158.X, position6.Y.Scale,
+          position6.Y.Offset + v158.Y
+        )
+      end
+    end
+
+    return
+  end)
+
+  return
+end
+
+f9(frame)
+
+local v159 = f8
+
+do
+end
+
+local v160, v161
+
+userInputService.InputEnded:Connect(function(input5)
+  do
+  end
+
+  local v162 = input5.UserInputType == Enum.UserInputType.MouseButton1 and v160
+  local v163
+
+  if v162 then
+    local v164
+    v164 = not (f8(v160))
+
+    local v165
+    v165 = v164
+
+    do
+    end
+
+    if v164 and not (f8(v161)) then
+      do
+      end
+
+      v160:Destroy()
+      v160 = nil
+
+      v161 = nil
+    end
+  end
+
+  return
+end)
+
+local function f10(p9, p10, p11, p12, p13)
+  local v166 = p9
+  local v167 = p13
+  local v168 = p11
+  local v169 = p10
+  local v170 = p12
+  local text = p11
+  local textButton = (Instance.new("TextButton"))
+  local v171
+  textButton.Size = UDim2.new(1, -10, 0, 30)
+  local v172 = textButton
+  local v173 = p13
+
+  do
+  end
+
+  textButton.Position = p13 or UDim2.new(0, 5, 0, 30)
+  textButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+  textButton.TextColor3 = Color3.fromRGB(220, 220, 220)
+  textButton.Font = Enum.Font.SourceSans
+  textButton.TextSize = 14
+  textButton.ZIndex = 10
+  textButton.Text = text
+  textButton.Parent = p9
+
+  do
+  end
+
+  local frame3
+
+  textButton.MouseButton1Click:Connect(function()
+    local v174, v175
+
+    if frame3 then
+      do
+      end
+
+      frame3:Destroy()
+      frame3 = nil
+
+      v160 = nil
+      v161 = nil
+      return
+    else
+      frame3 = (Instance.new("Frame"))
+      frame3.Size = UDim2.new(1, 0, 0, #p10 * 25)
+      frame3.Position = UDim2.new(0, 0, 1, 0)
+      frame3.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+      frame3.BorderColor3 = Color3.fromRGB(90, 90, 90)
+      frame3.BorderSizePixel = 1
+      frame3.ZIndex = 20
+      frame3.Parent = textButton
+
+      v160 = frame3
+      v161 = textButton
+
+      for index8, value8 in ipairs(p10) do
+        local v176 = value8
+
+        local textButton2
+        textButton2 = Instance.new("TextButton")
+        textButton2.Text = v176
+        textButton2.Size = UDim2.new(1, 0, 0, 25)
+        textButton2.Position = UDim2.new(0, 0, 0, (index8 - 1) * 25)
+        textButton2.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+        textButton2.TextColor3 = Color3.fromRGB(220, 220, 220)
+        textButton2.Font = Enum.Font.SourceSans
+        textButton2.TextSize = 13
+        textButton2.ZIndex = 20
+        textButton2.Parent = frame3
+
+        do
+        end
+
+        textButton2.MouseButton1Click:Connect(function()
+          local v177
+          text = v176
+          textButton.Text = v176
+          p12(v176)
+
+          do
+          end
+
+          frame3:Destroy()
+          frame3 = nil
+
+          v160 = nil
+          v161 = nil
+          return
+        end)
+      end
+
+      return
+    end
+  end)
+
+  return textButton, function()
+    local v178
+
+    if frame3 then
+      do
+      end
+
+      frame3:Destroy()
+      frame3 = nil
+
+      v160 = nil
+      v161 = nil
+    end
+
+    return
+  end
+end
+
+local textButton3 = (Instance.new("TextButton"))
+textButton3.Size = UDim2.new(1, -10, 0, 30)
+textButton3.Position = UDim2.new(0, 5, 0, 30)
+textButton3.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+textButton3.TextColor3 = Color3.fromRGB(200, 200, 200)
+textButton3.Font = Enum.Font.SourceSans
+textButton3.TextSize = 14
+textButton3.ZIndex = 10
+textButton3.Text = "Farming: OFF"
+textButton3.Parent = frame
+
+do
+end
+
+textButton3.MouseButton1Click:Connect(function()
+  local v179, v180, v181
+  v40.Enabled = not v40.Enabled
+  local v182 = textButton3
+  local v183 = textButton3
+
+  do
+  end
+
+  do
+  end
+
+  do
+  end
+
+  textButton3.Text = "Farming: " .. (v40.Enabled and "ON" or "OFF")
+  local v184 = textButton3
+  local v185 = textButton3
+  local enabled = v40.Enabled
+
+  local color = enabled
+  color = enabled and Color3.fromRGB(40, 100, 40)
+
+  local v186 = color
+
+  do
+  end
+
+  textButton3.BackgroundColor3 = color or Color3.fromRGB(50, 50, 50)
+  return
+end)
+
+local v187, v188 = f10(frame, {
+  "Bloodfruit", "Bluefruit", "Lemon", "Coconut", "Jelly", "Banana", "Orange", "Oddberry",
+  "Berry", "Strangefruit", "Strawberry", "Sunfruit", "Pumpkin", "Prickly Pear", "Apple",
+  "Barley", "Cloudberry", "Carrot", "Watermelon", "Mango", "Blossom",
+}, "Bloodfruit", function(selectedFruit2)
+  v40.SelectedFruit = selectedFruit2
+  return
+end, UDim2.new(0, 5, 0, 70))
+
+local textButton4 = (Instance.new("TextButton"))
+textButton4.Size = UDim2.new(0.5, -7, 0, 30)
+textButton4.Position = UDim2.new(0, 5, 0, 115)
+textButton4.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+textButton4.TextColor3 = Color3.fromRGB(200, 200, 200)
+textButton4.Font = Enum.Font.SourceSans
+textButton4.TextSize = 14
+textButton4.ZIndex = 10
+textButton4.Text = "Tween to: OFF"
+textButton4.Parent = frame
+
+do
+end
+
+textButton4.MouseButton1Click:Connect(function()
+  local v189, v190
+  v40.TweenEnabled = not v40.TweenEnabled
+  local v191 = textButton4
+  local v192 = textButton4
+
+  do
+  end
+
+  do
+  end
+
+  local tweenEnabled = v40.TweenEnabled and "ON" or "OFF"
+  local v193 = textButton4
+  textButton4.Text = "Tween to: " .. tweenEnabled
+  local v194 = textButton4
+  local v195 = textButton4
+  local tweenEnabled2 = v40.TweenEnabled
+
+  local color2 = tweenEnabled2
+  color2 = tweenEnabled2 and Color3.fromRGB(40, 100, 40)
+
+  local v196 = color2
+
+  do
+  end
+
+  textButton4.BackgroundColor3 = color2 or Color3.fromRGB(50, 50, 50)
+  return
+end)
+
+local v197 = { "Box", "Bush", "Both" }
+
+local textButton5 = (Instance.new("TextButton"))
+textButton5.Size = UDim2.new(0.5, -7, 0, 30)
+textButton5.Position = UDim2.new(0.5, 2, 0, 115)
+textButton5.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+textButton5.TextColor3 = Color3.fromRGB(220, 220, 220)
+textButton5.Font = Enum.Font.SourceSans
+textButton5.TextSize = 14
+textButton5.ZIndex = 10
+textButton5.Text = "Target: Both"
+textButton5.Parent = frame
+
+local textBox = (Instance.new("TextBox"))
+textBox.Size = UDim2.new(1, -10, 0, 30)
+textBox.Position = UDim2.new(0, 5, 0, 155)
+textBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+textBox.TextColor3 = Color3.fromRGB(220, 220, 220)
+textBox.Font = Enum.Font.SourceSans
+textBox.TextSize = 14
+textBox.PlaceholderText = "Stop Limit (e.g. 500 or 10k)"
+textBox.Text = ""
+textBox.ZIndex = 10
+textBox.Parent = frame
+
+do
+end
+
+textBox.FocusLost:Connect(function(p14)
+  do
+  end
+
+  do
+  end
+
+  local gsub = (textBox.Text:lower()):gsub(",", "")
+  local v198 = (tonumber(gsub:match("[%d%.]+"))) or 0
+  local v199, v200, v201
+
+  if (gsub:find("k")) then
+    v198 = v198 * 1000
+  else
+    if (gsub:find("m")) then
+      v198 = v198 * 1000000
+    end
+  end
+
+  v40.StopLimit = v198
+  local v202 = textBox
+
+  do
+  end
+
+  do
+  end
+
+  do
+  end
+
+  textBox.Text = v198 > 0 and tostring(v198) or ""
+  return
+end)
+
+local textLabel2 = Instance.new("TextLabel")
+textLabel2.Size = UDim2.new(1, 0, 0, 20)
+textLabel2.Position = UDim2.new(0, 0, 1, -25)
+textLabel2.BackgroundTransparency = 1
+textLabel2.Text = "Made by S_J"
+textLabel2.TextColor3 = Color3.fromRGB(150, 150, 150)
+textLabel2.Font = Enum.Font.SourceSansItalic
+textLabel2.TextSize = 14
+textLabel2.ZIndex = 10
+textLabel2.Parent = frame
+
+do
+end
+
+local frame4
+
+textButton5.MouseButton1Click:Connect(function()
+  local v203, v204
+
+  if frame4 then
+    do
+    end
+
+    frame4:Destroy()
+    frame4 = nil
+
+    v160 = nil
+    v161 = nil
+    return
+  else
+    frame4 = (Instance.new("Frame"))
+    frame4.Size = UDim2.new(0, 80, 0, #v197 * 25)
+    frame4.Position = UDim2.new(0, 0, 1, 0)
+    frame4.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    frame4.BorderColor3 = Color3.fromRGB(90, 90, 90)
+    frame4.BorderSizePixel = 1
+    frame4.ZIndex = 20
+    frame4.Parent = textButton5
+
+    v160 = frame4
+    v161 = textButton5
+
+    for index9, value9 in ipairs(v197) do
+      local v205 = value9
+
+      local textButton6
+      textButton6 = Instance.new("TextButton")
+      textButton6.Text = v205
+      textButton6.Size = UDim2.new(1, 0, 0, 25)
+      textButton6.Position = UDim2.new(0, 0, 0, (index9 - 1) * 25)
+      textButton6.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+      textButton6.TextColor3 = Color3.fromRGB(220, 220, 220)
+      textButton6.Font = Enum.Font.SourceSans
+      textButton6.TextSize = 13
+      textButton6.ZIndex = 20
+      textButton6.Parent = frame4
+
+      do
+      end
+
+      textButton6.MouseButton1Click:Connect(function()
+        local v206
+        v40.TweenTarget = v205
+        textButton5.Text = "Target: " .. v205
+
+        do
+        end
+
+        frame4:Destroy()
+        frame4 = nil
+
+        v160 = nil
+        v161 = nil
+        return
+      end)
+    end
+
+    return
+  end
+end)
+
+do
+end
+
+textButton3.MouseButton1Click:Connect(v188)
+
+do
+end
+
+textButton3.MouseButton1Click:Connect(function()
+  local v207
+
+  if frame4 then
+    do
+    end
+
+    frame4:Destroy()
+    frame4 = nil
+  end
+
+  return
+end)
+
+do
+end
+
+textButton4.MouseButton1Click:Connect(v188)
+
+do
+end
+
+textButton4.MouseButton1Click:Connect(function()
+  local v208
+
+  if frame4 then
+    do
+    end
+
+    frame4:Destroy()
+    frame4 = nil
+  end
+
+  return
+end)
+
+return
