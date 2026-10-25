@@ -1,3 +1,4 @@
+
 do
 end
 
@@ -105,7 +106,13 @@ local function f1()
       do
       end
 
-      for index, value in ipairs(workspace.Deployables:GetChildren()) do
+      local deployables = workspace:FindFirstChild("Deployables")
+
+      if not deployables then
+        return nil
+      end
+
+      for index, value in ipairs(deployables:GetChildren()) do
         if value.Name == "Coin Press" then
           local primaryPart
           primaryPart = value.PrimaryPart
@@ -120,10 +127,10 @@ local function f1()
           if basePart and (basePart.Position - humanoidRootPart.Position).Magnitude <= 50 then
             return value:GetAttribute("EntityID")
           else
-            ::L911060::
+            -- Continue searching for another Coin Press.
           end
         else
-          goto L911060
+          -- Continue searching other deployables.
         end
       end
 
