@@ -307,12 +307,12 @@ local function f8()
           f4()
           break
         else
-          ::L3002897::
+          do end
         end
       else
         v37 = v39
         v36 = 0
-        goto L3002897
+        do end
       end
     else
       if v39 then
