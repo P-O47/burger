@@ -167,7 +167,7 @@ end
 
 local function f1(p1)
   local v37 = p1
-  local humanoid2 = p1:FindFirstChild("Humanoid")
+  local humanoid2 = p1:WaitForChild("Humanoid", 10)
 
   if humanoid2 then
     humanoid2:SetStateEnabled(Enum.HumanoidStateType.Climbing, false)
@@ -184,7 +184,7 @@ do
 end
 
 localPlayer.CharacterAdded:Connect(f1)
-local v38 = (require(replicatedStorage.Modules.Packets))
+local v38 = (require(replicatedStorage:WaitForChild("Modules"):WaitForChild("Packets")))
 
 local v39 = {
   Bloodfruit = 94,
@@ -296,7 +296,7 @@ local function f2()
         do
         end
 
-        return (tonumber((findFirstChild.QuantityImage.QuantityText.Text:gsub(",", "")))) or 0
+        return (tonumber((v49.Text:gsub(",", "")))) or 0
       else
         return 0
       end
@@ -364,7 +364,12 @@ local function f4()
   do
   end
 
-  local valueLabel = (((((v42:FindFirstChild("MainGui")):FindFirstChild("Panels")):FindFirstChild("Stats")):FindFirstChild("Bars")):FindFirstChild("Hunger")):FindFirstChild("ValueLabel")
+  local hungerGui = v42:FindFirstChild("MainGui")
+  hungerGui = hungerGui and hungerGui:FindFirstChild("Panels")
+  hungerGui = hungerGui and hungerGui:FindFirstChild("Stats")
+  hungerGui = hungerGui and hungerGui:FindFirstChild("Bars")
+  hungerGui = hungerGui and hungerGui:FindFirstChild("Hunger")
+  local valueLabel = hungerGui and hungerGui:FindFirstChild("ValueLabel")
   local v53 = not valueLabel
   local v54 = v53
 
@@ -391,7 +396,7 @@ task.spawn(function()
         local v57
         v57 = f3(v40.SelectedFruit)
 
-        if v57 then
+        if v57 and v38.UseBagItem and v38.UseBagItem.send then
           v38.UseBagItem.send(v57)
           task.wait(0.2)
         end
@@ -442,8 +447,8 @@ local function f7()
   local deployables = v3:FindFirstChild("Deployables")
 
   if deployables then
-    for index5, value5 in ipairs(deployables:GetChildren()) do
-      if value5.Name == "Plant Box" then
+    for index5, value5 in ipairs(deployables:GetDescendants()) do
+      if value5:IsA("Model") and value5.Name == "Plant Box" then
         local entityID
         entityID = value5:GetAttribute("EntityID")
 
@@ -452,7 +457,7 @@ local function f7()
 
         local basePart
         basePart = primaryPart
-        basePart = primaryPart or value5:FindFirstChildWhichIsA("BasePart")
+        basePart = primaryPart or value5:FindFirstChildWhichIsA("BasePart", true)
 
         do
         end
@@ -682,7 +687,7 @@ task.spawn(function()
         do
         end
 
-        if not v116.model or not v116.model.Parent then
+        if not v116.model or not v116.model.Parent or not v116.part or not v116.part.Parent then
           table.remove(v65, i)
         else
           local magnitude
@@ -717,14 +722,14 @@ task.spawn(function()
       crops = v3:FindFirstChild("Crops")
 
       if crops then
-        for index6, value6 in ipairs(crops:GetChildren()) do
-          if (value6:IsA("Model")) then
+        for index6, value6 in ipairs(crops:GetDescendants()) do
+          if (value6:IsA("Model")) and value6:GetAttribute("EntityID") then
             local primaryPart2
             primaryPart2 = value6.PrimaryPart
 
             local basePart2
             basePart2 = primaryPart2
-            basePart2 = primaryPart2 or value6:FindFirstChildWhichIsA("BasePart")
+            basePart2 = primaryPart2 or value6:FindFirstChildWhichIsA("BasePart", true)
 
             if basePart2 then
               local magnitude2
@@ -802,35 +807,34 @@ task.spawn(function()
         do
         end
 
+        local canMove = true
         if v94 and (v94 - position2).Magnitude < 1 then
           v93 = v93 + 0.1
 
           if v93 >= 3 then
             v70 = nil
             v93 = 0
+            canMove = false
             task.wait(0.2)
-          else
-            ::L13926939::
-
-            if (position2 - humanoidRootPart.Position).Magnitude > 2 then
-              v70 = position2
-            else
-              v70 = nil
-            end
-
-            ::L13396177::
-            task.wait(0.05)
           end
         else
           v94 = position2
           v93 = 0
-          goto L13926939
+        end
+
+        if canMove then
+          if (position2 - humanoidRootPart.Position).Magnitude > 2 then
+            v70 = position2
+          else
+            v70 = nil
+          end
+          task.wait(0.05)
         end
       else
         v70 = nil
         v94 = nil
         v93 = 0
-        goto L13396177
+        task.wait(0.05)
       end
     end
   end
@@ -859,8 +863,9 @@ task.spawn(function()
 
         localPlayer:Kick("Fruit Limit Reached: " .. (tostring(v128)))
         break
-      else
-        ::L9990568::
+      end
+    end
+
         v120 = not v40.Enabled
         v121 = v120
 
@@ -911,7 +916,7 @@ task.spawn(function()
             do
             end
 
-            if not v134.model or not v134.model.Parent then
+            if not v134.model or not v134.model.Parent or not v134.part or not v134.part.Parent then
               table.remove(v65, v133)
             else
               if (v134.part.Position - position3).Magnitude <= plantRange then
@@ -936,10 +941,6 @@ task.spawn(function()
 
           task.wait(0.01)
         end
-      end
-    else
-      goto L9990568
-    end
   end
 
   return
@@ -983,14 +984,14 @@ task.spawn(function()
         local v140
         v140 = v40.HarvestRange * v40.HarvestRange
 
-        for index7, value7 in ipairs(crops2:GetChildren()) do
+        for index7, value7 in ipairs(crops2:GetDescendants()) do
           if (value7:IsA("Model")) then
             local primaryPart3
             primaryPart3 = value7.PrimaryPart
 
             local basePart3
             basePart3 = primaryPart3
-            basePart3 = primaryPart3 or value7:FindFirstChildWhichIsA("BasePart")
+            basePart3 = primaryPart3 or value7:FindFirstChildWhichIsA("BasePart", true)
 
             if basePart3 then
               local v141
@@ -1019,7 +1020,13 @@ screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 do
 end
 
-screenGui.Parent = game:GetService("CoreGui")
+local coreGui = game:GetService("CoreGui")
+local guiParented = pcall(function()
+  screenGui.Parent = coreGui
+end)
+if not guiParented then
+  screenGui.Parent = playerGui
+end
 
 local frame = (Instance.new("Frame"))
 frame.Size = UDim2.new(0, 220, 0, 210)
@@ -1078,7 +1085,7 @@ local function f9(p8)
   frame2.Parent = p8
 
   local textLabel = Instance.new("TextLabel")
-  textLabel.Text = "ð Fruit Farm"
+  textLabel.Text = "🍓 Fruit Farm"
   textLabel.Size = UDim2.new(1, 0, 1, 0)
   textLabel.BackgroundTransparency = 1
   textLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
