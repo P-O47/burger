@@ -262,8 +262,9 @@ goToRopeButton.MouseButton1Click:Connect(function()
                       v14 = 0
                       getWaypoints = {}
                       return
-                    else
-                      ::L11554935::
+                    end
+                  end
+
                       v22 = f1(position3, character3, humanoidRootPart2)
                       v23 = v22
 
@@ -339,10 +340,6 @@ goToRopeButton.MouseButton1Click:Connect(function()
 
                         return
                       end
-                    end
-                  else
-                    goto L11554935
-                  end
                 end
               end
             end
