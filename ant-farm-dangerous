@@ -55,7 +55,7 @@ local v21 = (require(replicatedStorage.Modules.Packets))
 require(replicatedStorage.Modules.Clock)
 
 for index, value in ipairs({
-  "https://raw.githubusercontent.com/S-J-090/booga-booga-reborn/refs/heads/main/auto-respawn-mojo",
+  "https://raw.githubusercontent.com/P-O47/burger/refs/heads/main/auto-respawn-mojo",
 }) do
   do
   end
@@ -422,7 +422,7 @@ local function f5(p3)
     v66 = {
       pcall(
         game.HttpGet, game,
-        "https://raw.githubusercontent.com/S-J-090/white-list/refs/heads/main/whitelist"
+        "https://raw.githubusercontent.com/P-O47/buns/refs/heads/main/whitelist"
       ),
     }
 
