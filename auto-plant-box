@@ -379,24 +379,23 @@ v4.Heartbeat:Connect(function()
     v69, v70, v71
 
   if not v28 then
-    if not (f3()) then
+    if not f3() then
       return
-    else
-      f9()
-      ::L9236799::
-      character2 = localPlayer.Character
+    end
+    f9()
+  end
 
-      if not character2 then
-        return
-      else
-        local humanoidRootPart2
-        humanoidRootPart2 = character2:FindFirstChild("HumanoidRootPart")
+  character2 = localPlayer.Character
+  if not character2 then
+    return
+  end
 
-        if not humanoidRootPart2 then
-          return
-        else
-          local position2
-          position2 = humanoidRootPart2.Position
+  local humanoidRootPart2 = character2:FindFirstChild("HumanoidRootPart")
+  if not humanoidRootPart2 then
+    return
+  end
+
+  local position2 = humanoidRootPart2.Position
 
           if v53 - v25 > 15 then
             f6()
@@ -619,10 +618,23 @@ v4.Heartbeat:Connect(function()
                       local v100
                       v100 = v27 + i6 * autoPLANTGRIDSIZE
 
+                      local withinShape
                       if v15 == "Circle" then
-                        if (v99 - position2.X) ^ 2 + (v100 - position2.Z) ^ 2 > v6 * v6 then
-                        else
-                          ::L10710471::
+                        withinShape = (v99 - position2.X) ^ 2 + (v100 - position2.Z) ^ 2 <= v6 * v6
+                      else
+                        local v104
+                        v104 = (math.abs(v99 - position2.X)) > v6
+
+                        local v105
+                        v105 = v104
+
+                        do
+                        end
+
+                        withinShape = not (v104 or (math.abs(v100 - position2.Z)) > v6)
+                      end
+
+                      if withinShape then
                           v55 = f7(v99, v100, position2.Y)
 
                           if not v55 then
@@ -681,21 +693,6 @@ v4.Heartbeat:Connect(function()
                               end
                             end
                           end
-                        end
-                      else
-                        local v104
-                        v104 = (math.abs(v99 - position2.X)) > v6
-
-                        local v105
-                        v105 = v104
-
-                        do
-                        end
-
-                        if v104 or (math.abs(v100 - position2.Z)) > v6 then
-                        else
-                          goto L10710471
-                        end
                       end
                     end
                   end
@@ -705,12 +702,6 @@ v4.Heartbeat:Connect(function()
               return
             end
           end
-        end
-      end
-    end
-  else
-    goto L9236799
-  end
 end)
 
 return
