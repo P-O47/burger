@@ -1,0 +1,381 @@
+do
+end
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local v1 = game
+
+do
+end
+
+local v2 = v1.GetService(v1, "Players")
+
+do
+end
+
+local runService = (game:GetService("RunService"))
+
+do
+end
+
+local workspace = (game:GetService("Workspace"))
+local localPlayer = v2.LocalPlayer
+local v3 = localPlayer
+local playerGui = (localPlayer:WaitForChild("PlayerGui"))
+
+do
+end
+
+local v4 = (require((replicatedStorage:WaitForChild("Modules")):WaitForChild("Packets")))
+
+do
+end
+
+local v5 = (require(replicatedStorage.Modules:WaitForChild("GameUtil")))
+
+do
+end
+
+local v6 = (require(replicatedStorage.Modules:WaitForChild("Clock")))
+local v7 = false
+local v8 = false
+local coinPressToggleGui = Instance.new("ScreenGui")
+local v9, v10
+
+coinPressToggleGui.Name = "CoinPressToggleGui"
+coinPressToggleGui.ResetOnSpawn = false
+coinPressToggleGui.Parent = playerGui
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 200, 0, 95)
+mainFrame.Position = UDim2.new(0, 10, 0.5, -47)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = coinPressToggleGui
+
+local textLabel = Instance.new("TextLabel")
+textLabel.Size = UDim2.new(1, 0, 0, 20)
+textLabel.Position = UDim2.new(0, 0, 0, 0)
+textLabel.BackgroundTransparency = 1
+textLabel.Text = "Auto Coin Press"
+textLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+textLabel.Font = Enum.Font.GothamBold
+textLabel.TextSize = 12
+textLabel.Parent = mainFrame
+
+local coinPressButton = (Instance.new("TextButton"))
+coinPressButton.Name = "CoinPressButton"
+coinPressButton.Size = UDim2.new(1, -10, 0, 32)
+coinPressButton.Position = UDim2.new(0, 5, 0, 22)
+coinPressButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+coinPressButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+coinPressButton.Font = Enum.Font.GothamBold
+coinPressButton.TextSize = 13
+coinPressButton.Text = "Coin Press: OFF"
+coinPressButton.AutoButtonColor = true
+coinPressButton.Parent = mainFrame
+
+local deleteItemsButton = (Instance.new("TextButton"))
+deleteItemsButton.Name = "DeleteItemsButton"
+deleteItemsButton.Size = UDim2.new(1, -10, 0, 32)
+deleteItemsButton.Position = UDim2.new(0, 5, 0, 58)
+deleteItemsButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+deleteItemsButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+deleteItemsButton.Font = Enum.Font.GothamBold
+deleteItemsButton.TextSize = 13
+deleteItemsButton.Text = "Delete Items"
+deleteItemsButton.AutoButtonColor = true
+deleteItemsButton.Parent = mainFrame
+
+local function f1()
+  local character = localPlayer.Character
+  local v11, v12
+
+  if not character then
+    return nil
+  else
+    local humanoidRootPart
+    humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+
+    if not humanoidRootPart then
+      return nil
+    else
+      do
+      end
+
+      for index, value in ipairs(workspace.Deployables:GetChildren()) do
+        if value.Name == "Coin Press" then
+          local primaryPart
+          primaryPart = value.PrimaryPart
+
+          local basePart
+          basePart = primaryPart
+          basePart = primaryPart or value:FindFirstChildWhichIsA("BasePart")
+
+          do
+          end
+
+          if basePart and (basePart.Position - humanoidRootPart.Position).Magnitude <= 50 then
+            return value:GetAttribute("EntityID")
+          else
+            ::L911060::
+          end
+        else
+          goto L911060
+        end
+      end
+
+      return nil
+    end
+  end
+end
+
+do
+end
+
+local connect
+
+coinPressButton.MouseButton1Click:Connect(function()
+  local v13, v14
+  v7 = not v7
+
+  if v7 then
+    coinPressButton.Text = "Coin Press: ON"
+    coinPressButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+
+    do
+    end
+
+    connect = (runService.Heartbeat:Connect(function()
+      local v15 = v6.getServerTime(true)
+
+      if v15 - (v5.Data.lastToolUse or 0) < 0.016666666666667 then
+        return
+      else
+        local v16
+        v16 = f1()
+
+        if v16 then
+          v5.Data.lastToolUse = v15
+          v4.InteractStructure.send({ entityID = v16, itemID = 597 })
+        end
+
+        return
+      end
+    end))
+  else
+    coinPressButton.Text = "Coin Press: OFF"
+    coinPressButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+
+    if connect then
+      do
+      end
+
+      connect:Disconnect()
+      connect = nil
+    end
+  end
+
+  return
+end)
+
+do
+end
+
+local v17
+
+deleteItemsButton.MouseButton1Click:Connect(function()
+  if not v8 then
+    v8 = true
+
+    deleteItemsButton.Text = "Are you sure?"
+    deleteItemsButton.BackgroundColor3 = Color3.fromRGB(200, 100, 0)
+
+    if v17 then
+      task.cancel(v17)
+    end
+
+    v17 = (task.delay(3, function()
+      if v8 then
+        v8 = false
+        deleteItemsButton.Text = "Delete Items"
+        deleteItemsButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+      end
+
+      return
+    end))
+  else
+    if v17 then
+      task.cancel(v17)
+    end
+
+    local v18
+    v18 = workspace
+
+    local items
+    items = workspace:FindFirstChild("Items")
+
+    if items then
+      items:Destroy()
+    end
+
+    deleteItemsButton.Text = "Items Deleted"
+    deleteItemsButton.BackgroundColor3 = Color3.fromRGB(150, 0, 0)
+    deleteItemsButton.Active = false
+    deleteItemsButton.AutoButtonColor = false
+  end
+
+  return
+end)
+
+local function f2()
+  local v19 = playerGui
+  local mainGui = playerGui:FindFirstChild("MainGui")
+  local v20, v21, v22, v23
+
+  if not mainGui then
+    return 100
+  else
+    local panels
+    panels = mainGui:FindFirstChild("Panels")
+
+    local v24
+    v24 = panels
+
+    if panels then
+      do
+      end
+
+      local stats
+      stats = mainGui.Panels:FindFirstChild("Stats")
+
+      local v25
+      v25 = stats
+
+      if stats then
+        do
+        end
+
+        local bars
+        bars = mainGui.Panels.Stats:FindFirstChild("Bars")
+
+        local v26
+        v26 = bars
+
+        if bars then
+          do
+          end
+
+          local hunger
+          hunger = mainGui.Panels.Stats.Bars:FindFirstChild("Hunger")
+
+          local valueLabel
+          valueLabel = hunger
+
+          if hunger then
+            do
+            end
+
+            valueLabel = mainGui.Panels.Stats.Bars.Hunger:FindFirstChild("ValueLabel")
+          end
+
+          v26 = valueLabel
+        end
+
+        v25 = v26
+      end
+
+      v24 = v25
+    end
+
+    local v27
+    v27 = v24
+
+    local v28
+    v28 = v27
+
+    do
+    end
+
+    if v27 and v27:IsA("TextLabel") then
+      return (tonumber(v27.Text)) or 100
+    else
+      return 100
+    end
+  end
+end
+
+local function f3()
+  local v29 = playerGui
+  local mainGui2 = playerGui:FindFirstChild("MainGui")
+  local v30, v31
+
+  if not mainGui2 then
+    return nil
+  else
+    local rightPanel
+    rightPanel = mainGui2:FindFirstChild("RightPanel")
+
+    local v32
+    v32 = rightPanel
+
+    if rightPanel then
+      do
+      end
+
+      local inventory
+      inventory = mainGui2.RightPanel:FindFirstChild("Inventory")
+
+      local list
+      list = inventory
+
+      if inventory then
+        do
+        end
+
+        list = mainGui2.RightPanel.Inventory:FindFirstChild("List")
+      end
+
+      v32 = list
+    end
+
+    local v33
+    v33 = v32
+
+    if not v33 then
+      return nil
+    else
+      local bluefruit
+      bluefruit = v33:FindFirstChild("Bluefruit")
+
+      if bluefruit then
+        return bluefruit.LayoutOrder
+      else
+        return nil
+      end
+    end
+  end
+end
+
+local v34 = f2
+local v35 = f3
+
+task.spawn(function()
+  while true do
+    task.wait(5)
+
+    if (f2()) <= 10 then
+      local v36
+      v36 = f3()
+
+      if v36 then
+        v4.UseBagItem.send(v36)
+        task.wait(0.2)
+      end
+    end
+  end
+end)
+
+return
