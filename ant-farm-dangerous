@@ -1,0 +1,1001 @@
+do
+end
+
+local players = game:GetService("Players")
+local v1 = game
+local v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15
+v1:GetService("RunService")
+
+do
+end
+
+game:GetService("UserInputService")
+
+do
+end
+
+local v16 = (game:GetService("Workspace"))
+
+do
+end
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+
+do
+end
+
+game:GetService("CollectionService")
+
+do
+end
+
+local marketplaceService = (game:GetService("MarketplaceService"))
+local v17 = 0
+local localPlayer = players.LocalPlayer
+
+do
+end
+
+local virtualUser = (game:GetService("VirtualUser"))
+
+do
+end
+
+players.LocalPlayer.Idled:Connect(function()
+  local v18 = virtualUser
+  virtualUser:CaptureController()
+  local v19 = virtualUser
+  virtualUser:ClickButton2(Vector2.new())
+  return
+end)
+
+local v20 = localPlayer
+local playerGui = (localPlayer:WaitForChild("PlayerGui"))
+local v21 = (require(replicatedStorage.Modules.Packets))
+require(replicatedStorage.Modules.Clock)
+
+for index, value in ipairs({
+  "https://raw.githubusercontent.com/S-J-090/booga-booga-reborn/refs/heads/main/auto-respawn-mojo",
+}) do
+  do
+  end
+
+  value.match(value, "^%s*(.-)%s*$")
+end
+
+local v22 = false
+local v23 = false
+local v24 = 0
+local v25 = 0
+local v26 = 0
+local v27 = 0
+local v28 = 0
+
+local antFarm = Instance.new("ScreenGui")
+antFarm.Name = "Ant Farm"
+antFarm.ResetOnSpawn = false
+
+do
+end
+
+antFarm.Parent = game:GetService("CoreGui")
+antFarm.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local instance = Instance.new("Frame", antFarm)
+instance.Size = UDim2.new(0, 240, 0, 140)
+instance.Position = UDim2.new(0.5, -120, 0, 20)
+instance.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+instance.BorderColor3 = Color3.fromRGB(80, 80, 80)
+instance.BorderSizePixel = 2
+instance.Active = true
+instance.Draggable = true
+
+local instance2 = Instance.new("TextLabel", instance)
+instance2.Size = UDim2.new(1, 0, 0, 30)
+instance2.BackgroundTransparency = 1
+instance2.Text = "Ant Farm"
+
+local function f1()
+  local v29 = v21
+
+  do
+  end
+
+  if v21 and v21.Rebirth then
+    v21.Rebirth.send()
+
+    task.spawn(function()
+      task.wait(1)
+      local character = localPlayer.Character
+
+      if character then
+        local humanoid
+        humanoid = character:FindFirstChildOfClass("Humanoid")
+
+        if humanoid then
+          humanoid.Health = 0
+        end
+      end
+
+      return
+    end)
+  end
+
+  return
+end
+
+instance2.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance2.Font = Enum.Font.SourceSansBold
+instance2.TextSize = 18
+instance2.TextXAlignment = Enum.TextXAlignment.Center
+
+local instance3 = (Instance.new("TextButton", instance))
+instance3.Size = UDim2.new(1, -20, 0, 40)
+instance3.Position = UDim2.new(0, 10, 0, 40)
+instance3.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+instance3.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance3.Font = Enum.Font.SourceSansBold
+instance3.TextSize = 14
+instance3.Text = "For Tank [OFF]"
+instance3.AutoButtonColor = true
+instance3.BorderColor3 = Color3.fromRGB(100, 100, 100)
+
+local instance4 = (Instance.new("TextButton", instance))
+instance4.Size = UDim2.new(1, -20, 0, 40)
+instance4.Position = UDim2.new(0, 10, 0, 90)
+instance4.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+
+local function f2()
+  local v30 = playerGui
+  local topbar = playerGui:FindFirstChild("Topbar")
+  local v31 = topbar
+  local v32, v33, v34, v35, v36
+
+  if topbar then
+    do
+    end
+
+    local topbar2
+    topbar2 = playerGui.Topbar:FindFirstChild("Topbar")
+
+    local v37
+    v37 = topbar2
+
+    if topbar2 then
+      do
+      end
+
+      local right
+      right = playerGui.Topbar.Topbar:FindFirstChild("Right")
+
+      local v38
+      v38 = right
+
+      if right then
+        do
+        end
+
+        local level
+        level = playerGui.Topbar.Topbar.Right:FindFirstChild("Level")
+
+        local level2
+        level2 = level
+
+        if level then
+          do
+          end
+
+          level2 = playerGui.Topbar.Topbar.Right.Level:FindFirstChild("Level")
+        end
+
+        v38 = level2
+      end
+
+      v37 = v38
+    end
+
+    v31 = v37
+  end
+
+  local v39 = v31
+  local v40 = v39
+
+  do
+  end
+
+  if v39 and v39:IsA("TextLabel") then
+    do
+    end
+
+    local v41
+    v41 = tonumber(v39.Text:match("lvl%s*(%d+)"))
+
+    if v41 then
+      return v41
+    else
+      ::L8443397::
+      return 0
+    end
+  else
+    goto L8443397
+  end
+end
+
+instance4.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance4.Font = Enum.Font.SourceSansBold
+instance4.TextSize = 14
+instance4.Text = "For Mojo [OFF]"
+instance4.AutoButtonColor = true
+instance4.BorderColor3 = Color3.fromRGB(100, 100, 100)
+
+local mojoConfirm = (Instance.new("ScreenGui"))
+mojoConfirm.Name = "MojoConfirm"
+mojoConfirm.ResetOnSpawn = false
+
+do
+end
+
+mojoConfirm.Parent = game:GetService("CoreGui")
+mojoConfirm.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+mojoConfirm.Enabled = false
+
+local instance5 = Instance.new("Frame", mojoConfirm)
+instance5.Size = UDim2.new(0, 300, 0, 150)
+instance5.Position = UDim2.new(0.5, -150, 0.5, -75)
+instance5.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+instance5.BorderColor3 = Color3.fromRGB(100, 100, 100)
+instance5.BorderSizePixel = 2
+
+local instance6 = Instance.new("TextLabel", instance5)
+instance6.Size = UDim2.new(1, -20, 0, 80)
+instance6.Position = UDim2.new(0, 10, 0, 10)
+instance6.BackgroundTransparency = 1
+instance6.Text = "This mode involve rebirthing which will wipe out your inventory, do you still wanna continue?"
+instance6.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance6.Font = Enum.Font.SourceSans
+instance6.TextSize = 14
+instance6.TextWrapped = true
+instance6.TextXAlignment = Enum.TextXAlignment.Center
+
+local instance7 = Instance.new("TextButton", instance5)
+instance7.Size = UDim2.new(0, 80, 0, 30)
+instance7.Position = UDim2.new(0.25, -40, 1, -40)
+instance7.BackgroundColor3 = Color3.fromRGB(40, 100, 40)
+instance7.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance7.Font = Enum.Font.SourceSansBold
+instance7.TextSize = 14
+instance7.Text = "Yes"
+instance7.BorderColor3 = Color3.fromRGB(100, 100, 100)
+
+local instance8 = Instance.new("TextButton", instance5)
+instance8.Size = UDim2.new(0, 80, 0, 30)
+instance8.Position = UDim2.new(0.75, -40, 1, -40)
+instance8.BackgroundColor3 = Color3.fromRGB(100, 40, 40)
+
+local function f3(p1)
+  local v42 = p1
+  local v43, v44, v45, v46, v47, v48
+
+  if p1 == "Tank" then
+    if v22 then
+      v22 = false
+    else
+      v22 = true
+      v23 = false
+    end
+  else
+    if p1 == "Mojo" then
+      if v23 then
+        v23 = false
+      else
+        v23 = true
+        v22 = false
+      end
+    else
+      v22 = false
+      v23 = false
+    end
+  end
+
+  local v49 = instance3
+
+  do
+  end
+
+  do
+  end
+
+  do
+  end
+
+  instance3.Text = "For Tank [" .. (v22 and "ON]" or "OFF]")
+  local v50 = instance3
+  local v51 = v22
+
+  local color = v51
+  color = v51 and Color3.fromRGB(40, 100, 40)
+
+  local v52 = color
+
+  do
+  end
+
+  instance3.BackgroundColor3 = color or Color3.fromRGB(50, 50, 50)
+  local v53 = instance4
+
+  do
+  end
+
+  do
+  end
+
+  do
+  end
+
+  instance4.Text = "For Mojo [" .. (v23 and "ON]" or "OFF]")
+  local v54 = instance4
+  local v55 = v23
+
+  local color2 = v55
+  color2 = v55 and Color3.fromRGB(40, 100, 40)
+
+  local v56 = color2
+
+  do
+  end
+
+  instance4.BackgroundColor3 = color2 or Color3.fromRGB(50, 50, 50)
+  return
+end
+
+instance8.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance8.Font = Enum.Font.SourceSansBold
+instance8.TextSize = 14
+instance8.Text = "No"
+
+local function f4(p2)
+  local v57 = p2
+  local v58 = playerGui
+  local mainGui = playerGui:FindFirstChild("MainGui")
+  local v59, v60
+
+  if not mainGui then
+    return nil
+  else
+    local rightPanel
+    rightPanel = mainGui:FindFirstChild("RightPanel")
+
+    local v61
+    v61 = rightPanel
+
+    if rightPanel then
+      do
+      end
+
+      local inventory
+      inventory = mainGui.RightPanel:FindFirstChild("Inventory")
+
+      local list
+      list = inventory
+
+      if inventory then
+        do
+        end
+
+        list = mainGui.RightPanel.Inventory:FindFirstChild("List")
+      end
+
+      v61 = list
+    end
+
+    local v62
+    v62 = v61
+
+    if not v62 then
+      return nil
+    else
+      local findFirstChild
+      findFirstChild = v62:FindFirstChild(p2)
+
+      if findFirstChild then
+        return findFirstChild.LayoutOrder
+      else
+        return nil
+      end
+    end
+  end
+end
+
+instance8.BorderColor3 = Color3.fromRGB(100, 100, 100)
+local v63
+
+local function f5(p3)
+  local v64 = p3
+
+  do
+  end
+
+  local v65 = not v63 or (tick()) - v17 > 300
+
+  if v65 then
+    local v66
+
+    v66 = {
+      pcall(
+        game.HttpGet, game,
+        "https://raw.githubusercontent.com/S-J-090/white-list/refs/heads/main/whitelist"
+      ),
+    }
+
+    local v67
+    v67 = v66[2]
+
+    if v66[1] then
+      v63 = {}
+
+      for match in v67:gmatch("[^\r\n]+") do
+        local sS
+        sS = match:match("^%s*(.-)%s*$")
+
+        if sS ~= "" then
+          v63[(sS:lower())] = true
+        end
+      end
+
+      v17 = (tick())
+    else
+      v63 = {}
+      v17 = (tick())
+    end
+  end
+
+  local v68 = v63
+  local v69 = v68
+
+  do
+  end
+
+  return v68 and v63[(p3:lower())]
+end
+
+local function f6()
+  return localPlayer.Character
+end
+
+local v70 = f5
+
+local function f7()
+  local v71 = v16
+  local items = v16:FindFirstChild("Items")
+  local v72, v73
+
+  if not items then
+    return
+  else
+    for index2, value2 in ipairs(items:GetChildren()) do
+      local v74 = value2
+
+      local v75
+      v75 = v74
+
+      do
+      end
+
+      do
+      end
+
+      if (v74:IsA("BasePart")) and v74.Name ~= "Essence" then
+        pcall(function()
+          local v76 = v74
+          v74:Destroy()
+          return
+        end)
+      end
+    end
+
+    return
+  end
+end
+
+local function f8(p4, p5)
+  local v77 = p5
+  local v78 = p4
+  local character2 = localPlayer.Character
+  local v79, v80, v81, v82, v83
+
+  if not character2 then
+    return
+  else
+    local humanoidRootPart
+    humanoidRootPart = character2:FindFirstChild("HumanoidRootPart")
+
+    if not humanoidRootPart then
+      return
+    else
+      local overlapParams
+      overlapParams = OverlapParams.new()
+      overlapParams.FilterType = Enum.RaycastFilterType.Exclude
+      overlapParams.FilterDescendantsInstances = { character2 }
+
+      local v84
+      v84 = {}
+
+      local v85
+      v85 = {}
+
+      do
+      end
+
+      for index3, value3 in ipairs(workspace:GetPartBoundsInRadius(
+        humanoidRootPart.Position, 17, overlapParams
+      )) do
+        local model
+        model = value3:FindFirstAncestorWhichIsA("Model")
+
+        if not model then
+        else
+          local name
+          name = model.Name
+
+          local entityID
+          entityID = model:GetAttribute("EntityID")
+
+          do
+          end
+
+          do
+          end
+
+          if not entityID or v85[entityID] then
+          else
+            local v86
+            v86 = false
+
+            if name == p4 then
+              if p5 then
+                local health
+                health = model:FindFirstChild("Health")
+
+                local valueBase
+                valueBase = health
+
+                if health then
+                  do
+                  end
+
+                  do
+                  end
+
+                  valueBase = (health:IsA("ValueBase")) and health.Value >= p5
+                end
+
+                if valueBase then
+                  v86 = true
+                end
+              else
+                v86 = true
+              end
+            end
+
+            if v86 then
+              v85[entityID] = true
+              table.insert(v84, { entityID = entityID })
+            end
+          end
+        end
+      end
+
+      if #v84 > 0 then
+        v21.SwingTool.send({
+          entityIDs = v84,
+          cframe = humanoidRootPart.CFrame,
+          timestamp = workspace.DistributedGameTime,
+        })
+      end
+
+      return
+    end
+  end
+end
+
+local function f9()
+  local v87, v88
+
+  if (tick()) - v28 < 3 then
+    return
+  else
+    do
+    end
+
+    do
+    end
+
+    if not v21 or not v21.EquipTool then
+      return
+    else
+      local v89
+      v89 = f6()
+
+      local v90
+      v90 = v89
+
+      do
+      end
+
+      if v89 and v89:FindFirstChild("Rock") then
+        v28 = (tick())
+        return
+      else
+        local v91
+        v91 = v16
+
+        local players2
+        players2 = v16:FindFirstChild("Players")
+
+        if not players2 then
+          return
+        else
+          local findFirstChild2
+          findFirstChild2 = players2:FindFirstChild(localPlayer.Name)
+
+          if not findFirstChild2 then
+            return
+          else
+            local tools
+            tools = findFirstChild2:FindFirstChild("Tools")
+
+            local v92
+            v92 = tools
+
+            do
+            end
+
+            if tools and tools:FindFirstChild("Rock") then
+              v28 = (tick())
+              return
+            else
+              pcall(function()
+                v21.EquipTool.send(1)
+                return
+              end)
+
+              v28 = (tick())
+              return
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+local function f10()
+  local v93 = v16
+  local items2 = v16:FindFirstChild("Items")
+  local v94
+
+  if not items2 then
+    return
+  else
+    local v95
+    v95 = f6()
+
+    local v96
+    v96 = v95
+
+    do
+    end
+
+    local humanoidRootPart2
+    humanoidRootPart2 = v95 and v95:FindFirstChild("HumanoidRootPart")
+
+    if not humanoidRootPart2 then
+      return
+    else
+      local position
+      position = humanoidRootPart2.Position
+
+      for index4, value4 in ipairs(items2:GetChildren()) do
+        local v97
+        v97 = value4.Name == "Essence"
+
+        local v98
+        v98 = v97
+
+        do
+        end
+
+        if v97 and value4:IsA("BasePart") then
+          if (value4.Position - position).Magnitude <= 30 then
+            local entityID2 = (value4:GetAttribute("EntityID"))
+
+            local v99
+            v99 = entityID2
+
+            local pickup
+            pickup = entityID2
+
+            if entityID2 then
+              local v100
+              v100 = v21
+
+              do
+              end
+
+              pickup = v21 and v21.Pickup
+            end
+
+            if pickup then
+              pcall(function()
+                v21.Pickup.send(entityID2)
+                return
+              end)
+            end
+          end
+        end
+      end
+
+      return
+    end
+  end
+end
+
+local v101 = f7
+local v102 = f10
+local v103 = f8
+local v104 = f4
+
+local function f11()
+  local v105, v106, v107, v108, v109, bloodfruit
+
+  if (tick()) - v25 < 0.05 then
+    return
+  else
+    local v110
+    v110 = playerGui
+
+    local mainGui2
+    mainGui2 = playerGui:FindFirstChild("MainGui")
+
+    if not mainGui2 then
+      return
+    else
+      local panels
+      panels = mainGui2:FindFirstChild("Panels")
+
+      local v111
+      v111 = panels
+
+      if panels then
+        do
+        end
+
+        local stats
+        stats = mainGui2.Panels:FindFirstChild("Stats")
+
+        local v112
+        v112 = stats
+
+        if stats then
+          do
+          end
+
+          local bars
+          bars = mainGui2.Panels.Stats:FindFirstChild("Bars")
+
+          local v113
+          v113 = bars
+
+          if bars then
+            do
+            end
+
+            local health2
+            health2 = mainGui2.Panels.Stats.Bars:FindFirstChild("Health")
+
+            local valueLabel
+            valueLabel = health2
+
+            if health2 then
+              do
+              end
+
+              valueLabel = mainGui2.Panels.Stats.Bars.Health:FindFirstChild("ValueLabel")
+            end
+
+            v113 = valueLabel
+          end
+
+          v112 = v113
+        end
+
+        v111 = v112
+      end
+
+      local v114
+      v114 = 100
+
+      local v115
+      v115 = v111
+
+      local v116
+      v116 = v115
+
+      do
+      end
+
+      if v115 and v115:IsA("TextLabel") then
+        v114 = (tonumber(v115.Text)) or 100
+      end
+
+      if v114 < 95 then
+        bloodfruit = (f4("Bloodfruit"))
+
+        local v117
+        v117 = bloodfruit
+
+        local useBagItem
+        useBagItem = bloodfruit
+
+        if bloodfruit then
+          local v118
+          v118 = v21
+
+          do
+          end
+
+          useBagItem = v21 and v21.UseBagItem
+        end
+
+        if useBagItem then
+          pcall(function()
+            v21.UseBagItem.send(bloodfruit)
+            return
+          end)
+
+          v25 = (tick())
+        end
+      end
+
+      return
+    end
+  end
+end
+
+local v119 = f9
+local v120 = f2
+local v121 = f1
+local v122 = f3
+
+do
+end
+
+instance3.MouseButton1Click:Connect(function()
+  local v123
+
+  local v124, v125 = pcall(function()
+    local v126 = marketplaceService
+    return marketplaceService:UserOwnsGamePassAsync(localPlayer.UserId, 1768193888)
+  end)
+
+  do
+  end
+
+  local text
+
+  if v124 and v125 then
+    f3("Tank")
+    return
+  else
+    if (f5(localPlayer.Name)) then
+      f3("Tank")
+      return
+    else
+      text = instance3.Text
+
+      instance3.Text = "Gamepass or whitelist required"
+      instance3.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
+
+      task.delay(2, function()
+        instance3.Text = text
+        local v127 = instance3
+        local v128 = instance3
+        local v129 = v22
+
+        local color3 = v129
+        color3 = v129 and Color3.fromRGB(40, 100, 40)
+
+        local v130 = color3
+
+        do
+        end
+
+        instance3.BackgroundColor3 = color3 or Color3.fromRGB(50, 50, 50)
+        return
+      end)
+
+      return
+    end
+  end
+end)
+
+do
+end
+
+instance4.MouseButton1Click:Connect(function()
+  if not v23 then
+    mojoConfirm.Enabled = true
+  else
+    f3("Mojo")
+  end
+
+  return
+end)
+
+do
+end
+
+instance7.MouseButton1Click:Connect(function()
+  mojoConfirm.Enabled = false
+  f3("Mojo")
+  return
+end)
+
+do
+end
+
+instance8.MouseButton1Click:Connect(function()
+  mojoConfirm.Enabled = false
+  return
+end)
+
+task.spawn(function()
+  while true do
+    task.wait(0.05)
+
+    if v22 then
+      if (tick()) - v24 >= 0.05 then
+        f8("Queen Ant", 120)
+        v24 = (tick())
+      end
+
+      f11()
+
+      if (tick()) - v26 >= 2 then
+        f7()
+        v26 = (tick())
+      end
+    end
+  end
+end)
+
+task.spawn(function()
+  while true do
+    task.wait(0.05)
+
+    if v23 then
+      f9()
+
+      if (tick()) - v24 >= 0.05 then
+        f8("Queen Ant's Servant", nil)
+        v24 = (tick())
+      end
+
+      if (tick()) - v26 >= 2 then
+        f7()
+        f10()
+        v26 = (tick())
+      end
+
+      if (tick()) - v27 >= 5 then
+        if (f2()) >= 100 then
+          f1()
+        end
+
+        v27 = (tick())
+      end
+    end
+  end
+end)
+
+return
