@@ -3,7 +3,7 @@ end
 
 local players = game:GetService("Players")
 local v1 = game
-local v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19
+local v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15
 v1:GetService("RunService")
 
 do
@@ -14,7 +14,7 @@ game:GetService("UserInputService")
 do
 end
 
-local v20 = (game:GetService("Workspace"))
+local v16 = (game:GetService("Workspace"))
 
 do
 end
@@ -30,7 +30,7 @@ do
 end
 
 local marketplaceService = (game:GetService("MarketplaceService"))
-local v21 = 0
+local v17 = 0
 local localPlayer = players.LocalPlayer
 
 do
@@ -42,93 +42,34 @@ do
 end
 
 players.LocalPlayer.Idled:Connect(function()
-  local v22 = virtualUser
+  local v18 = virtualUser
   virtualUser:CaptureController()
-  local v23 = virtualUser
+  local v19 = virtualUser
   virtualUser:ClickButton2(Vector2.new())
   return
 end)
 
-local v24 = localPlayer
+local v20 = localPlayer
 local playerGui = (localPlayer:WaitForChild("PlayerGui"))
-local v25 = (require(replicatedStorage.Modules.Packets))
-local v26 = (require(replicatedStorage.Modules.Clock))
+local v21 = (require(replicatedStorage.Modules.Packets))
+require(replicatedStorage.Modules.Clock)
 
-local function f1(p1)
-  local v27 = p1
-  local model = p1:IsA("Model")
-  local sunTree = model
-  local v28
-
-  if model then
-    do
-    end
-
-    sunTree = p1.Name:find("Sun Tree")
+for index, value in ipairs({
+  "https://raw.githubusercontent.com/S-J-090/booga-booga-reborn/refs/heads/main/auto-respawn-mojo",
+}) do
+  do
   end
 
-  local trunk
-
-  if sunTree then
-    trunk = (p1:FindFirstChild("Trunk"))
-
-    if trunk then
-      pcall(function()
-        local v29 = trunk
-        trunk:Destroy()
-        return
-      end)
-    end
-  end
-
-  return
+  value.match(value, "^%s*(.-)%s*$")
 end
 
-do
-end
-
-for index, value in ipairs(workspace:GetDescendants()) do
-  f1(value)
-end
-
-do
-end
-
-workspace.DescendantAdded:Connect(function(descendant)
-  local v30 = descendant
-
-  task.delay(0.1, function()
-    f1(descendant)
-    return
-  end)
-
-  return
-end)
-
-task.spawn(function()
-  local v31
-
-  while true do
-    task.wait(5)
-
-    do
-    end
-
-    for index2, value2 in ipairs(workspace:GetDescendants()) do
-      f1(value2)
-    end
-  end
-end)
-
-local v32 = false
-local v33 = false
-local v34 = 0
-local v35 = 0.05
-local v36 = 0
-local v37 = 0
-local v38 = "Bloodfruit"
-local v39 = 0.06
-local v40 = 0
+local v22 = false
+local v23 = false
+local v24 = 0
+local v25 = 0
+local v26 = 0
+local v27 = 0
+local v28 = 0
 
 local antFarm = Instance.new("ScreenGui")
 antFarm.Name = "Ant Farm"
@@ -140,83 +81,6 @@ end
 antFarm.Parent = game:GetService("CoreGui")
 antFarm.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local function f2()
-  local v41 = playerGui
-  local mainGui = playerGui:FindFirstChild("MainGui")
-  local v42, v43, v44, v45
-
-  if not mainGui then
-    return 100
-  else
-    local panels
-    panels = mainGui:FindFirstChild("Panels")
-
-    local v46
-    v46 = panels
-
-    if panels then
-      do
-      end
-
-      local stats
-      stats = mainGui.Panels:FindFirstChild("Stats")
-
-      local v47
-      v47 = stats
-
-      if stats then
-        do
-        end
-
-        local bars
-        bars = mainGui.Panels.Stats:FindFirstChild("Bars")
-
-        local v48
-        v48 = bars
-
-        if bars then
-          do
-          end
-
-          local hunger
-          hunger = mainGui.Panels.Stats.Bars:FindFirstChild("Hunger")
-
-          local valueLabel
-          valueLabel = hunger
-
-          if hunger then
-            do
-            end
-
-            valueLabel = mainGui.Panels.Stats.Bars.Hunger:FindFirstChild("ValueLabel")
-          end
-
-          v48 = valueLabel
-        end
-
-        v47 = v48
-      end
-
-      v46 = v47
-    end
-
-    local v49
-    v49 = v46
-
-    local v50
-    v50 = v49
-
-    do
-    end
-
-    if v49 and v49:IsA("TextLabel") then
-      return (tonumber(v49.Text)) or 100
-    else
-      return 100
-    end
-  end
-end
-
 local instance = Instance.new("Frame", antFarm)
 instance.Size = UDim2.new(0, 240, 0, 140)
 instance.Position = UDim2.new(0.5, -120, 0, 20)
@@ -226,209 +90,19 @@ instance.BorderSizePixel = 2
 instance.Active = true
 instance.Draggable = true
 
-local function f3()
-  local v51 = v20
-  local items = v20:FindFirstChild("Items")
-  local v52, v53
-
-  if not items then
-    return
-  else
-    for index3, value3 in ipairs(items:GetChildren()) do
-      local v54 = value3
-
-      local v55
-      v55 = v54
-
-      if (v54:IsA("BasePart")) then
-        do
-        end
-
-        do
-        end
-
-        if v54.Name ~= "Essence" and v54.Name ~= "Raw Gold" then
-          pcall(function()
-            local v56 = v54
-            v54:Destroy()
-            return
-          end)
-        end
-      end
-    end
-
-    return
-  end
-end
-
 local instance2 = Instance.new("TextLabel", instance)
 instance2.Size = UDim2.new(1, 0, 0, 30)
 instance2.BackgroundTransparency = 1
 instance2.Text = "Ant Farm"
-instance2.TextColor3 = Color3.fromRGB(220, 220, 220)
-instance2.Font = Enum.Font.SourceSansBold
-instance2.TextSize = 18
-instance2.TextXAlignment = Enum.TextXAlignment.Center
 
-local instance3 = (Instance.new("TextButton", instance))
-instance3.Size = UDim2.new(1, -20, 0, 40)
-instance3.Position = UDim2.new(0, 10, 0, 40)
-instance3.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-instance3.TextColor3 = Color3.fromRGB(220, 220, 220)
-instance3.Font = Enum.Font.SourceSansBold
-instance3.TextSize = 14
-instance3.Text = "For Tank [OFF]"
-instance3.AutoButtonColor = true
-instance3.BorderColor3 = Color3.fromRGB(100, 100, 100)
-
-local instance4 = (Instance.new("TextButton", instance))
-instance4.Size = UDim2.new(1, -20, 0, 40)
-instance4.Position = UDim2.new(0, 10, 0, 90)
-instance4.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-instance4.TextColor3 = Color3.fromRGB(220, 220, 220)
-instance4.Font = Enum.Font.SourceSansBold
-instance4.TextSize = 14
-instance4.Text = "For Mojo [OFF]"
-instance4.AutoButtonColor = true
-instance4.BorderColor3 = Color3.fromRGB(100, 100, 100)
-
-local mojoConfirm = (Instance.new("ScreenGui"))
-mojoConfirm.Name = "MojoConfirm"
-mojoConfirm.ResetOnSpawn = false
-
-do
-end
-
-mojoConfirm.Parent = game:GetService("CoreGui")
-mojoConfirm.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-mojoConfirm.Enabled = false
-
-local instance5 = Instance.new("Frame", mojoConfirm)
-instance5.Size = UDim2.new(0, 300, 0, 180)
-instance5.Position = UDim2.new(0.5, -150, 0.5, -90)
-instance5.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-instance5.BorderColor3 = Color3.fromRGB(100, 100, 100)
-instance5.BorderSizePixel = 2
-
-local instance6 = Instance.new("TextLabel", instance5)
-instance6.Size = UDim2.new(1, -20, 0, 80)
-instance6.Position = UDim2.new(0, 10, 0, 10)
-instance6.BackgroundTransparency = 1
-instance6.Text = "This mode involve rebirthing which will wipe out your inventory, do you still wanna continue?"
-instance6.TextColor3 = Color3.fromRGB(220, 220, 220)
-instance6.Font = Enum.Font.SourceSans
-instance6.TextSize = 14
-
-do
-end
-
-instance6.TextWrapped = true
-
-local function f4()
-  local v57 = playerGui
-  local topbar = playerGui:FindFirstChild("Topbar")
-  local v58 = topbar
-  local v59, v60, v61, v62, v63
-
-  if topbar then
-    do
-    end
-
-    local topbar2
-    topbar2 = playerGui.Topbar:FindFirstChild("Topbar")
-
-    local v64
-    v64 = topbar2
-
-    if topbar2 then
-      do
-      end
-
-      local right
-      right = playerGui.Topbar.Topbar:FindFirstChild("Right")
-
-      local v65
-      v65 = right
-
-      if right then
-        do
-        end
-
-        local level
-        level = playerGui.Topbar.Topbar.Right:FindFirstChild("Level")
-
-        local level2
-        level2 = level
-
-        if level then
-          do
-          end
-
-          level2 = playerGui.Topbar.Topbar.Right.Level:FindFirstChild("Level")
-        end
-
-        v65 = level2
-      end
-
-      v64 = v65
-    end
-
-    v58 = v64
-  end
-
-  local v66 = v58
-  local v67 = v66
+local function f1()
+  local v29 = v21
 
   do
   end
 
-  if v66 and v66:IsA("TextLabel") then
-    do
-    end
-
-    local v68
-    v68 = tonumber(v66.Text:match("lvl%s*(%d+)"))
-
-    if v68 then
-      return v68
-    else
-      return 0
-    end
-  else
-    return 0
-  end
-end
-
-instance6.TextXAlignment = Enum.TextXAlignment.Center
-
-local instance7 = (Instance.new("TextBox", instance5))
-instance7.Size = UDim2.new(1, -40, 0, 30)
-instance7.Position = UDim2.new(0, 20, 0, 95)
-instance7.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-instance7.TextColor3 = Color3.fromRGB(220, 220, 220)
-instance7.Font = Enum.Font.SourceSans
-instance7.TextSize = 14
-instance7.PlaceholderText = "Target Rebirths (Optional)"
-instance7.Text = ""
-instance7.BorderColor3 = Color3.fromRGB(100, 100, 100)
-instance7.ClearTextOnFocus = false
-
-local instance8 = Instance.new("TextButton", instance5)
-instance8.Size = UDim2.new(0, 80, 0, 30)
-
-local function f5()
-  local v69 = v25
-
-  do
-  end
-
-  if v25 and v25.Rebirth then
-    pcall(function()
-      v25.Rebirth.send()
-      return
-    end)
-
-    v34 = v34 + 1
+  if v21 and v21.Rebirth then
+    v21.Rebirth.send()
 
     task.spawn(function()
       task.wait(1)
@@ -450,355 +124,179 @@ local function f5()
   return
 end
 
-instance8.Position = UDim2.new(0.25, -40, 1, -40)
-instance8.BackgroundColor3 = Color3.fromRGB(40, 100, 40)
-instance8.TextColor3 = Color3.fromRGB(220, 220, 220)
-instance8.Font = Enum.Font.SourceSansBold
+instance2.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance2.Font = Enum.Font.SourceSansBold
+instance2.TextSize = 18
+instance2.TextXAlignment = Enum.TextXAlignment.Center
 
-local function f6(p2)
-  local v70 = p2
-  local character2 = localPlayer.Character
-  local v71 = not character2
-  local v72 = v71
-  local v73, v74, v75, v76, v77, v78, v79, v80
+local instance3 = (Instance.new("TextButton", instance))
+instance3.Size = UDim2.new(1, -20, 0, 40)
+instance3.Position = UDim2.new(0, 10, 0, 40)
+instance3.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+instance3.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance3.Font = Enum.Font.SourceSansBold
+instance3.TextSize = 14
+instance3.Text = "For Tank [OFF]"
+instance3.AutoButtonColor = true
+instance3.BorderColor3 = Color3.fromRGB(100, 100, 100)
+
+local instance4 = (Instance.new("TextButton", instance))
+instance4.Size = UDim2.new(1, -20, 0, 40)
+instance4.Position = UDim2.new(0, 10, 0, 90)
+instance4.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+
+local function f2()
+  local v30 = playerGui
+  local topbar = playerGui:FindFirstChild("Topbar")
+  local v31 = topbar
+  local v32, v33, v34, v35, v36
+
+  if topbar then
+    do
+    end
+
+    local topbar2
+    topbar2 = playerGui.Topbar:FindFirstChild("Topbar")
+
+    local v37
+    v37 = topbar2
+
+    if topbar2 then
+      do
+      end
+
+      local right
+      right = playerGui.Topbar.Topbar:FindFirstChild("Right")
+
+      local v38
+      v38 = right
+
+      if right then
+        do
+        end
+
+        local level
+        level = playerGui.Topbar.Topbar.Right:FindFirstChild("Level")
+
+        local level2
+        level2 = level
+
+        if level then
+          do
+          end
+
+          level2 = playerGui.Topbar.Topbar.Right.Level:FindFirstChild("Level")
+        end
+
+        v38 = level2
+      end
+
+      v37 = v38
+    end
+
+    v31 = v37
+  end
+
+  local v39 = v31
+  local v40 = v39
 
   do
   end
 
-  if v71 or character2:GetAttribute("Paused") then
-    return
-  else
-    if not (character2:FindFirstChild("HumanoidRootPart")) then
-      return
-    else
-      local getPivot
-      getPivot = character2:GetPivot()
-
-      local position
-      position = getPivot.Position
-
-      local timestamp
-      timestamp = v26.getServerTime(true)
-
-      local v81
-      v81 = {}
-
-      local v82
-      v82 = {}
-
-      if p2 == "Tank" then
-        local v83
-        v83 = v20
-
-        local critters
-        critters = v20:FindFirstChild("Critters")
-
-        if critters then
-          local queenAnt
-          queenAnt = critters:FindFirstChild("Queen Ant")
-
-          local v84
-          v84 = false
-
-          if queenAnt then
-            local health
-            health = queenAnt:FindFirstChild("Health")
-
-            do
-            end
-
-            if health and health.Value > 120 then
-              v84 = true
-            end
-          end
-
-          do
-          end
-
-          if v84 and queenAnt then
-            local entityID
-            entityID = queenAnt:GetAttribute("EntityID")
-
-            local primaryPart
-            primaryPart = queenAnt.PrimaryPart
-
-            local v85
-            v85 = primaryPart
-
-            do
-            end
-
-            local basePart
-            basePart = primaryPart or queenAnt:FindFirstChildWhichIsA("BasePart")
-
-            local v86
-            v86 = entityID
-
-            if entityID then
-              do
-              end
-
-              v86 = basePart and (basePart.Position - position).Magnitude <= 17
-            end
-
-            if v86 then
-              v82[entityID] = true
-              table.insert(v81, { entityID = entityID, buffer = nil })
-            end
-          end
-
-          for index4, value4 in ipairs(critters:GetChildren()) do
-            do
-            end
-
-            do
-            end
-
-            if (value4:IsA("Model")) and value4.Name == "Queen Ant's Servant" then
-              local entityID2
-              entityID2 = value4:GetAttribute("EntityID")
-
-              do
-              end
-
-              if entityID2 and not v82[entityID2] then
-                if ((value4:GetPivot()).Position - position).Magnitude <= 17 then
-                  v82[entityID2] = true
-                  table.insert(v81, { entityID = entityID2, buffer = nil })
-                end
-              end
-            end
-          end
-        end
-      else
-        if p2 == "Mojo" then
-          local v87
-          v87 = v20
-
-          local resources
-          resources = v20:FindFirstChild("Resources")
-
-          if resources then
-            for index5, value5 in ipairs(resources:GetChildren()) do
-              local model2
-              model2 = value5:IsA("Model")
-
-              local sunTree2
-              sunTree2 = model2
-
-              if model2 then
-                do
-                end
-
-                sunTree2 = value5.Name:find("Sun Tree")
-              end
-
-              if sunTree2 then
-                local entityID3
-                entityID3 = value5:GetAttribute("EntityID")
-
-                local primaryPart2
-                primaryPart2 = value5.PrimaryPart
-
-                local v88
-                v88 = primaryPart2
-
-                do
-                end
-
-                local basePart2
-                basePart2 = primaryPart2 or value5:FindFirstChildWhichIsA("BasePart")
-
-                local v89
-                v89 = entityID3
-
-                if entityID3 then
-                  do
-                  end
-
-                  v89 = basePart2 and not v82[entityID3]
-                end
-
-                if v89 then
-                  if (basePart2.Position - position).Magnitude <= 18 then
-                    v82[entityID3] = true
-                    table.insert(v81, { entityID = entityID3, buffer = nil })
-                  end
-                end
-              end
-            end
-          end
-        end
-      end
-
-      if #v81 > 0 then
-        v25.SwingTool.send({ entityIDs = v81, cframe = getPivot, timestamp = timestamp })
-      end
-
-      return
+  if v39 and v39:IsA("TextLabel") then
+    do
     end
+
+    local v41
+    v41 = tonumber(v39.Text:match("lvl%s*(%d+)"))
+
+    if v41 then
+      return v41
+    else
+      return 0
+    end
+  else
+    return 0
   end
 end
 
-instance8.TextSize = 14
-instance8.Text = "Yes"
-instance8.BorderColor3 = Color3.fromRGB(100, 100, 100)
+instance4.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance4.Font = Enum.Font.SourceSansBold
+instance4.TextSize = 14
+instance4.Text = "For Mojo [OFF]"
+instance4.AutoButtonColor = true
+instance4.BorderColor3 = Color3.fromRGB(100, 100, 100)
 
-local instance9 = Instance.new("TextButton", instance5)
-instance9.Size = UDim2.new(0, 80, 0, 30)
-instance9.Position = UDim2.new(0.75, -40, 1, -40)
-instance9.BackgroundColor3 = Color3.fromRGB(100, 40, 40)
-instance9.TextColor3 = Color3.fromRGB(220, 220, 220)
-instance9.Font = Enum.Font.SourceSansBold
-instance9.TextSize = 14
-instance9.Text = "No"
-instance9.BorderColor3 = Color3.fromRGB(100, 100, 100)
-
-local tankSettings = (Instance.new("ScreenGui"))
-tankSettings.Name = "TankSettings"
-tankSettings.ResetOnSpawn = false
+local mojoConfirm = (Instance.new("ScreenGui"))
+mojoConfirm.Name = "MojoConfirm"
+mojoConfirm.ResetOnSpawn = false
 
 do
 end
 
-tankSettings.Parent = game:GetService("CoreGui")
-tankSettings.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-tankSettings.Enabled = false
+mojoConfirm.Parent = game:GetService("CoreGui")
+mojoConfirm.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+mojoConfirm.Enabled = false
 
-local instance10 = Instance.new("Frame", tankSettings)
-instance10.Size = UDim2.new(0, 200, 0, 120)
+local instance5 = Instance.new("Frame", mojoConfirm)
+instance5.Size = UDim2.new(0, 300, 0, 150)
+instance5.Position = UDim2.new(0.5, -150, 0.5, -75)
+instance5.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+instance5.BorderColor3 = Color3.fromRGB(100, 100, 100)
+instance5.BorderSizePixel = 2
 
-local function f7()
-  local v90 = playerGui
-  local mainGui2 = playerGui:FindFirstChild("MainGui")
-  local v91, v92, v93, v94
+local instance6 = Instance.new("TextLabel", instance5)
+instance6.Size = UDim2.new(1, -20, 0, 80)
+instance6.Position = UDim2.new(0, 10, 0, 10)
+instance6.BackgroundTransparency = 1
+instance6.Text = "This mode involve rebirthing which will wipe out your inventory, do you still wanna continue?"
+instance6.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance6.Font = Enum.Font.SourceSans
+instance6.TextSize = 14
+instance6.TextWrapped = true
+instance6.TextXAlignment = Enum.TextXAlignment.Center
 
-  if not mainGui2 then
-    return 100
-  else
-    local panels2
-    panels2 = mainGui2:FindFirstChild("Panels")
+local instance7 = Instance.new("TextButton", instance5)
+instance7.Size = UDim2.new(0, 80, 0, 30)
+instance7.Position = UDim2.new(0.25, -40, 1, -40)
+instance7.BackgroundColor3 = Color3.fromRGB(40, 100, 40)
+instance7.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance7.Font = Enum.Font.SourceSansBold
+instance7.TextSize = 14
+instance7.Text = "Yes"
+instance7.BorderColor3 = Color3.fromRGB(100, 100, 100)
 
-    local v95
-    v95 = panels2
+local instance8 = Instance.new("TextButton", instance5)
+instance8.Size = UDim2.new(0, 80, 0, 30)
+instance8.Position = UDim2.new(0.75, -40, 1, -40)
+instance8.BackgroundColor3 = Color3.fromRGB(100, 40, 40)
 
-    if panels2 then
-      do
-      end
+local function f3(p1)
+  local v42 = p1
+  local v43, v44, v45, v46, v47, v48
 
-      local stats2
-      stats2 = mainGui2.Panels:FindFirstChild("Stats")
-
-      local v96
-      v96 = stats2
-
-      if stats2 then
-        do
-        end
-
-        local bars2
-        bars2 = mainGui2.Panels.Stats:FindFirstChild("Bars")
-
-        local v97
-        v97 = bars2
-
-        if bars2 then
-          do
-          end
-
-          local health2
-          health2 = mainGui2.Panels.Stats.Bars:FindFirstChild("Health")
-
-          local valueLabel2
-          valueLabel2 = health2
-
-          if health2 then
-            do
-            end
-
-            valueLabel2 = mainGui2.Panels.Stats.Bars.Health:FindFirstChild("ValueLabel")
-          end
-
-          v97 = valueLabel2
-        end
-
-        v96 = v97
-      end
-
-      v95 = v96
-    end
-
-    local v98
-    v98 = v95
-
-    local v99
-    v99 = v98
-
-    do
-    end
-
-    if v98 and v98:IsA("TextLabel") then
-      return (tonumber(v98.Text)) or 100
+  if p1 == "Tank" then
+    if v22 then
+      v22 = false
     else
-      return 100
-    end
-  end
-end
-
-instance10.Position = UDim2.new(0.5, -100, 0, 180)
-instance10.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-instance10.BorderColor3 = Color3.fromRGB(80, 80, 80)
-instance10.BorderSizePixel = 2
-instance10.Active = true
-instance10.Draggable = true
-
-local instance11 = (Instance.new("TextButton", instance10))
-instance11.Size = UDim2.new(1, -20, 0, 40)
-instance11.Position = UDim2.new(0, 10, 0, 10)
-instance11.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-instance11.TextColor3 = Color3.fromRGB(220, 220, 220)
-instance11.Font = Enum.Font.SourceSansBold
-instance11.TextSize = 14
-instance11.Text = "Eat: Bloodfruit"
-instance11.AutoButtonColor = true
-instance11.BorderColor3 = Color3.fromRGB(100, 100, 100)
-
-local instance12 = (Instance.new("TextBox", instance10))
-instance12.Size = UDim2.new(1, -20, 0, 30)
-instance12.Position = UDim2.new(0, 10, 0, 60)
-instance12.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-instance12.TextColor3 = Color3.fromRGB(220, 220, 220)
-instance12.Font = Enum.Font.SourceSans
-instance12.TextSize = 14
-instance12.Text = "0.06"
-instance12.PlaceholderText = "Cooldown (seconds)"
-
-local function f8(p3)
-  local v100 = p3
-  local v101, v102, v103, v104, v105, v106
-
-  if p3 == "Tank" then
-    if v32 then
-      v32 = false
-    else
-      v32 = true
-      v33 = false
+      v22 = true
+      v23 = false
     end
   else
-    if p3 == "Mojo" then
-      if v33 then
-        v33 = false
+    if p1 == "Mojo" then
+      if v23 then
+        v23 = false
       else
-        v33 = true
-        v32 = false
+        v23 = true
+        v22 = false
       end
     else
-      v32 = false
-      v33 = false
+      v22 = false
+      v23 = false
     end
   end
 
-  local v107 = instance3
+  local v49 = instance3
 
   do
   end
@@ -809,20 +307,20 @@ local function f8(p3)
   do
   end
 
-  instance3.Text = "For Tank [" .. (v32 and "ON]" or "OFF]")
-  local v108 = instance3
-  local v109 = v32
+  instance3.Text = "For Tank [" .. (v22 and "ON]" or "OFF]")
+  local v50 = instance3
+  local v51 = v22
 
-  local color = v109
-  color = v109 and Color3.fromRGB(40, 100, 40)
+  local color = v51
+  color = v51 and Color3.fromRGB(40, 100, 40)
 
-  local v110 = color
+  local v52 = color
 
   do
   end
 
   instance3.BackgroundColor3 = color or Color3.fromRGB(50, 50, 50)
-  local v111 = instance4
+  local v53 = instance4
 
   do
   end
@@ -833,860 +331,48 @@ local function f8(p3)
   do
   end
 
-  instance4.Text = "For Mojo [" .. (v33 and "ON]" or "OFF]")
-  local v112 = instance4
-  local v113 = v33
+  instance4.Text = "For Mojo [" .. (v23 and "ON]" or "OFF]")
+  local v54 = instance4
+  local v55 = v23
 
-  local color2 = v113
-  color2 = v113 and Color3.fromRGB(40, 100, 40)
+  local color2 = v55
+  color2 = v55 and Color3.fromRGB(40, 100, 40)
 
-  local v114 = color2
+  local v56 = color2
 
   do
   end
 
   instance4.BackgroundColor3 = color2 or Color3.fromRGB(50, 50, 50)
-  tankSettings.Enabled = v32
   return
 end
 
-instance12.TextXAlignment = Enum.TextXAlignment.Center
-
-local function f9(p4)
-  local v115 = p4
-  local v116 = v20
-  local resources2 = v20:FindFirstChild("Resources")
-  local v117, v118, v119
-
-  if not resources2 then
-    return nil
-  else
-    local v120
-    v120 = nil
-
-    local huge
-    huge = math.huge
-
-    for index6, value6 in ipairs(resources2:GetChildren()) do
-      local model3
-      model3 = value6:IsA("Model")
-
-      local sunTree3
-      sunTree3 = model3
-
-      if model3 then
-        do
-        end
-
-        sunTree3 = value6.Name:find("Sun Tree")
-      end
-
-      if sunTree3 then
-        local primaryPart3
-        primaryPart3 = value6.PrimaryPart
-
-        local basePart3
-        basePart3 = primaryPart3
-        basePart3 = primaryPart3 or value6:FindFirstChildWhichIsA("BasePart")
-
-        if basePart3 then
-          local v121
-          v121 = basePart3.Position - p4
-
-          local v122
-          v122 = math.sqrt(v121.X ^ 2 + v121.Z ^ 2)
-
-          local v123
-          v123 = math.abs(v121.Y)
-
-          do
-          end
-
-          do
-          end
-
-          if v122 <= 300 and v123 <= 50 then
-            local magnitude
-            magnitude = (basePart3.Position - p4).Magnitude
-
-            if magnitude < huge then
-              v120 = value6
-              huge = magnitude
-            end
-          end
-        end
-      end
-    end
-
-    return v120
-  end
-end
-
-instance12.BorderColor3 = Color3.fromRGB(100, 100, 100)
-
-do
-end
-
-local f10
-
-local function f11()
-  local v124 = f10()
-
-  if v124 then
-    return v124:FindFirstChild("HumanoidRootPart")
-  else
-    return nil
-  end
-end
-
-local function f12()
-  local v125 = f10()
-
-  if v125 then
-    return v125:FindFirstChildOfClass("Humanoid")
-  else
-    return nil
-  end
-end
-
-f10 = function() return localPlayer.Character end
-local v126 = f12
-
-local function f13(p5)
-  local v127 = p5
-  local v128 = v20
-  local critters2 = v20:FindFirstChild("Critters")
-  local v129, v130
-
-  if not critters2 then
-    return nil
-  else
-    local v131
-    v131 = nil
-
-    local huge2
-    huge2 = math.huge
-
-    for index7, value7 in ipairs(critters2:GetChildren()) do
-      do
-      end
-
-      do
-      end
-
-      if (value7:IsA("Model")) and value7.Name == "Queen Ant" then
-        local primaryPart4
-        primaryPart4 = value7.PrimaryPart
-
-        local basePart4
-        basePart4 = primaryPart4
-        basePart4 = primaryPart4 or value7:FindFirstChildWhichIsA("BasePart")
-
-        if basePart4 then
-          local magnitude2
-          magnitude2 = (basePart4.Position - p5).Magnitude
-
-          if magnitude2 < huge2 then
-            v131 = value7
-            huge2 = magnitude2
-          end
-        end
-      end
-    end
-
-    return v131
-  end
-end
-
-local function f14(p6)
-  local v132 = p6
-  local v133 = v20
-  local deployables = v20:FindFirstChild("Deployables")
-
-  if not deployables then
-    return nil
-  else
-    local v134
-    v134 = nil
-
-    local huge3
-    huge3 = math.huge
-
-    for index8, value8 in ipairs(deployables:GetChildren()) do
-      if value8.Name == "Plant Box" then
-        local primaryPart5
-        primaryPart5 = value8.PrimaryPart
-
-        local basePart5
-        basePart5 = primaryPart5
-        basePart5 = primaryPart5 or value8:FindFirstChildWhichIsA("BasePart")
-
-        if basePart5 then
-          local magnitude3
-          magnitude3 = (basePart5.Position - p6).Magnitude
-
-          if magnitude3 < huge3 then
-            v134 = value8
-            huge3 = magnitude3
-          end
-        end
-      end
-    end
-
-    return v134
-  end
-end
-
-local v135 = f11
-local v136
-
-local function f15(p7)
-  local v137 = p7
-
-  do
-  end
-
-  local v138 = not v136 or (tick()) - v21 > 300
-
-  if v138 then
-    local v139
-
-    v139 = {
-      pcall(
-        game.HttpGet, game,
-        "https://raw.githubusercontent.com/S-J-090/white-list/refs/heads/main/whitelist"
-      ),
-    }
-
-    local v140
-    v140 = v139[2]
-
-    if v139[1] then
-      v136 = {}
-
-      for match in v140:gmatch("[^\r\n]+") do
-        local sS
-        sS = match:match("^%s*(.-)%s*$")
-
-        if sS ~= "" then
-          v136[(sS:lower())] = true
-        end
-      end
-
-      v21 = (tick())
-    else
-      v136 = {}
-      v21 = (tick())
-    end
-  end
-
-  local v141 = v136
-  local v142 = v141
-
-  do
-  end
-
-  return v141 and v136[(p7:lower())]
-end
-
-local function f16(p8)
-  local v143 = p8
-  local v144 = f12()
-  local v145 = not v144
-
-  do
-  end
-
-  local v146 = v145 or not (f11())
-
-  if v146 then
-    return false
-  else
-    local v147
-    v147 = tick()
-
-    while true do
-      task.wait(0.1)
-
-      local v148
-      v148 = f10()
-
-      if not v148 then
-        return false
-      else
-        local humanoidRootPart
-        humanoidRootPart = v148:FindFirstChild("HumanoidRootPart")
-
-        if not humanoidRootPart then
-          return false
-        else
-          if (humanoidRootPart.Position - p8).Magnitude <= 5 then
-            return true
-          else
-            v144:MoveTo(p8)
-
-            if (tick()) - v147 > 30 then
-              return false
-            else
-              if not v33 then
-                return false
-              end
-            end
-          end
-        end
-      end
-    end
-
-    return
-  end
-end
-
-local v149
-
-local function f17(p9)
-  local v150 = p9
-
-  do
-  end
-
-  local parent = v149 and v149.Parent
-  local v151, v152, v153, v154, deployables2, v155, magnitude4
-
-  if parent then
-    do
-    end
-
-    do
-    end
-
-    local basePart6
-    basePart6 = (v149:IsA("BasePart")) and v149
-
-    local v156
-    v156 = basePart6
-
-    if not basePart6 then
-      local primaryPart6
-      primaryPart6 = v149.PrimaryPart
-
-      local basePart7
-      basePart7 = primaryPart6
-
-      if not primaryPart6 then
-        do
-        end
-
-        basePart7 = v149:FindFirstChildWhichIsA("BasePart")
-      end
-
-      v156 = basePart7
-    end
-
-    local v157
-    v157 = v156
-
-    local v158
-    v158 = v157
-
-    do
-    end
-
-    if v157 and (math.abs(v157.Position.Y - 311)) <= 5 then
-      return v149
-    end
-  end
-
-  v154 = v20
-  deployables2 = v20:FindFirstChild("Deployables")
-
-  if not deployables2 then
-    return nil
-  else
-    local v159
-    v159 = nil
-
-    local huge4
-    huge4 = math.huge
-
-    for index9, value9 in ipairs(deployables2:GetChildren()) do
-      if value9.Name == "Chest" then
-        do
-        end
-
-        local basePart8
-        basePart8 = (value9:IsA("BasePart")) and value9
-
-        local basePart9
-        basePart9 = basePart8
-
-        if not basePart8 then
-          local primaryPart7
-          primaryPart7 = value9.PrimaryPart
-
-          local v160
-          v160 = primaryPart7
-
-          do
-          end
-
-          basePart9 = primaryPart7 or value9:FindFirstChildWhichIsA("BasePart")
-        end
-
-        if basePart9 then
-          if (math.abs(basePart9.Position.Y - 311)) <= 5 then
-            v149 = value9
-            return value9
-          else
-            magnitude4 = (basePart9.Position - p9).Magnitude
-
-            if magnitude4 < huge4 then
-              huge4 = magnitude4
-              v159 = value9
-            end
-          end
-        end
-      end
-    end
-
-    v149 = nil
-    return v159
-  end
-end
-
-local v161 = f15
-v149 = nil
-local v162 = f17
-
-local function f18()
-  do
-  end
-
-  local v163 = not v25 or not v25.EquipTool
-
-  if v163 then
-    return
-  else
-    local v164
-    v164 = f10()
-
-    local v165
-    v165 = v164
-
-    do
-    end
-
-    if v164 and v164:FindFirstChild("Rock") then
-      return
-    else
-      local v166
-      v166 = v20
-
-      local players2
-      players2 = v20:FindFirstChild("Players")
-
-      if not players2 then
-        return
-      else
-        local findFirstChild
-        findFirstChild = players2:FindFirstChild(localPlayer.Name)
-
-        if not findFirstChild then
-          return
-        else
-          local tools
-          tools = findFirstChild:FindFirstChild("Tools")
-
-          local v167
-          v167 = tools
-
-          do
-          end
-
-          if tools and tools:FindFirstChild("Rock") then
-            return
-          else
-            pcall(function()
-              v25.EquipTool.send(1)
-              return
-            end)
-
-            return
-          end
-        end
-      end
-    end
-  end
-end
-
-local function f19()
-  do
-  end
-
-  local v168 = not v25 or not v25.Pickup
-  local v169
-
-  if v168 then
-    return
-  else
-    local v170
-    v170 = f11()
-
-    if not v170 then
-      return
-    else
-      local position2
-      position2 = v170.Position
-
-      local v171
-      v171 = v20
-
-      local crops
-      crops = v20:FindFirstChild("Crops")
-
-      if not crops then
-        return
-      else
-        for index10, value10 in ipairs(crops:GetChildren()) do
-          local model4
-          model4 = value10:IsA("Model")
-
-          local find
-          find = model4
-
-          if model4 then
-            do
-            end
-
-            find = value10.Name:find("Bluefruit", 1, true)
-          end
-
-          if find then
-            local primaryPart8
-            primaryPart8 = value10.PrimaryPart
-
-            local v172
-            v172 = primaryPart8
-
-            do
-            end
-
-            local basePart10
-            basePart10 = primaryPart8 or value10:FindFirstChildWhichIsA("BasePart")
-
-            if basePart10 then
-              if (basePart10.Position - position2).Magnitude <= 30 then
-                local entityID4 = (value10:GetAttribute("EntityID"))
-
-                if entityID4 then
-                  pcall(function()
-                    v25.Pickup.send(entityID4)
-                    return
-                  end)
-                end
-              end
-            end
-          end
-        end
-
-        return
-      end
-    end
-  end
-end
-
-local v173 = f13
-local v174 = f14
-
-local function f20()
-  local v175 = f11()
-
-  if not v175 then
-    return false
-  else
-    local v176
-    v176 = f13(v175.Position)
-
-    if not v176 then
-      return false
-    else
-      local primaryPart9
-      primaryPart9 = v176.PrimaryPart
-
-      local v177
-      v177 = primaryPart9
-
-      do
-      end
-
-      local basePart11
-      basePart11 = primaryPart9 or v176:FindFirstChildWhichIsA("BasePart")
-
-      if not basePart11 then
-        return false
-      else
-        return f16(basePart11.Position + (Vector3.new(0, 2, 0)))
-      end
-    end
-  end
-end
-
-local v178 = f9
-local v179 = f3
-
-local function f21()
-  local v180, v181, v182
-  f3()
-  local v183 = v20
-  local items2 = v20:FindFirstChild("Items")
-
-  if not items2 then
-    return
-  else
-    local character3
-    character3 = localPlayer.Character
-
-    local v184
-    v184 = character3
-
-    do
-    end
-
-    local humanoidRootPart2
-    humanoidRootPart2 = character3 and character3:FindFirstChild("HumanoidRootPart")
-
-    if not humanoidRootPart2 then
-      return
-    else
-      local v185
-      v185 = f17(humanoidRootPart2.Position)
-
-      if not v185 then
-        return
-      else
-        do
-        end
-
-        local basePart12
-        basePart12 = (v185:IsA("BasePart")) and v185
-
-        local basePart13
-        basePart13 = basePart12
-
-        if not basePart12 then
-          local primaryPart10
-          primaryPart10 = v185.PrimaryPart
-
-          local v186
-          v186 = primaryPart10
-
-          do
-          end
-
-          basePart13 = primaryPart10 or v185:FindFirstChildWhichIsA("BasePart")
-        end
-
-        local v187
-        v187 = basePart13
-
-        if not v187 then
-          return
-        else
-          local v188
-          v188 = v187.Position + (Vector3.new(0, 2.5, 0))
-
-          local contents
-          contents = v185:FindFirstChild("Contents")
-
-          if not contents then
-            contents = Instance.new("Folder")
-            contents.Name = "Contents"
-            contents.Parent = v185
-          end
-
-          local position3
-          position3 = humanoidRootPart2.Position
-
-          for index11, value11 in ipairs(items2:GetChildren()) do
-            local v189 = value11
-
-            local v190
-            v190 = v189
-
-            if (v189:IsA("BasePart")) then
-              if (v189.Position - position3).Magnitude <= 30 then
-                do
-                end
-
-                do
-                end
-
-                if v189.Name == "Raw Magnetite" or v189.Name == "Raw Meat" then
-                  pcall(function()
-                    local v191 = v189
-                    v189:Destroy()
-                    return
-                  end)
-                else
-                  local v192
-                  v192 = v189
-
-                  v189:PivotTo(CFrame.new(v188))
-
-                  if contents then
-                    v189.Parent = contents
-                  end
-                end
-              end
-            end
-          end
-
-          return
-        end
-      end
-    end
-  end
-end
-
-local v193 = f20
-local v194 = f6
-local v195 = f18
-
-local function f22()
-  do
-  end
-
-  local v196 = not v25 or not v25.InteractStructure
-  local v197, v198, v199
-
-  if v196 then
-    return
-  else
-    local v200
-    v200 = v20
-
-    local deployables3
-    deployables3 = v20:FindFirstChild("Deployables")
-
-    if not deployables3 then
-      return
-    else
-      local v201
-      v201 = f11()
-
-      if not v201 then
-        return
-      else
-        local position4
-        position4 = v201.Position
-
-        for index12, value12 in ipairs(deployables3:GetChildren()) do
-          do
-          end
-
-          do
-          end
-
-          if (value12:IsA("Model")) and value12.Name == "Plant Box" then
-            local entityID5 = (value12:GetAttribute("EntityID"))
-
-            local primaryPart11
-            primaryPart11 = value12.PrimaryPart
-
-            local v202
-            v202 = primaryPart11
-
-            do
-            end
-
-            local basePart14
-            basePart14 = primaryPart11 or value12:FindFirstChildWhichIsA("BasePart")
-
-            local v203
-            v203 = entityID5
-
-            do
-            end
-
-            if entityID5 and basePart14 then
-              if (basePart14.Position - position4).Magnitude <= 10 then
-                if not (value12:FindFirstChild("Seed")) then
-                  pcall(function()
-                    v25.InteractStructure.send({ entityID = entityID5, itemID = 377 })
-                    return
-                  end)
-
-                  task.wait(0.1)
-                end
-              end
-            end
-          end
-        end
-
-        return
-      end
-    end
-  end
-end
-
-local v204 = f2
-local v205 = f7
-local v206 = f4
-local f23
-
-local function f24()
-  local v207, bluefruit
-
-  if (f2()) <= 10 then
-    bluefruit = (f23("Bluefruit"))
-
-    local v208
-    v208 = bluefruit
-
-    local useBagItem
-    useBagItem = bluefruit
-
-    if bluefruit then
-      local v209
-      v209 = v25
-
-      do
-      end
-
-      useBagItem = v25 and v25.UseBagItem
-    end
-
-    if useBagItem then
-      pcall(function()
-        v25.UseBagItem.send(bluefruit)
-        return
-      end)
-    end
-  end
-
-  return
-end
-
-f23 = function(p10)
-  local v210 = playerGui
-  local v211 = p10
-  local mainGui3 = playerGui:FindFirstChild("MainGui")
-  local v212, v213
-
-  if not mainGui3 then
+instance8.TextColor3 = Color3.fromRGB(220, 220, 220)
+instance8.Font = Enum.Font.SourceSansBold
+instance8.TextSize = 14
+instance8.Text = "No"
+
+local function f4(p2)
+  local v57 = p2
+  local v58 = playerGui
+  local mainGui = playerGui:FindFirstChild("MainGui")
+  local v59, v60
+
+  if not mainGui then
     return nil
   else
     local rightPanel
-    rightPanel = mainGui3:FindFirstChild("RightPanel")
+    rightPanel = mainGui:FindFirstChild("RightPanel")
 
-    local v214
-    v214 = rightPanel
+    local v61
+    v61 = rightPanel
 
     if rightPanel then
       do
       end
 
       local inventory
-      inventory = mainGui3.RightPanel:FindFirstChild("Inventory")
+      inventory = mainGui.RightPanel:FindFirstChild("Inventory")
 
       local list
       list = inventory
@@ -1695,23 +381,23 @@ f23 = function(p10)
         do
         end
 
-        list = mainGui3.RightPanel.Inventory:FindFirstChild("List")
+        list = mainGui.RightPanel.Inventory:FindFirstChild("List")
       end
 
-      v214 = list
+      v61 = list
     end
 
-    local v215
-    v215 = v214
+    local v62
+    v62 = v61
 
-    if not v215 then
+    if not v62 then
       return nil
     else
-      local findFirstChild2
-      findFirstChild2 = v215:FindFirstChild(p10)
+      local findFirstChild
+      findFirstChild = v62:FindFirstChild(p2)
 
-      if findFirstChild2 then
-        return findFirstChild2.LayoutOrder
+      if findFirstChild then
+        return findFirstChild.LayoutOrder
       else
         return nil
       end
@@ -1719,40 +405,90 @@ f23 = function(p10)
   end
 end
 
-local v216 = f24
+instance8.BorderColor3 = Color3.fromRGB(100, 100, 100)
+local v63
 
-local function f25()
-  local v217, v218
+local function f5(p3)
+  local v64 = p3
 
-  if (tick()) - v37 < v39 then
-    return
-  else
-    if (f7()) < 95 then
-      v218 = (f23(v38))
+  do
+  end
 
-      local v219
-      v219 = v218
+  local v65 = not v63 or (tick()) - v17 > 300
 
-      local useBagItem2
-      useBagItem2 = v218
+  if v65 then
+    local v66
 
-      if v218 then
-        local v220
-        v220 = v25
+    v66 = {
+      pcall(
+        game.HttpGet, game,
+        "https://raw.githubusercontent.com/S-J-090/white-list/refs/heads/main/whitelist"
+      ),
+    }
 
-        do
+    local v67
+    v67 = v66[2]
+
+    if v66[1] then
+      v63 = {}
+
+      for match in v67:gmatch("[^\r\n]+") do
+        local sS
+        sS = match:match("^%s*(.-)%s*$")
+
+        if sS ~= "" then
+          v63[(sS:lower())] = true
         end
-
-        useBagItem2 = v25 and v25.UseBagItem
       end
 
-      if useBagItem2 then
+      v17 = (tick())
+    else
+      v63 = {}
+      v17 = (tick())
+    end
+  end
+
+  local v68 = v63
+  local v69 = v68
+
+  do
+  end
+
+  return v68 and v63[(p3:lower())]
+end
+
+local function f6()
+  return localPlayer.Character
+end
+
+local v70 = f5
+
+local function f7()
+  local v71 = v16
+  local items = v16:FindFirstChild("Items")
+  local v72, v73
+
+  if not items then
+    return
+  else
+    for index2, value2 in ipairs(items:GetChildren()) do
+      local v74 = value2
+
+      local v75
+      v75 = v74
+
+      do
+      end
+
+      do
+      end
+
+      if (v74:IsA("BasePart")) and v74.Name ~= "Essence" then
         pcall(function()
-          v25.UseBagItem.send(v218)
+          local v76 = v74
+          v74:Destroy()
           return
         end)
-
-        v37 = (tick())
       end
     end
 
@@ -1760,80 +496,424 @@ local function f25()
   end
 end
 
-local v221 = f22
-local v222 = f19
-local v223 = f5
-local v224 = f8
+local function f8(p4, p5)
+  local v77 = p5
+  local v78 = p4
+  local character2 = localPlayer.Character
+  local v79, v80, v81, v82, v83
+
+  if not character2 then
+    return
+  else
+    local humanoidRootPart
+    humanoidRootPart = character2:FindFirstChild("HumanoidRootPart")
+
+    if not humanoidRootPart then
+      return
+    else
+      local overlapParams
+      overlapParams = OverlapParams.new()
+      overlapParams.FilterType = Enum.RaycastFilterType.Exclude
+      overlapParams.FilterDescendantsInstances = { character2 }
+
+      local v84
+      v84 = {}
+
+      local v85
+      v85 = {}
+
+      do
+      end
+
+      for index3, value3 in ipairs(workspace:GetPartBoundsInRadius(
+        humanoidRootPart.Position, 17, overlapParams
+      )) do
+        local model
+        model = value3:FindFirstAncestorWhichIsA("Model")
+
+        if not model then
+        else
+          local name
+          name = model.Name
+
+          local entityID
+          entityID = model:GetAttribute("EntityID")
+
+          do
+          end
+
+          do
+          end
+
+          if not entityID or v85[entityID] then
+          else
+            local v86
+            v86 = false
+
+            if name == p4 then
+              if p5 then
+                local health
+                health = model:FindFirstChild("Health")
+
+                local valueBase
+                valueBase = health
+
+                if health then
+                  do
+                  end
+
+                  do
+                  end
+
+                  valueBase = (health:IsA("ValueBase")) and health.Value >= p5
+                end
+
+                if valueBase then
+                  v86 = true
+                end
+              else
+                v86 = true
+              end
+            end
+
+            if v86 then
+              v85[entityID] = true
+              table.insert(v84, { entityID = entityID })
+            end
+          end
+        end
+      end
+
+      if #v84 > 0 then
+        v21.SwingTool.send({
+          entityIDs = v84,
+          cframe = humanoidRootPart.CFrame,
+          timestamp = workspace.DistributedGameTime,
+        })
+      end
+
+      return
+    end
+  end
+end
+
+local function f9()
+  local v87, v88
+
+  if (tick()) - v28 < 3 then
+    return
+  else
+    do
+    end
+
+    do
+    end
+
+    if not v21 or not v21.EquipTool then
+      return
+    else
+      local v89
+      v89 = f6()
+
+      local v90
+      v90 = v89
+
+      do
+      end
+
+      if v89 and v89:FindFirstChild("Rock") then
+        v28 = (tick())
+        return
+      else
+        local v91
+        v91 = v16
+
+        local players2
+        players2 = v16:FindFirstChild("Players")
+
+        if not players2 then
+          return
+        else
+          local findFirstChild2
+          findFirstChild2 = players2:FindFirstChild(localPlayer.Name)
+
+          if not findFirstChild2 then
+            return
+          else
+            local tools
+            tools = findFirstChild2:FindFirstChild("Tools")
+
+            local v92
+            v92 = tools
+
+            do
+            end
+
+            if tools and tools:FindFirstChild("Rock") then
+              v28 = (tick())
+              return
+            else
+              pcall(function()
+                v21.EquipTool.send(1)
+                return
+              end)
+
+              v28 = (tick())
+              return
+            end
+          end
+        end
+      end
+    end
+  end
+end
+
+local function f10()
+  local v93 = v16
+  local items2 = v16:FindFirstChild("Items")
+  local v94
+
+  if not items2 then
+    return
+  else
+    local v95
+    v95 = f6()
+
+    local v96
+    v96 = v95
+
+    do
+    end
+
+    local humanoidRootPart2
+    humanoidRootPart2 = v95 and v95:FindFirstChild("HumanoidRootPart")
+
+    if not humanoidRootPart2 then
+      return
+    else
+      local position
+      position = humanoidRootPart2.Position
+
+      for index4, value4 in ipairs(items2:GetChildren()) do
+        local v97
+        v97 = value4.Name == "Essence"
+
+        local v98
+        v98 = v97
+
+        do
+        end
+
+        if v97 and value4:IsA("BasePart") then
+          if (value4.Position - position).Magnitude <= 30 then
+            local entityID2 = (value4:GetAttribute("EntityID"))
+
+            local v99
+            v99 = entityID2
+
+            local pickup
+            pickup = entityID2
+
+            if entityID2 then
+              local v100
+              v100 = v21
+
+              do
+              end
+
+              pickup = v21 and v21.Pickup
+            end
+
+            if pickup then
+              pcall(function()
+                v21.Pickup.send(entityID2)
+                return
+              end)
+            end
+          end
+        end
+      end
+
+      return
+    end
+  end
+end
+
+local v101 = f7
+local v102 = f10
+local v103 = f8
+local v104 = f4
+
+local function f11()
+  local v105, v106, v107, v108, v109, bloodfruit
+
+  if (tick()) - v25 < 0.05 then
+    return
+  else
+    local v110
+    v110 = playerGui
+
+    local mainGui2
+    mainGui2 = playerGui:FindFirstChild("MainGui")
+
+    if not mainGui2 then
+      return
+    else
+      local panels
+      panels = mainGui2:FindFirstChild("Panels")
+
+      local v111
+      v111 = panels
+
+      if panels then
+        do
+        end
+
+        local stats
+        stats = mainGui2.Panels:FindFirstChild("Stats")
+
+        local v112
+        v112 = stats
+
+        if stats then
+          do
+          end
+
+          local bars
+          bars = mainGui2.Panels.Stats:FindFirstChild("Bars")
+
+          local v113
+          v113 = bars
+
+          if bars then
+            do
+            end
+
+            local health2
+            health2 = mainGui2.Panels.Stats.Bars:FindFirstChild("Health")
+
+            local valueLabel
+            valueLabel = health2
+
+            if health2 then
+              do
+              end
+
+              valueLabel = mainGui2.Panels.Stats.Bars.Health:FindFirstChild("ValueLabel")
+            end
+
+            v113 = valueLabel
+          end
+
+          v112 = v113
+        end
+
+        v111 = v112
+      end
+
+      local v114
+      v114 = 100
+
+      local v115
+      v115 = v111
+
+      local v116
+      v116 = v115
+
+      do
+      end
+
+      if v115 and v115:IsA("TextLabel") then
+        v114 = (tonumber(v115.Text)) or 100
+      end
+
+      if v114 < 95 then
+        bloodfruit = (f4("Bloodfruit"))
+
+        local v117
+        v117 = bloodfruit
+
+        local useBagItem
+        useBagItem = bloodfruit
+
+        if bloodfruit then
+          local v118
+          v118 = v21
+
+          do
+          end
+
+          useBagItem = v21 and v21.UseBagItem
+        end
+
+        if useBagItem then
+          pcall(function()
+            v21.UseBagItem.send(bloodfruit)
+            return
+          end)
+
+          v25 = (tick())
+        end
+      end
+
+      return
+    end
+  end
+end
+
+local v119 = f9
+local v120 = f2
+local v121 = f1
+local v122 = f3
 
 do
 end
 
 instance3.MouseButton1Click:Connect(function()
-  local v225, v226
+  local v123
 
-  local v227, v228 = pcall(function()
-    local v229 = marketplaceService
+  local v124, v125 = pcall(function()
+    local v126 = marketplaceService
     return marketplaceService:UserOwnsGamePassAsync(localPlayer.UserId, 1768193888)
   end)
 
   do
   end
 
-  local v230, text
+  local text
 
-  if v227 and v228 then
-    f8("Tank")
+  if v124 and v125 then
+    f3("Tank")
     return
   else
-    if (f15(localPlayer.Name)) then
-      f8("Tank")
+    if (f5(localPlayer.Name)) then
+      f3("Tank")
       return
     else
-      local v230Check
+      text = instance3.Text
 
-      do
-      end
+      instance3.Text = "Gamepass or whitelist required"
+      instance3.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
 
-      v230 = 12672698118
-      local v231, v232
+      task.delay(2, function()
+        instance3.Text = text
+        local v127 = instance3
+        local v128 = instance3
+        local v129 = v22
 
-      v232, v231 = pcall(function()
-        local v233 = marketplaceService
-        return marketplaceService:PlayerOwnsAsset(localPlayer, v230)
+        local color3 = v129
+        color3 = v129 and Color3.fromRGB(40, 100, 40)
+
+        local v130 = color3
+
+        do
+        end
+
+        instance3.BackgroundColor3 = color3 or Color3.fromRGB(50, 50, 50)
+        return
       end)
 
-      do
-      end
-
-      if v232 and v231 then
-        f8("Tank")
-        return
-      else
-        text = instance3.Text
-
-        instance3.Text = "Gamepass, Whitelist, or Shirt required"
-        instance3.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
-
-        task.delay(2, function()
-          instance3.Text = text
-          local v234 = instance3
-          local v235 = instance3
-          local v236 = v32
-
-          local color3 = v236
-          color3 = v236 and Color3.fromRGB(40, 100, 40)
-
-          local v237 = color3
-
-          do
-          end
-
-          instance3.BackgroundColor3 = color3 or Color3.fromRGB(50, 50, 50)
-          return
-        end)
-
-        return
-      end
+      return
     end
   end
 end)
@@ -1842,10 +922,10 @@ do
 end
 
 instance4.MouseButton1Click:Connect(function()
-  if not v33 then
+  if not v23 then
     mojoConfirm.Enabled = true
   else
-    f8("Mojo")
+    f3("Mojo")
   end
 
   return
@@ -1854,193 +934,17 @@ end)
 do
 end
 
-local v238
+instance7.MouseButton1Click:Connect(function()
+  mojoConfirm.Enabled = false
+  f3("Mojo")
+  return
+end)
+
+do
+end
 
 instance8.MouseButton1Click:Connect(function()
-  local text2 = instance7.Text
-  local v239 = text2
-  local v240, v241
-
-  if text2 then
-    do
-    end
-
-    do
-    end
-
-    v239 = text2 ~= "" and tonumber(text2)
-  end
-
-  if v239 then
-    v238 = (tonumber(text2))
-  else
-    v238 = nil
-  end
-
-  v34 = 0
   mojoConfirm.Enabled = false
-  f8("Mojo")
-  return
-end)
-
-do
-end
-
-instance9.MouseButton1Click:Connect(function()
-  mojoConfirm.Enabled = false
-  return
-end)
-
-do
-end
-
-instance11.MouseButton1Click:Connect(function()
-  if v38 == "Bloodfruit" then
-    v38 = "Bluefruit"
-    instance11.Text = "Eat: Bluefruit"
-  else
-    v38 = "Bloodfruit"
-    instance11.Text = "Eat: Bloodfruit"
-  end
-
-  return
-end)
-
-do
-end
-
-instance12.FocusLost:Connect(function(p11)
-  local v242
-
-  if p11 then
-    local v243
-    v243 = tonumber(instance12.Text)
-
-    do
-    end
-
-    if v243 and v243 >= 0 then
-      v39 = v243
-      instance12.Text = tostring(v39)
-    else
-      instance12.Text = tostring(v39)
-    end
-  end
-
-  return
-end)
-
-task.spawn(function()
-  local v244, v245, v246, v247, v248, position5, pickup, v249
-
-  while true do
-    if not v33 then
-      task.wait(0.1)
-    else
-      local v250
-      v250 = v238
-
-      local v251
-      v251 = f4()
-
-      do
-      end
-
-      if v250 and v34 >= v238 and v251 >= 13 then
-          v33 = false
-
-          local v252
-          v252 = localPlayer
-
-          localPlayer:Kick("Farming complete. Reached target rebirths.")
-          break
-      else
-
-          if v251 >= 100 then
-            if v35 ~= 10 then
-              f5()
-              v35 = 10
-            end
-          else
-            if v251 >= 99 then
-              v35 = 0.15
-            else
-              v35 = 0.05
-            end
-          end
-
-          if v251 >= 100 then
-            v245 = 1
-          else
-            if v251 >= 99 then
-              v245 = 5
-            else
-              v245 = 10
-            end
-          end
-
-          v246 = f11()
-          v247 = 0
-          v248 = v246
-
-          do
-          end
-
-          position5 = v246 and (f11()).Position
-          pickup = position5
-
-          if position5 then
-            local v253
-            v253 = v25
-
-            do
-            end
-
-            pickup = v25 and v25.Pickup
-          end
-
-          if pickup then
-            local v254
-            v254 = f17(position5)
-
-            if v254 then
-              local contents2
-              contents2 = v254:FindFirstChild("Contents")
-
-              if contents2 then
-                for index13, value13 in ipairs(contents2:GetChildren()) do
-                  if value13.Name == "Essence" then
-                    local entityID6 = (value13:GetAttribute("EntityID"))
-
-                    if entityID6 then
-                      pcall(function()
-                        v25.Pickup.send(entityID6)
-                        return
-                      end)
-
-                      v247 = v247 + 1
-
-                      if v247 >= v245 then
-                        break
-                      else
-                        -- Continue with the next item.
-                      end
-                    else
-                      -- Continue with the next item.
-                    end
-                  else
-                    -- Continue with the next item.
-                  end
-                end
-              end
-            end
-          end
-
-          task.wait(v35)
-      end
-    end
-  end
-
   return
 end)
 
@@ -2048,514 +952,46 @@ task.spawn(function()
   while true do
     task.wait(0.05)
 
-    if v32 then
-      if (tick()) - v36 >= 0.25 then
-        f6("Tank")
-        v36 = (tick())
+    if v22 then
+      if (tick()) - v24 >= 0.05 then
+        f8("Queen Ant", 120)
+        v24 = (tick())
       end
 
-      if (tick()) - v40 >= 5 then
-        f20()
-        v40 = (tick())
-      end
-
-      f21()
-      f25()
-    end
-  end
-end)
-
-task.spawn(function()
-  while true do
-    task.wait(0.1)
-
-    if v33 then
-      f18()
-      f3()
-      f22()
-      f19()
-      f24()
-    end
-  end
-end)
-
-task.spawn(function()
-  local v255
-
-  while true do
-    task.wait(0.1)
-
-    if not v33 then
-    else
-      local v256
-      v256 = f11()
-
-      if not v256 then
-      else
-        local position6
-        position6 = v256.Position
-
-        local v257
-        v257 = f9(position6)
-
-        if v257 then
-          local primaryPart12
-          primaryPart12 = v257.PrimaryPart
-
-          local v258
-          v258 = primaryPart12
-
-          do
-          end
-
-          local basePart15
-          basePart15 = primaryPart12 or v257:FindFirstChildWhichIsA("BasePart")
-
-          do
-          end
-
-          if basePart15 and (position6 - basePart15.Position).Magnitude <= 5 then
-            if (tick()) - v36 >= 0.25 then
-              f6("Mojo")
-              v36 = (tick())
-            end
-          end
-        end
-      end
-    end
-  end
-end)
-
-local v259, v260
-
-task.spawn(function()
-  local v261 = "IDLE"
-  local v262 = 0
-
-  local v263, v264, v265, v266, v267, v268, v269, v270, v271, v272, v273, v274, v275, v276,
-    v277, v278, v279, v280, v281, v282, v283, v284, v285, v286
-
-  while true do
-    task.wait(0.1)
-
-    if not v33 then
-    else
-      local v287
-      v287 = f11()
-
-      local v288
-      v288 = not v287
-
-      do
-      end
-
-      do
-      end
-
-      if v288 or not (f12()) then
-      else
-        local position7
-        position7 = v287.Position
-
-        do
-        end
-
-        do
-        end
-
-        if v261 == "IDLE" or v261 == "RETURN_TO_PLANT" then
-          do
-          end
-
-          do
-          end
-
-          if not v259 or not v259.Parent then
-            v259 = (f14(position7))
-          end
-
-          if v259 then
-            local primaryPart13
-            primaryPart13 = v259.PrimaryPart
-
-            local basePart16
-            basePart16 = primaryPart13
-
-            if not primaryPart13 then
-              do
-              end
-
-              basePart16 = v259:FindFirstChildWhichIsA("BasePart")
-            end
-
-            if basePart16 then
-              if (position7 - basePart16.Position).Magnitude > 5 then
-                f16(basePart16.Position)
-              else
-                v261 = "WAIT_AT_PLANT"
-                v262 = tick()
-              end
-            else
-              v259 = nil
-            end
-          end
-        else
-          if v261 == "WAIT_AT_PLANT" then
-            if (tick()) - v262 >= 1 then
-              f22()
-
-              do
-              end
-
-              do
-              end
-
-              if not v260 or not v260.Parent then
-                v260 = (f9(position7))
-              end
-
-              if v260 then
-                v261 = "FIND_SUN_TREE"
-              else
-                v262 = tick()
-              end
-            end
-          else
-            if v261 == "FIND_SUN_TREE" then
-              do
-              end
-
-              do
-              end
-
-              if v260 and v260.Parent then
-                local primaryPart14
-                primaryPart14 = v260.PrimaryPart
-
-                local basePart17
-                basePart17 = primaryPart14
-
-                if not primaryPart14 then
-                  do
-                  end
-
-                  basePart17 = v260:FindFirstChildWhichIsA("BasePart")
-                end
-
-                do
-                end
-
-                if basePart17 and basePart17.Parent then
-                  if (position7 - basePart17.Position).Magnitude > 3 then
-                    f16(basePart17.Position)
-                  else
-                    v261 = "BREAK_TREE"
-                    v262 = tick()
-                  end
-                else
-                  v260 = nil
-                  v261 = "RETURN_TO_PLANT"
-                end
-              else
-                v260 = nil
-                v261 = "RETURN_TO_PLANT"
-              end
-            else
-              if v261 == "BREAK_TREE" then
-                do
-                end
-
-                do
-                end
-
-                if v260 and v260.Parent then
-                  local primaryPart15
-                  primaryPart15 = v260.PrimaryPart
-
-                  local basePart18
-                  basePart18 = primaryPart15
-
-                  if not primaryPart15 then
-                    do
-                    end
-
-                    basePart18 = v260:FindFirstChildWhichIsA("BasePart")
-                  end
-
-                  local v289
-                  v289 = false
-
-                  while (tick()) - v262 < 15 do
-                    task.wait(0.2)
-
-                    if not v33 then
-                      break
-                    else
-                      local v290
-                      v290 = not v260.Parent
-
-                      local v291
-                      v291 = v290
-
-                      if not v290 then
-                        do
-                        end
-
-                        do
-                        end
-
-                        v291 = not basePart18 or not basePart18.Parent
-                      end
-
-                      if v291 then
-                        v289 = true
-                        break
-                      end
-                    end
-                  end
-
-                  local v292
-                  v292 = v289
-
-                  if not v289 then
-                    do
-                    end
-
-                    do
-                    end
-
-                    v292 = not v260 or not v260.Parent
-                  end
-
-                  if v292 then
-                    f19()
-                    v260 = nil
-                    v261 = "RETURN_TO_PLANT"
-                  end
-                else
-                  f19()
-                  v260 = nil
-                  v261 = "RETURN_TO_PLANT"
-                end
-              end
-            end
-          end
-        end
-
-        do
-        end
-
-        do
-        end
-
-        if v259 and not v259.Parent then
-          v259 = nil
-        end
-
-        do
-        end
-
-        do
-        end
-
-        if v260 and not v260.Parent then
-          v260 = nil
-        end
+      f11()
+
+      if (tick()) - v26 >= 2 then
+        f7()
+        v26 = (tick())
       end
     end
   end
 end)
 
 task.spawn(function()
-  local v293 = 0
-
   while true do
-    task.wait(0.1)
+    task.wait(0.05)
 
-    if not v32 then
-    else
-      local v294
-      v294 = f12()
+    if v23 then
+      f9()
 
-      if not v294 then
-      else
-        if (tick()) - v293 >= 1 then
-          v294:ChangeState(Enum.HumanoidStateType.Jumping)
-          v293 = tick()
-        end
-      end
-    end
-  end
-end)
-
-task.spawn(function()
-  local v295 = 0
-  local v296, v297, v298, v299, v300
-
-  while true do
-    task.wait(0.1)
-
-    if not v33 then
-    else
-      local v301
-      v301 = f12()
-
-      local v302
-      v302 = not v301
-
-      local v303
-      v303 = f11()
-
-      do
+      if (tick()) - v24 >= 0.05 then
+        f8("Queen Ant's Servant", nil)
+        v24 = (tick())
       end
 
-      if v302 or not v303 then
-      else
-        local v304
-        v304 = v260
-
-        local v305
-        v305 = false
-
-        do
-        end
-
-        if v304 and v260.Parent then
-          local primaryPart16
-          primaryPart16 = v260.PrimaryPart
-
-          local basePart19
-          basePart19 = primaryPart16
-
-          if not primaryPart16 then
-            do
-            end
-
-            basePart19 = v260:FindFirstChildWhichIsA("BasePart")
-          end
-
-          local v306
-          v306 = basePart19
-
-          if v306 then
-            if (v303.Position - v306.Position).Magnitude <= 5 then
-              v305 = true
-            end
-          end
-        end
-
-        do
-        end
-
-        do
-        end
-
-        if not v305 and (tick()) - v295 >= 2 then
-          v301:ChangeState(Enum.HumanoidStateType.Jumping)
-          v295 = tick()
-        end
+      if (tick()) - v26 >= 2 then
+        f7()
+        f10()
+        v26 = (tick())
       end
-    end
-  end
-end)
 
-task.spawn(function()
-  local v307, v308, v309, v310, v311
-
-  while true do
-    task.wait(10)
-
-    if not v33 then
-    else
-      local v312
-      v312 = f11()
-
-      if not v312 then
-      else
-        local position8
-        position8 = v312.Position
-
-        local v313
-        v313 = f17(position8)
-
-        if v313 then
-          do
-          end
-
-          local basePart20
-          basePart20 = (v313:IsA("BasePart")) and v313
-
-          local basePart21
-          basePart21 = basePart20
-
-          if not basePart20 then
-            local primaryPart17
-            primaryPart17 = v313.PrimaryPart
-
-            local v314
-            v314 = primaryPart17
-
-            do
-            end
-
-            basePart21 = primaryPart17 or v313:FindFirstChildWhichIsA("BasePart")
-          end
-
-          local v315
-          v315 = basePart21
-
-          if v315 then
-            local v316
-            v316 = v315.Position + (Vector3.new(0, 2.5, 0))
-
-            local contents3
-            contents3 = v313:FindFirstChild("Contents")
-
-            if not contents3 then
-              contents3 = Instance.new("Folder")
-              contents3.Name = "Contents"
-              contents3.Parent = v313
-            end
-
-            local v317
-            v317 = v20
-
-            local items3
-            items3 = v20:FindFirstChild("Items")
-
-            if items3 then
-              for index14, value14 in ipairs(items3:GetChildren()) do
-                do
-                end
-
-                do
-                end
-
-                if (value14:IsA("BasePart")) and value14.Name == "Essence" then
-                  local v318
-                  v318 = value14.Position - position8
-
-                  local v319
-                  v319 = math.sqrt(v318.X ^ 2 + v318.Z ^ 2)
-
-                  local v320
-                  v320 = math.abs(v318.Y)
-
-                  do
-                  end
-
-                  do
-                  end
-
-                  if v319 <= 500 and v320 <= 50 then
-                    value14:PivotTo(CFrame.new(v316))
-                    value14.Parent = contents3
-                  end
-                end
-              end
-            end
-          end
+      if (tick()) - v27 >= 5 then
+        if (f2()) >= 100 then
+          f1()
         end
+
+        v27 = (tick())
       end
     end
   end
