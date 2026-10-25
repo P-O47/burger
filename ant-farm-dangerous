@@ -213,11 +213,10 @@ local function f2()
     if v41 then
       return v41
     else
-      ::L8443397::
       return 0
     end
   else
-    goto L8443397
+    return 0
   end
 end
 
