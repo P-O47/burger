@@ -392,11 +392,10 @@ local function f4()
     if v68 then
       return v68
     else
-      ::L4888507::
       return 0
     end
   else
-    goto L4888507
+    return 0
   end
 end
 
@@ -1194,73 +1193,63 @@ local function f17(p9)
 
     if v157 and (math.abs(v157.Position.Y - 311)) <= 5 then
       return v149
-    else
-      ::L15426340::
-      v154 = v20
-      deployables2 = v20:FindFirstChild("Deployables")
+    end
+  end
 
-      if not deployables2 then
-        return nil
-      else
-        local v159
-        v159 = nil
+  v154 = v20
+  deployables2 = v20:FindFirstChild("Deployables")
 
-        local huge4
-        huge4 = math.huge
+  if not deployables2 then
+    return nil
+  else
+    local v159
+    v159 = nil
 
-        for index9, value9 in ipairs(deployables2:GetChildren()) do
-          if value9.Name == "Chest" then
-            do
-            end
+    local huge4
+    huge4 = math.huge
 
-            local basePart8
-            basePart8 = (value9:IsA("BasePart")) and value9
-
-            local basePart9
-            basePart9 = basePart8
-
-            if not basePart8 then
-              local primaryPart7
-              primaryPart7 = value9.PrimaryPart
-
-              local v160
-              v160 = primaryPart7
-
-              do
-              end
-
-              basePart9 = primaryPart7 or value9:FindFirstChildWhichIsA("BasePart")
-            end
-
-            if basePart9 then
-              if (math.abs(basePart9.Position.Y - 311)) <= 5 then
-                v149 = value9
-                return value9
-              else
-                magnitude4 = (basePart9.Position - p9).Magnitude
-
-                if magnitude4 < huge4 then
-                  huge4 = magnitude4
-                  v159 = value9
-                end
-
-                ::L7185824::
-                ::L16727764::
-              end
-            else
-              goto L7185824
-            end
-          else
-            goto L16727764
-          end
+    for index9, value9 in ipairs(deployables2:GetChildren()) do
+      if value9.Name == "Chest" then
+        do
         end
 
-        v149 = nil
-        return v159
+        local basePart8
+        basePart8 = (value9:IsA("BasePart")) and value9
+
+        local basePart9
+        basePart9 = basePart8
+
+        if not basePart8 then
+          local primaryPart7
+          primaryPart7 = value9.PrimaryPart
+
+          local v160
+          v160 = primaryPart7
+
+          do
+          end
+
+          basePart9 = primaryPart7 or value9:FindFirstChildWhichIsA("BasePart")
+        end
+
+        if basePart9 then
+          if (math.abs(basePart9.Position.Y - 311)) <= 5 then
+            v149 = value9
+            return value9
+          else
+            magnitude4 = (basePart9.Position - p9).Magnitude
+
+            if magnitude4 < huge4 then
+              huge4 = magnitude4
+              v159 = value9
+            end
+          end
+        end
       end
     end
-  else
-    goto L15426340
+
+    v149 = nil
+    return v159
   end
 end
 
@@ -1800,7 +1789,7 @@ instance3.MouseButton1Click:Connect(function()
       f8("Tank")
       return
     else
-      local 
+      local v230Check
 
       do
       end
@@ -1957,8 +1946,7 @@ task.spawn(function()
       do
       end
 
-      if v250 and v34 >= v238 then
-        if v251 >= 13 then
+      if v250 and v34 >= v238 and v251 >= 13 then
           v33 = false
 
           local v252
@@ -1966,8 +1954,7 @@ task.spawn(function()
 
           localPlayer:Kick("Farming complete. Reached target rebirths.")
           break
-        else
-          ::L1377785::
+      else
 
           if v251 >= 100 then
             if v35 ~= 10 then
@@ -2036,14 +2023,13 @@ task.spawn(function()
                       if v247 >= v245 then
                         break
                       else
-                        ::L4629383::
-                        ::L5836250::
+                        -- Continue with the next item.
                       end
                     else
-                      goto L4629383
+                      -- Continue with the next item.
                     end
                   else
-                    goto L5836250
+                    -- Continue with the next item.
                   end
                 end
               end
@@ -2051,9 +2037,6 @@ task.spawn(function()
           end
 
           task.wait(v35)
-        end
-      else
-        goto L1377785
       end
     end
   end
