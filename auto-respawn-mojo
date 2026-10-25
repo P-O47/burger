@@ -1,0 +1,232 @@
+do
+end
+
+local players = game:GetService("Players")
+
+do
+end
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local localPlayer = players.LocalPlayer
+local currentCamera = workspace.CurrentCamera
+
+do
+end
+
+local v1 = (require((replicatedStorage:WaitForChild("Modules")):WaitForChild("Packets")))
+
+do
+end
+
+local spawnFirst = ((replicatedStorage:WaitForChild("Events")):WaitForChild("SpawnFirst"))
+local v2 = localPlayer
+local playerGui = localPlayer:WaitForChild("PlayerGui")
+local spawnGui = (playerGui:WaitForChild("SpawnGui"))
+local mainGui = (playerGui:WaitForChild("MainGui"))
+local topbar = (playerGui:WaitForChild("Topbar"))
+local v3 = false
+local v4, f1
+
+local function f2()
+  local v5
+  task.wait(13)
+
+  if not localPlayer.Character then
+    return
+  else
+    local 
+
+    do
+    end
+
+    f1()
+    local v6, v7
+
+    v7, v6 = pcall(function()
+      local v8 = spawnFirst
+      return spawnFirst:InvokeServer(true)
+    end)
+
+    do
+    end
+
+    if v7 and v6 then
+      local v9
+      v9 = localPlayer
+      localPlayer:SetAttribute("hasSpawned", true)
+    end
+
+    for index, value in ipairs({ 377 }) do
+      local v10 = value
+
+      for i = 1, 1 do
+        pcall(function()
+          v1.PurchaseFromShop.send(v10)
+          return
+        end)
+
+        task.wait(0.1)
+      end
+
+      task.wait(0.5)
+    end
+
+    task.wait(1)
+
+    pcall(function()
+      v1.CraftItem.send(843)
+      return
+    end)
+
+    return
+  end
+end
+
+function f1()
+  local v11, v12, v13, v14, v15, v16
+  currentCamera.CameraType = Enum.CameraType.Custom
+  task.wait(0.5)
+  local character = localPlayer.Character
+  local humanoid = character
+
+  if character then
+    do
+    end
+
+    humanoid = localPlayer.Character:FindFirstChild("Humanoid")
+  end
+
+  if humanoid then
+    currentCamera.CameraSubject = localPlayer.Character.Humanoid
+  end
+
+  spawnGui.Enabled = false
+  mainGui.Enabled = true
+  topbar.Enabled = true
+  local character2 = localPlayer.Character
+  local waitForChild, v17, valueLabel
+
+  if not character2 then
+    return
+  else
+    waitForChild = (character2:WaitForChild("Humanoid", 5))
+
+    if not waitForChild then
+      return
+    else
+      task.wait(1)
+
+      local v18
+      v18 = mainGui
+
+      local panels
+      panels = mainGui:FindFirstChild("Panels")
+
+      if panels then
+        local stats
+        stats = panels:FindFirstChild("Stats")
+
+        local v19
+        v19 = stats
+
+        if stats then
+          do
+          end
+
+          local bars
+          bars = panels.Stats:FindFirstChild("Bars")
+
+          local health
+          health = bars
+
+          if bars then
+            do
+            end
+
+            health = panels.Stats.Bars:FindFirstChild("Health")
+          end
+
+          v19 = health
+        end
+
+        local v20
+        v20 = v19
+
+        if v20 then
+          local slider
+          slider = v20:FindFirstChild("Slider")
+
+          local uiGradient
+          uiGradient = slider
+
+          if slider then
+            do
+            end
+
+            uiGradient = v20.Slider:FindFirstChild("UIGradient")
+          end
+
+          v17 = uiGradient
+          valueLabel = (v20:FindFirstChild("ValueLabel"))
+
+          local v21
+          v21 = v17
+
+          do
+          end
+
+          if v17 and valueLabel then
+            v17.Offset = Vector2.new(1 - waitForChild.Health / waitForChild.MaxHealth, 0)
+            valueLabel.Text = string.format("%0.1f", waitForChild.Health)
+
+            do
+            end
+
+            waitForChild.HealthChanged:Connect(function(p1)
+              local v22 = p1
+              v17.Offset = Vector2.new(1 - p1 / waitForChild.MaxHealth, 0)
+              valueLabel.Text = string.format("%0.1f", p1)
+              return
+            end)
+          end
+        end
+      end
+
+      return
+    end
+  end
+end
+
+local v23 = f2
+
+local function f3(p2)
+  local v24 = p2
+
+  do
+  end
+
+  ;(p2:WaitForChild("Humanoid")).Died:Connect(function()
+    v3 = true
+    return
+  end)
+
+  if v3 then
+    v3 = false
+    task.spawn(f2)
+  else
+    f1()
+  end
+
+  return
+end
+
+do
+end
+
+localPlayer.CharacterAdded:Connect(f3)
+
+if localPlayer.Character then
+  f3(localPlayer.Character)
+end
+
+return
