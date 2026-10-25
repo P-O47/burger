@@ -1,0 +1,404 @@
+local v1 = game
+
+do
+end
+
+local v2 = v1.GetService(v1, "Players")
+
+do
+end
+
+local runService = (game:GetService("RunService"))
+
+do
+end
+
+local pathfindingService = (game:GetService("PathfindingService"))
+
+do
+end
+
+local workspace = (game:GetService("Workspace"))
+local localPlayer = v2.LocalPlayer
+local v3 = localPlayer
+
+do
+end
+
+local parent = localPlayer.WaitForChild(localPlayer, "PlayerGui")
+
+local function f1(p1, p2, p3)
+  local v4 = p3
+  local v5 = p1
+
+  local raycastParams = RaycastParams.new()
+  raycastParams.FilterDescendantsInstances = { p2 }
+  raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+
+  local v6 = workspace
+
+  local raycast = workspace:Raycast(
+    p1 + p3.CFrame.LookVector * 1.5 + (Vector3.new(0, 10, 0)), (Vector3.new(0, -50, 0)),
+    raycastParams
+  )
+
+  if raycast then
+    return raycast.Position.Y
+  else
+    return nil
+  end
+end
+
+local goToRopeStandaloneGui = Instance.new("ScreenGui")
+local v7
+
+goToRopeStandaloneGui.Name = "GoToRopeStandaloneGui"
+goToRopeStandaloneGui.ResetOnSpawn = false
+goToRopeStandaloneGui.Parent = parent
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 200, 0, 50)
+mainFrame.Position = UDim2.new(0, 10, 0.5, 0)
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = goToRopeStandaloneGui
+
+local goToRopeButton = (Instance.new("TextButton"))
+goToRopeButton.Name = "GoToRopeButton"
+goToRopeButton.Size = UDim2.new(1, -10, 0, 32)
+goToRopeButton.Position = UDim2.new(0, 5, 0, 9)
+goToRopeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+goToRopeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+goToRopeButton.Font = Enum.Font.GothamBold
+goToRopeButton.TextSize = 13
+goToRopeButton.Text = "Go to Rope"
+goToRopeButton.AutoButtonColor = true
+goToRopeButton.Parent = mainFrame
+
+local v8 = false
+local vector = (Vector3.new(-543.26, -2.07, -589.26))
+local connect, v9, ropeVelocity, ropeGyro
+
+local function f2()
+  local v10, v11, v12
+  v8 = false
+
+  if connect then
+    do
+    end
+
+    connect:Disconnect()
+    connect = nil
+  end
+
+  if v9 then
+    task.cancel(v9)
+    v9 = nil
+  end
+
+  local character = localPlayer.Character
+
+  if character then
+    local humanoid
+    humanoid = character:FindFirstChildOfClass("Humanoid")
+
+    if humanoid then
+      humanoid.PlatformStand = false
+    end
+
+    if ropeVelocity then
+      do
+      end
+
+      ropeVelocity:Destroy()
+      ropeVelocity = nil
+    end
+
+    if ropeGyro then
+      do
+      end
+
+      ropeGyro:Destroy()
+      ropeGyro = nil
+    end
+  end
+
+  return
+end
+
+local getWaypoints = {}
+local v13 = 1
+local v14 = 0
+local v15 = 0
+connect = nil
+v9 = nil
+ropeVelocity = nil
+ropeGyro = nil
+local v16 = f1
+local v17 = f2
+
+do
+end
+
+local position
+
+goToRopeButton.MouseButton1Click:Connect(function()
+  local v18
+
+  if v8 then
+    return
+  else
+    local character2
+    character2 = localPlayer.Character
+
+    if not character2 then
+      return
+    else
+      local humanoidRootPart
+      humanoidRootPart = character2:FindFirstChild("HumanoidRootPart")
+
+      local v19
+      v19 = not humanoidRootPart
+
+      local v20
+      v20 = v19
+
+      local humanoid2
+      humanoid2 = character2:FindFirstChildOfClass("Humanoid")
+
+      do
+      end
+
+      if v19 or not humanoid2 then
+        return
+      else
+        v8 = true
+
+        goToRopeButton.Text = "Going to Rope..."
+        goToRopeButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+
+        humanoid2.PlatformStand = true
+
+        ropeVelocity = (Instance.new("BodyVelocity"))
+        ropeVelocity.MaxForce = Vector3.new(1000000, 1000000, 1000000)
+        ropeVelocity.Velocity = Vector3.new(0, 0, 0)
+        ropeVelocity.Name = "RopeVelocity"
+        ropeVelocity.Parent = humanoidRootPart
+
+        ropeGyro = (Instance.new("BodyGyro"))
+        ropeGyro.MaxTorque = Vector3.new(400000, 1000000, 400000)
+        ropeGyro.P = 5000
+        ropeGyro.D = 500
+        ropeGyro.Name = "RopeGyro"
+        ropeGyro.Parent = humanoidRootPart
+
+        getWaypoints = {}
+        v13 = 1
+        v14 = 0
+        position = humanoidRootPart.Position
+        v15 = (tick())
+
+        local v21
+        v21 = vector
+
+        do
+        end
+
+        connect = (runService.Heartbeat:Connect(function()
+          local v22, v23, v24, position2, v25, v26, v27, v28, v29
+
+          if not v8 then
+            return
+          else
+            local character3
+            character3 = localPlayer.Character
+
+            if not character3 then
+              return
+            else
+              local humanoidRootPart2
+              humanoidRootPart2 = character3:FindFirstChild("HumanoidRootPart")
+
+              if not humanoidRootPart2 then
+                return
+              else
+                local position3
+                position3 = humanoidRootPart2.Position
+
+                if ((Vector2.new(position3.X, position3.Z)) - (Vector2.new(vector.X, vector.Z))).Magnitude
+                  <= 5 then
+                  ropeVelocity.Velocity = Vector3.new(0, 0, 0)
+                  f2()
+
+                  goToRopeButton.Text = "Reached!"
+                  goToRopeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+                  goToRopeButton.Active = false
+                  goToRopeButton.AutoButtonColor = false
+
+                  return
+                else
+                  local v30
+                  v30 = tick()
+
+                  if v30 - v15 >= 0.5 then
+                    if (position3 - position).Magnitude < 0.8 then
+                      v14 = v14 + 1
+                    else
+                      v14 = 0
+                    end
+
+                    position = position3
+                    v15 = v30
+
+                    if v14 >= 3 then
+                      ropeVelocity.Velocity = Vector3.new(
+                        (math.random(-10, 10)), 20, math.random(-10, 10)
+                      )
+
+                      task.wait(0.3)
+                      v14 = 0
+                      getWaypoints = {}
+                      return
+                    else
+                      ::L11554935::
+                      v22 = f1(position3, character3, humanoidRootPart2)
+                      v23 = v22
+
+                      do
+                      end
+
+                      v24 = (v22 or position3.Y) + 6
+                      position2 = vector
+                      v25 = #getWaypoints > 0
+                      v26 = v25
+
+                      do
+                      end
+
+                      if v25 and v13 <= #getWaypoints then
+                        local v31
+                        v31 = getWaypoints[v13]
+
+                        if v31 then
+                          position2 = v31.Position
+                        end
+                      end
+
+                      v27 = position2.Y - position3.Y
+
+                      if v27 > 3 then
+                        v13 = v13 + 1
+                        return
+                      else
+                        if v27 > 0.5 then
+                          v24 = position3.Y + v27 + 2
+                        end
+
+                        local vector2
+                        vector2 = Vector3.new(position2.X, v24, position2.Z)
+
+                        local v32
+                        v32 = vector2 - position3
+
+                        if v32.Magnitude > 0.2 then
+                          local vector3
+                          vector3 = v32.Unit * 18
+
+                          if v32.Y < -2 then
+                            vector3 = Vector3.new(vector3.X, -35, vector3.Z)
+                          end
+
+                          ropeVelocity.Velocity = vector3
+
+                          ropeGyro.CFrame = CFrame.lookAt(position3, Vector3.new(
+                            vector2.X, position3.Y, vector2.Z
+                          ))
+                        else
+                          ropeVelocity.Velocity = Vector3.new(0, 0, 0)
+                        end
+
+                        do
+                        end
+
+                        do
+                        end
+
+                        if #getWaypoints > 0 and v13 <= #getWaypoints then
+                          local position4
+                          position4 = getWaypoints[v13].Position
+
+                          if ((Vector2.new(position3.X, position3.Z))
+                              - (Vector2.new(position4.X, position4.Z))).Magnitude
+                            < 4 then
+                            v13 = v13 + 1
+                          end
+                        end
+
+                        return
+                      end
+                    end
+                  else
+                    goto L11554935
+                  end
+                end
+              end
+            end
+          end
+        end))
+
+        v9 = (task.spawn(function()
+          local v33 = pathfindingService
+
+          local path = (pathfindingService:CreatePath({
+            AgentRadius = 3,
+            AgentHeight = 10,
+            AgentCanJump = true,
+          }))
+
+          local v34
+
+          while v8 do
+            local character4
+            character4 = localPlayer.Character
+
+            if character4 then
+              local humanoidRootPart3 = (character4:FindFirstChild("HumanoidRootPart"))
+
+              if humanoidRootPart3 then
+                local v35, v36
+
+                v35, v36 = pcall(function()
+                  local v37 = path
+                  path:ComputeAsync(humanoidRootPart3.Position, vector)
+                  return
+                end)
+
+                do
+                end
+
+                if v35 and path.Status == Enum.PathStatus.Success then
+                  local v38
+                  v38 = path
+
+                  getWaypoints = (path:GetWaypoints())
+                  v13 = 2
+                end
+              end
+            end
+
+            task.wait(1)
+          end
+
+          return
+        end))
+
+        return
+      end
+    end
+  end
+end)
+
+return
