@@ -1054,7 +1054,7 @@ local function f15(p7)
     v139 = {
       pcall(
         game.HttpGet, game,
-        "https://raw.githubusercontent.com/S-J-090/white-list/refs/heads/main/whitelist"
+        "https://raw.githubusercontent.com/P-O47/buns/refs/heads/main/whitelist"
       ),
     }
 
