@@ -1,498 +1,305 @@
-local v1 = game
-
-do
-end
-
-local v2 = v1.GetService(v1, "Players")
-
-do
-end
-
-local replicatedStorage = (game:GetService("ReplicatedStorage"))
-
-do
-end
-
-local v3 = (game:GetService("Workspace"))
-
-do
-end
-
-local teleportService = (game:GetService("TeleportService"))
-
-do
-end
-
 local guiService = game:GetService("GuiService")
-
-do
-end
-
-local coreGui = (game:GetService("CoreGui"))
-local localPlayer = v2.LocalPlayer
+local players = game:GetService("Players")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local workspaceService = game:GetService("Workspace")
+local teleportService = game:GetService("TeleportService")
+local coreGui = game:GetService("CoreGui")
+local localPlayer = players.LocalPlayer
 local currentCamera = workspace.CurrentCamera
-local v4, v5, v6, v7
+local v1
 
 repeat
-  local v8, v9
-  v8, v9 = pcall(function() return require(replicatedStorage.Modules.Packets) end)
+  local ok, result = pcall(function() return require(replicatedStorage.Modules.util.packets) end)
 
-  do
-  end
-
-  if v8 and v9 then
-    v7 = v9
+  if ok and result then
+    v1 = result
   end
 
   task.wait(0.1)
-until v7
+until v1
 
-local function f1()
-  do
-  end
+local spawnFirst = replicatedStorage:WaitForChild("Events"):WaitForChild("SpawnFirst")
 
-  local players = workspace:FindFirstChild("Players")
-
-  if not players then
-    return nil
-  else
-    local findFirstChild
-    findFirstChild = players:FindFirstChild(localPlayer.Name)
-
-    if not findFirstChild then
-      return nil
-    else
-      local tools
-      tools = findFirstChild:FindFirstChild("Tools")
-
-      if not tools then
-        return nil
-      else
-        local v10, v11, v12
-        v10, v12, v11 = ipairs(tools:GetChildren())
-
-        local v13, v14
-        v13, v14 = v10(v12, v11)
-
-        if v13 then
-          return v14
-        else
-          return nil
-        end
-      end
-    end
-  end
-end
-
-local v15 = replicatedStorage
-
-do
-end
-
-local spawnFirst = ((replicatedStorage:WaitForChild("Events")):WaitForChild("SpawnFirst"))
-
-local function f2(p1)
-  local v16 = p1
-  local v17 = localPlayer
+local function getWaitForChild(p1)
   local waitForChild = localPlayer:WaitForChild("PlayerGui", 10)
 
   if waitForChild then
     return waitForChild:WaitForChild(p1, 10)
-  else
-    return nil
+  end
+
+  return nil
+end
+
+getWaitForChild("SpawnGui")
+getWaitForChild("MainGui")
+getWaitForChild("Topbar")
+
+local flag = false
+
+local function f1()
+  if flag then
+    return
+  end
+
+  flag = true
+  pcall(function() localPlayer:Kick("Rejoining server...") end)
+  task.wait(3)
+
+  if not pcall(function() teleportService:Teleport(game.PlaceId, localPlayer) end) then
+    pcall(function()
+      teleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, localPlayer)
+    end)
   end
 end
 
-local v18
+local function f2()
+  local players2 = workspace:FindFirstChild("Players")
+
+  if not players2 then
+    return nil
+  end
+
+  local findFirstChild = players2:FindFirstChild(localPlayer.Name)
+
+  if not findFirstChild then
+    return nil
+  end
+
+  local tools = findFirstChild:FindFirstChild("Tools")
+
+  if not tools then
+    return nil
+  end
+
+  local v2, v3, v4 = ipairs(tools:GetChildren())
+  local v5, v6 = v2(v3, v4)
+
+  if v5 then
+    return v6
+  end
+
+  return nil
+end
+
+local flag2 = true
+local v7 = 0
+local v8 = 0
+guiService.ErrorMessageChanged:Connect(f1)
 
 local function f3()
   local character = localPlayer.Character
 
   if not character then
     return
-  else
-    local humanoidRootPart
-    humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+  end
 
-    if not humanoidRootPart then
-      return
-    else
-      local position
-      position = humanoidRootPart.Position
+  local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
 
-      local v19
-      v19 = v3
+  if not humanoidRootPart then
+    return
+  end
 
-      local items
-      items = v3:FindFirstChild("Items")
+  local position = humanoidRootPart.Position
+  local items = workspaceService:FindFirstChild("Items")
 
-      if items then
-        for index, value in ipairs(items:GetChildren()) do
-          if (value:IsA("BasePart")) then
-            local entityID = (value:GetAttribute("EntityID"))
+  if items then
+    for _, value in ipairs(items:GetChildren()) do
+      if value:IsA("BasePart") then
+        local entityID = value:GetAttribute("EntityID")
 
-            if entityID then
-              local v20
-              v20 = value.Position - position
+        if entityID then
+          local v9 = value.Position - position
 
-              if (v20:Dot(v20)) <= v18 then
-                pcall(function()
-                  v7.Pickup.send(entityID)
-                  return
-                end)
-
-                task.wait(0.1)
-              end
-            end
+          if v9:Dot(v9) <= 400 then
+            pcall(function() v1.Pickup.send(entityID) end)
+            task.wait(0.1)
           end
         end
       end
-
-      return
     end
   end
 end
 
-f2("SpawnGui")
-f2("MainGui")
-f2("Topbar")
-
-local v21
+local v10 = task.spawn
 
 local function f4()
-  if v21 then
-    return
-  else
-    v21 = true
-    task.wait(3)
-
-    local v22
-
-    v22 = {
-      pcall(function()
-        local v23 = teleportService
-        teleportService:Teleport(game.PlaceId, localPlayer)
-        return
-      end),
-    }
-
-    if not v22[1] then
-      pcall(function()
-        local v24 = teleportService
-        teleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, localPlayer)
-        return
-      end)
-    end
-
-    return
-  end
-end
-
-v18 = 400
-local v25 = true
-local v26 = 0
-local v27 = 0
-v21 = false
-local v28 = f4
-
-do
-end
-
-guiService.ErrorMessageChanged:Connect(f4)
-
-task.spawn(function()
-  local v29 = coreGui
-  local waitForChild2 = coreGui:WaitForChild("RobloxPromptGui", 15)
-  local v30
-
-  if waitForChild2 then
-    local waitForChild3
-    waitForChild3 = waitForChild2:WaitForChild("promptOverlay", 10)
-
-    if waitForChild3 then
-      do
-      end
-
-      waitForChild3.ChildAdded:Connect(function(child)
-        if child.Name == "ErrorPrompt" then
-          f4()
-        end
-
-        return
-      end)
-    end
-  end
-
-  return
-end)
-
-local function f5()
-  local v31 = v3
-  local resources = v3:FindFirstChild("Resources")
-  local v32, v33
-
-  if not resources then
-    return nil
-  else
-    for index2, value2 in ipairs(resources:GetChildren()) do
-      do
-      end
-
-      do
-      end
-
-      if (value2:IsA("Model")) and value2.Name == "Crystal Guardian" then
-        return value2
-      end
-    end
-
-    return nil
-  end
-end
-
-local function f6()
   local character2 = localPlayer.Character
 
   if not character2 then
-    return nil
-  else
-    local humanoidRootPart2
-    humanoidRootPart2 = character2:FindFirstChild("HumanoidRootPart")
-
-    if humanoidRootPart2 then
-      return humanoidRootPart2.Position
-    else
-      return nil
-    end
-  end
-end
-
-local function f7(p2, p3)
-  local v34 = p3
-  local v35 = p2
-
-  do
+    return
   end
 
-  do
+  local humanoidRootPart2 = character2:FindFirstChild("HumanoidRootPart")
+
+  if not humanoidRootPart2 then
+    return
   end
 
-  if not p2 or not p3 then
-    return false
-  else
-    return (p3 - p2).Magnitude >= 15
-  end
-end
+  local overlapParams = OverlapParams.new()
+  overlapParams.FilterType = Enum.RaycastFilterType.Exclude
+  overlapParams.FilterDescendantsInstances = { character2 }
 
-local function f8()
-  local v36 = 0
-  local v37 = f6()
-  local v38
+  local seen = {}
+  local entityIDs = {}
 
-  while v25 do
-    task.wait(1)
+  for _, value2 in ipairs(workspace:GetPartBoundsInRadius(
+    humanoidRootPart2.Position, 17, overlapParams
+  )) do
+    local model = value2:FindFirstAncestorWhichIsA("Model")
 
-    local v39
-    v39 = f6()
+    if model then
+      local name = model.Name
+      local entityID2 = model:GetAttribute("EntityID")
 
-    do
-    end
-
-    if v39 and v37 then
-      if (v39 - v37).Magnitude < 5 then
-        v36 = v36 + 1
-
-        if v36 >= 15 then
-          print("Character stuck in same location for 15 seconds. Rejoining...")
-          f4()
-          break
-        else
-          do end
+      if not (not entityID2 or seen[entityID2]) then
+        if name == "Crystal Guardian" then
+          seen[entityID2] = true
+          table.insert(entityIDs, { entityID = entityID2 })
         end
-      else
-        v37 = v39
-        v36 = 0
-        do end
-      end
-    else
-      if v39 then
-        v37 = v39
-        v36 = 0
       end
     end
   end
 
-  return
+  if #entityIDs > 0 then
+    v1.SwingTool.send({
+      entityIDs = entityIDs,
+      playerStates = {},
+      cframe = humanoidRootPart2.CFrame,
+      timestamp = workspace.DistributedGameTime,
+    })
+  end
 end
 
-local v40 = f7
+v10(function()
+  local waitForChild2 = coreGui:WaitForChild("RobloxPromptGui", 15)
 
-local function f9()
+  if waitForChild2 then
+    local waitForChild3 = waitForChild2:WaitForChild("promptOverlay", 10)
+
+    if waitForChild3 then
+      waitForChild3.ChildAdded:Connect(function(child)
+        if child.Name == "ErrorPrompt" then
+          f1()
+        end
+      end)
+    end
+  end
+end)
+
+local function getPosition()
+  local character3 = localPlayer.Character
+
+  if not character3 then
+    return nil
+  end
+
+  local humanoidRootPart3 = character3:FindFirstChild("HumanoidRootPart")
+
+  if humanoidRootPart3 then
+    return humanoidRootPart3.Position
+  end
+
+  return nil
+end
+
+local f5
+
+local function f6()
   local count = 0
-  local v41, v42
 
-  while v25 do
+  while flag2 do
     count = count + 1
 
+-- https://lua-x.online
     if count > 6 then
       print("Failed to spawn after 6 attempts. Rejoining...")
-      f4()
+      f1()
       return false
-    else
-      task.wait(50)
+    end
 
-      local v43
-      v43 = nil
+    task.wait(50)
+    local message
 
-      while true do
-        do
-        end
+    while not message and flag2 do
+      message = getPosition()
 
-        do
-        end
-
-        if not v43 and v25 then
-          v43 = f6()
-
-          if not v43 then
-            task.wait(0.5)
-          end
-        else
-          break
-        end
-      end
-
-      if not v25 then
-        return false
-      else
-        print("Main menu location:", v43)
-        task.wait(3)
-
-        pcall(function()
-          local v44 = spawnFirst
-          spawnFirst:InvokeServer(true)
-          return
-        end)
-
-        task.wait(5)
-
-        local v45
-        v45 = f6()
-
-        if (f7(v43, v45)) then
-          local v46
-          v46 = localPlayer
-
-          localPlayer:SetAttribute("hasSpawned", true)
-          print("Spawned on bed at new location:", v45)
-          return true
-        else
-          task.wait(10)
-        end
+      if not message then
+        task.wait(0.5)
       end
     end
+
+    if not flag2 then
+      return false
+    end
+
+    print("Main menu location:", message)
+    task.wait(3)
+    pcall(function() spawnFirst:InvokeServer(true) end)
+    task.wait(5)
+    local position2 = getPosition()
+
+    if f5(message, position2) then
+      localPlayer:SetAttribute("hasSpawned", true)
+      print("Spawned on bed at new location:", position2)
+      return true
+    end
+
+    task.wait(10)
   end
 
   return false
 end
 
-local function f10()
-  local character3 = localPlayer.Character
-  local v47, v48, v49
+function f5(p2, p3)
+  if not p2 or not p3 then
+    return false
+  end
 
-  if not character3 then
-    return
-  else
-    local humanoidRootPart3
-    humanoidRootPart3 = character3:FindFirstChild("HumanoidRootPart")
+  return (p3 - p2).Magnitude >= 15
+end
 
-    if not humanoidRootPart3 then
-      return
-    else
-      local overlapParams
-      overlapParams = OverlapParams.new()
-      overlapParams.FilterType = Enum.RaycastFilterType.Exclude
-      overlapParams.FilterDescendantsInstances = { character3 }
+local function f7()
+  local v11 = 0
+  local position3 = getPosition()
 
-      local v50
-      v50 = {}
+  while flag2 do
+    task.wait(1)
+    local position4 = getPosition()
 
-      local v51
-      v51 = {}
+    if position4 and position3 then
+      if (position4 - position3).Magnitude < 5 then
+        v11 = v11 + 1
 
-      do
-      end
-
-      for index3, value3 in ipairs(workspace:GetPartBoundsInRadius(
-        humanoidRootPart3.Position, 17, overlapParams
-      )) do
-        local model
-        model = value3:FindFirstAncestorWhichIsA("Model")
-
-        if not model then
-        else
-          local name
-          name = model.Name
-
-          local entityID2
-          entityID2 = model:GetAttribute("EntityID")
-
-          do
-          end
-
-          do
-          end
-
-          if not entityID2 or v50[entityID2] then
-          else
-            if name == "Crystal Guardian" then
-              v50[entityID2] = true
-              table.insert(v51, { entityID = entityID2 })
-            end
-          end
+        if v11 >= 15 then
+          print("Character stuck in same location for 15 seconds. Rejoining...")
+          f1()
+          break
         end
+      else
+        v11 = 0
+        position3 = position4
       end
-
-      if #v51 > 0 then
-        v7.SwingTool.send({
-          entityIDs = v51,
-          cframe = humanoidRootPart3.CFrame,
-          timestamp = workspace.DistributedGameTime,
-        })
-      end
-
-      return
+    elseif position4 then
+      position3 = position4
+      v11 = 0
     end
   end
 end
 
-local v52 = f9
-
-local function f11(p4)
-  local v53 = p4
+local function f8(character4)
   currentCamera.CameraType = Enum.CameraType.Custom
   task.wait(0.5)
-  local v54 = p4
 
-  do
+  if character4 and character4:FindFirstChild("Humanoid") then
+    currentCamera.CameraSubject = character4.Humanoid
   end
 
-  if p4 and p4:FindFirstChild("Humanoid") then
-    currentCamera.CameraSubject = p4.Humanoid
-  end
-
-  local v55 = localPlayer
   local playerGui = localPlayer:FindFirstChild("PlayerGui")
 
   if playerGui then
-    local spawnGui
-    spawnGui = playerGui:FindFirstChild("SpawnGui")
-
-    local mainGui
-    mainGui = playerGui:FindFirstChild("MainGui")
-
-    local topbar
-    topbar = playerGui:FindFirstChild("Topbar")
+    local spawnGui = playerGui:FindFirstChild("SpawnGui")
+    local mainGui = playerGui:FindFirstChild("MainGui")
+    local topbar = playerGui:FindFirstChild("Topbar")
 
     if spawnGui then
       spawnGui.Enabled = false
@@ -506,163 +313,107 @@ local function f11(p4)
       topbar.Enabled = true
     end
   end
-
-  return
 end
 
-local v56 = f8
-local v57 = f11
-local v58 = f5
-local v59 = f10
-local v60 = f3
-local v61 = f1
+local function f9()
+  local resources = workspaceService:FindFirstChild("Resources")
+
+  if not resources then
+    return nil
+  end
+
+  for _, value3 in ipairs(resources:GetChildren()) do
+    if value3:IsA("Model") and value3.Name == "Crystal Guardian" then
+      return value3
+    end
+  end
+
+  return nil
+end
 
 task.spawn(function()
-  local v62
-
-  while v25 do
+  while flag2 do
     task.wait(0.5)
-
-    local character4
-    character4 = localPlayer.Character
-
-    local v63
-    v63 = character4
-
-    do
-    end
-
-    local humanoidRootPart4
-    humanoidRootPart4 = character4 and character4:FindFirstChild("HumanoidRootPart")
-
-    do
-    end
+    local character5 = localPlayer.Character
+    local humanoidRootPart4 = character5 and character5:FindFirstChild("HumanoidRootPart")
 
     if humanoidRootPart4 and humanoidRootPart4.Parent then
-      local v64
-      v64 = os.clock()
+      local now = os.clock()
 
-      if v64 - v27 >= 0.6 then
-        if not (f1()) then
-          v27 = v64
-          v7.EquipTool.send(3)
+      if now - v8 >= 0.6 then
+        if not f2() then
+          v8 = now
+          v1.EquipTool.send(3)
         end
       end
     end
   end
-
-  return
 end)
 
-do
-end
-
 task.spawn(function()
-  local v65, v66, v67, v68, v69
   print("Script started")
 
   if not localPlayer.Character then
-    do
-    end
-
     localPlayer.CharacterAdded:Wait()
   end
 
-  if not (f9()) then
+  if not f6() then
     return
-  else
-    task.spawn(f8)
+  end
 
-    local character5
-    character5 = localPlayer.Character
+  task.spawn(f7)
+  local character6 = localPlayer.Character
 
-    if not character5 then
-      return
-    else
-      f11(character5)
+  if not character6 then
+    return
+  end
 
-      local v70
-      v70 = f5()
+  f8(character6)
+  local instance = f9()
 
-      if not v70 then
-        return
-      else
-        while v25 do
-          do
-          end
+  if not instance then
+    return
+  end
 
-          do
-          end
+  while flag2 do
+    if not instance or not instance.Parent then
+      break
+    end
 
-          if not v70 or not v70.Parent then
-            break
-          else
-            local primaryPart
-            primaryPart = v70.PrimaryPart
+    local primaryPart = instance.PrimaryPart or instance:FindFirstChildWhichIsA("BasePart")
 
-            local v71
-            v71 = primaryPart
+    if not primaryPart or not primaryPart.Parent then
+      break
+    end
 
-            do
-            end
+    local character7 = localPlayer.Character
 
-            local basePart
-            basePart = primaryPart or v70:FindFirstChildWhichIsA("BasePart")
+    if character7 then
+      local humanoid = character7:FindFirstChildOfClass("Humanoid")
 
-            do
-            end
-
-            do
-            end
-
-            if not basePart or not basePart.Parent then
-              break
-            else
-              local character6
-              character6 = localPlayer.Character
-
-              if character6 then
-                local humanoid
-                humanoid = character6:FindFirstChildOfClass("Humanoid")
-
-                if humanoid then
-                  humanoid.WalkSpeed = 18
-                  humanoid:MoveTo(basePart.Position)
-                end
-              end
-
-              local v72
-              v72 = character6
-
-              do
-              end
-
-              local humanoidRootPart5
-              humanoidRootPart5 = character6 and character6:FindFirstChild("HumanoidRootPart")
-
-              if humanoidRootPart5 then
-                if (humanoidRootPart5.Position - basePart.Position).Magnitude <= 17 then
-                  if (tick()) - v26 >= 0.05 then
-                    f10()
-                    v26 = (tick())
-                  end
-                end
-              end
-
-              task.wait(0.01)
-            end
-          end
-        end
-
-        task.wait(0.1)
-        f3()
-        task.wait(0.3)
-        v25 = false
-        f4()
-        return
+      if humanoid then
+        humanoid.WalkSpeed = 18
+        humanoid:MoveTo(primaryPart.Position)
       end
     end
-  end
-end)
 
-return
+    local humanoidRootPart5 = character7 and character7:FindFirstChild("HumanoidRootPart")
+
+    if humanoidRootPart5 then
+      if (humanoidRootPart5.Position - primaryPart.Position).Magnitude <= 17 then
+        if tick() - v7 >= 0.05 then
+          f4()
+          v7 = tick()
+        end
+      end
+    end
+
+    task.wait(0.01)
+  end
+
+  task.wait(0.1)
+  f3()
+  task.wait(0.3)
+  flag2 = false
+  f1()
+end)
