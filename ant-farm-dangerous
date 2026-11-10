@@ -1,84 +1,35 @@
-do
-end
-
 local players = game:GetService("Players")
-local v1 = game
-local v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15
-v1:GetService("RunService")
-
-do
-end
-
-game:GetService("UserInputService")
-
-do
-end
-
-local v16 = (game:GetService("Workspace"))
-
-do
-end
-
+local userInputService = game:GetService("UserInputService")
+local workspaceService = game:GetService("Workspace")
 local replicatedStorage = game:GetService("ReplicatedStorage")
-
-do
-end
-
-game:GetService("CollectionService")
-
-do
-end
-
-local marketplaceService = (game:GetService("MarketplaceService"))
-local v17 = 0
+local collectionService = game:GetService("CollectionService")
+local marketplaceService = game:GetService("MarketplaceService")
+local virtualUser = game:GetService("VirtualUser")
+local coreGui = game:GetService("CoreGui")
+local runService = game:GetService("RunService")
+local v1 = 0
 local localPlayer = players.LocalPlayer
 
-do
-end
-
-local virtualUser = (game:GetService("VirtualUser"))
-
-do
-end
-
 players.LocalPlayer.Idled:Connect(function()
-  local v18 = virtualUser
   virtualUser:CaptureController()
-  local v19 = virtualUser
   virtualUser:ClickButton2(Vector2.new())
-  return
 end)
 
-local v20 = localPlayer
-local playerGui = (localPlayer:WaitForChild("PlayerGui"))
-local v21 = (require(replicatedStorage.Modules.Packets))
+local playerGui = localPlayer:WaitForChild("PlayerGui")
+local v2 = require(replicatedStorage.Modules.Packets)
 require(replicatedStorage.Modules.Clock)
-
-for index, value in ipairs({
-  "https://raw.githubusercontent.com/P-O47/burger/refs/heads/main/auto-respawn-mojo",
-}) do
-  do
-  end
-
-  value.match(value, "^%s*(.-)%s*$")
-end
-
-local v22 = false
-local v23 = false
-local v24 = 0
-local v25 = 0
-local v26 = 0
-local v27 = 0
-local v28 = 0
+local flag = false
+local flag2 = false
+local v3 = 0
+local v4 = 0
+local v5 = 0
+local v6 = 0
+local v7 = 0
 
 local antFarm = Instance.new("ScreenGui")
 antFarm.Name = "Ant Farm"
 antFarm.ResetOnSpawn = false
-
-do
-end
-
-antFarm.Parent = game:GetService("CoreGui")
+antFarm.Parent = coreGui
 antFarm.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local instance = Instance.new("Frame", antFarm)
@@ -96,32 +47,22 @@ instance2.BackgroundTransparency = 1
 instance2.Text = "Ant Farm"
 
 local function f1()
-  local v29 = v21
-
-  do
-  end
-
-  if v21 and v21.Rebirth then
-    v21.Rebirth.send()
+  if v2 and v2.Rebirth then
+    v2.Rebirth.send()
 
     task.spawn(function()
       task.wait(1)
       local character = localPlayer.Character
 
       if character then
-        local humanoid
-        humanoid = character:FindFirstChildOfClass("Humanoid")
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
 
         if humanoid then
           humanoid.Health = 0
         end
       end
-
-      return
     end)
   end
-
-  return
 end
 
 instance2.TextColor3 = Color3.fromRGB(220, 220, 220)
@@ -129,7 +70,7 @@ instance2.Font = Enum.Font.SourceSansBold
 instance2.TextSize = 18
 instance2.TextXAlignment = Enum.TextXAlignment.Center
 
-local instance3 = (Instance.new("TextButton", instance))
+local instance3 = Instance.new("TextButton", instance)
 instance3.Size = UDim2.new(1, -20, 0, 40)
 instance3.Position = UDim2.new(0, 10, 0, 40)
 instance3.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -140,84 +81,26 @@ instance3.Text = "For Tank [OFF]"
 instance3.AutoButtonColor = true
 instance3.BorderColor3 = Color3.fromRGB(100, 100, 100)
 
-local instance4 = (Instance.new("TextButton", instance))
+local instance4 = Instance.new("TextButton", instance)
 instance4.Size = UDim2.new(1, -20, 0, 40)
 instance4.Position = UDim2.new(0, 10, 0, 90)
 instance4.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 
 local function f2()
-  local v30 = playerGui
-  local topbar = playerGui:FindFirstChild("Topbar")
-  local v31 = topbar
-  local v32, v33, v34, v35, v36
+  local level = playerGui:FindFirstChild("Topbar") and playerGui.Topbar:FindFirstChild("Topbar")
+    and playerGui.Topbar.Topbar:FindFirstChild("Right")
+    and playerGui.Topbar.Topbar.Right:FindFirstChild("Level")
+    and playerGui.Topbar.Topbar.Right.Level:FindFirstChild("Level")
 
-  if topbar then
-    do
+  if level and level:IsA("TextLabel") then
+    local v8 = tonumber(level.Text:match("lvl%s*(%d+)"))
+
+    if v8 then
+      return v8
     end
-
-    local topbar2
-    topbar2 = playerGui.Topbar:FindFirstChild("Topbar")
-
-    local v37
-    v37 = topbar2
-
-    if topbar2 then
-      do
-      end
-
-      local right
-      right = playerGui.Topbar.Topbar:FindFirstChild("Right")
-
-      local v38
-      v38 = right
-
-      if right then
-        do
-        end
-
-        local level
-        level = playerGui.Topbar.Topbar.Right:FindFirstChild("Level")
-
-        local level2
-        level2 = level
-
-        if level then
-          do
-          end
-
-          level2 = playerGui.Topbar.Topbar.Right.Level:FindFirstChild("Level")
-        end
-
-        v38 = level2
-      end
-
-      v37 = v38
-    end
-
-    v31 = v37
   end
 
-  local v39 = v31
-  local v40 = v39
-
-  do
-  end
-
-  if v39 and v39:IsA("TextLabel") then
-    do
-    end
-
-    local v41
-    v41 = tonumber(v39.Text:match("lvl%s*(%d+)"))
-
-    if v41 then
-      return v41
-    else
-      return 0
-    end
-  else
-    return 0
-  end
+  return 0
 end
 
 instance4.TextColor3 = Color3.fromRGB(220, 220, 220)
@@ -227,14 +110,10 @@ instance4.Text = "For Mojo [OFF]"
 instance4.AutoButtonColor = true
 instance4.BorderColor3 = Color3.fromRGB(100, 100, 100)
 
-local mojoConfirm = (Instance.new("ScreenGui"))
+local mojoConfirm = Instance.new("ScreenGui")
 mojoConfirm.Name = "MojoConfirm"
 mojoConfirm.ResetOnSpawn = false
-
-do
-end
-
-mojoConfirm.Parent = game:GetService("CoreGui")
+mojoConfirm.Parent = coreGui
 mojoConfirm.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 mojoConfirm.Enabled = false
 
@@ -272,79 +151,34 @@ instance8.Position = UDim2.new(0.75, -40, 1, -40)
 instance8.BackgroundColor3 = Color3.fromRGB(100, 40, 40)
 
 local function f3(p1)
-  local v42 = p1
-  local v43, v44, v45, v46, v47, v48
-
   if p1 == "Tank" then
-    if v22 then
-      v22 = false
+    if flag then
+      flag = false
     else
-      v22 = true
-      v23 = false
+      flag = true
+      flag2 = false
+    end
+  elseif p1 == "Mojo" then
+    if flag2 then
+      flag2 = false
+    else
+      flag2 = true
+      flag = false
     end
   else
-    if p1 == "Mojo" then
-      if v23 then
-        v23 = false
-      else
-        v23 = true
-        v22 = false
-      end
-    else
-      v22 = false
-      v23 = false
-    end
+    flag = false
+    flag2 = false
   end
 
-  local v49 = instance3
+  instance3.Text = "For Tank [" .. (flag and "ON]" or "OFF]")
 
-  do
-  end
+  instance3.BackgroundColor3 = flag and Color3.fromRGB(40, 100, 40)
+    or Color3.fromRGB(50, 50, 50)
 
-  do
-  end
+  instance4.Text = "For Mojo [" .. (flag2 and "ON]" or "OFF]")
 
-  do
-  end
-
-  instance3.Text = "For Tank [" .. (v22 and "ON]" or "OFF]")
-  local v50 = instance3
-  local v51 = v22
-
-  local color = v51
-  color = v51 and Color3.fromRGB(40, 100, 40)
-
-  local v52 = color
-
-  do
-  end
-
-  instance3.BackgroundColor3 = color or Color3.fromRGB(50, 50, 50)
-  local v53 = instance4
-
-  do
-  end
-
-  do
-  end
-
-  do
-  end
-
-  instance4.Text = "For Mojo [" .. (v23 and "ON]" or "OFF]")
-  local v54 = instance4
-  local v55 = v23
-
-  local color2 = v55
-  color2 = v55 and Color3.fromRGB(40, 100, 40)
-
-  local v56 = color2
-
-  do
-  end
-
-  instance4.BackgroundColor3 = color2 or Color3.fromRGB(50, 50, 50)
-  return
+  instance4.BackgroundColor3 = flag2 and Color3.fromRGB(40, 100, 40)
+    or Color3.fromRGB(50, 50, 50)
 end
 
 instance8.TextColor3 = Color3.fromRGB(220, 220, 220)
@@ -352,617 +186,301 @@ instance8.Font = Enum.Font.SourceSansBold
 instance8.TextSize = 14
 instance8.Text = "No"
 
-local function f4(p2)
-  local v57 = p2
-  local v58 = playerGui
+local function getLayoutOrder(p2)
   local mainGui = playerGui:FindFirstChild("MainGui")
-  local v59, v60
 
   if not mainGui then
     return nil
-  else
-    local rightPanel
-    rightPanel = mainGui:FindFirstChild("RightPanel")
-
-    local v61
-    v61 = rightPanel
-
-    if rightPanel then
-      do
-      end
-
-      local inventory
-      inventory = mainGui.RightPanel:FindFirstChild("Inventory")
-
-      local list
-      list = inventory
-
-      if inventory then
-        do
-        end
-
-        list = mainGui.RightPanel.Inventory:FindFirstChild("List")
-      end
-
-      v61 = list
-    end
-
-    local v62
-    v62 = v61
-
-    if not v62 then
-      return nil
-    else
-      local findFirstChild
-      findFirstChild = v62:FindFirstChild(p2)
-
-      if findFirstChild then
-        return findFirstChild.LayoutOrder
-      else
-        return nil
-      end
-    end
   end
+
+  local list = mainGui:FindFirstChild("RightPanel")
+    and mainGui.RightPanel:FindFirstChild("Inventory")
+    and mainGui.RightPanel.Inventory:FindFirstChild("List")
+
+  if not list then
+    return nil
+  end
+
+  local findFirstChild = list:FindFirstChild(p2)
+
+  if findFirstChild then
+    return findFirstChild.LayoutOrder
+  end
+
+  return nil
 end
 
 instance8.BorderColor3 = Color3.fromRGB(100, 100, 100)
-local v63
+local v9
 
-local function f5(p3)
-  local v64 = p3
+local function f4(name)
+  if not v9 or tick() - v1 > 300 then
+    local ok, result = pcall(
+      game.HttpGet, game,
+      "https://raw.githubusercontent.com/S-J-090/white-list/refs/heads/main/whitelist"
+    )
 
-  do
-  end
+    if ok then
+      v9 = {}
 
-  local v65 = not v63 or (tick()) - v17 > 300
-
-  if v65 then
-    local v66
-
-    v66 = {
-      pcall(
-        game.HttpGet, game,
-        "https://raw.githubusercontent.com/P-O47/buns/refs/heads/main/whitelist"
-      ),
-    }
-
-    local v67
-    v67 = v66[2]
-
-    if v66[1] then
-      v63 = {}
-
-      for match in v67:gmatch("[^\r\n]+") do
-        local sS
-        sS = match:match("^%s*(.-)%s*$")
+      for match in result:gmatch("[^\r\n]+") do
+        local sS = match:match("^%s*(.-)%s*$")
 
         if sS ~= "" then
-          v63[(sS:lower())] = true
+          v9[sS:lower()] = true
         end
       end
 
-      v17 = (tick())
+      v1 = tick()
     else
-      v63 = {}
-      v17 = (tick())
+      v9 = {}
+      v1 = tick()
     end
   end
 
-  local v68 = v63
-  local v69 = v68
-
-  do
-  end
-
-  return v68 and v63[(p3:lower())]
+  return v9 and v9[name:lower()]
 end
 
-local function f6()
+local function getCharacter()
   return localPlayer.Character
 end
 
-local v70 = f5
-
-local function f7()
-  local v71 = v16
-  local items = v16:FindFirstChild("Items")
-  local v72, v73
+local function f5()
+  local items = workspaceService:FindFirstChild("Items")
 
   if not items then
     return
-  else
-    for index2, value2 in ipairs(items:GetChildren()) do
-      local v74 = value2
+  end
 
-      local v75
-      v75 = v74
-
-      do
-      end
-
-      do
-      end
-
-      if (v74:IsA("BasePart")) and v74.Name ~= "Essence" then
-        pcall(function()
-          local v76 = v74
-          v74:Destroy()
-          return
-        end)
-      end
+  for _, value in ipairs(items:GetChildren()) do
+    if value:IsA("BasePart") and value.Name ~= "Essence" then
+      pcall(function() value:Destroy() end)
     end
-
-    return
   end
 end
 
-local function f8(p4, p5)
-  local v77 = p5
-  local v78 = p4
+-- https://lua-x.online
+local function f6(p3, p4)
   local character2 = localPlayer.Character
-  local v79, v80, v81, v82, v83
 
   if not character2 then
     return
-  else
-    local humanoidRootPart
-    humanoidRootPart = character2:FindFirstChild("HumanoidRootPart")
+  end
 
-    if not humanoidRootPart then
-      return
-    else
-      local overlapParams
-      overlapParams = OverlapParams.new()
-      overlapParams.FilterType = Enum.RaycastFilterType.Exclude
-      overlapParams.FilterDescendantsInstances = { character2 }
+  local humanoidRootPart = character2:FindFirstChild("HumanoidRootPart")
 
-      local v84
-      v84 = {}
+  if not humanoidRootPart then
+    return
+  end
 
-      local v85
-      v85 = {}
+  local overlapParams = OverlapParams.new()
+  overlapParams.FilterType = Enum.RaycastFilterType.Exclude
+  overlapParams.FilterDescendantsInstances = { character2 }
 
-      do
-      end
+  local entityIDs = {}
+  local seen = {}
 
-      for index3, value3 in ipairs(workspace:GetPartBoundsInRadius(
-        humanoidRootPart.Position, 17, overlapParams
-      )) do
-        local model
-        model = value3:FindFirstAncestorWhichIsA("Model")
+  for _, value2 in ipairs(workspace:GetPartBoundsInRadius(
+    humanoidRootPart.Position, 17, overlapParams
+  )) do
+    local model = value2:FindFirstAncestorWhichIsA("Model")
 
-        if not model then
-        else
-          local name
-          name = model.Name
+    if model then
+      local name2 = model.Name
+      local entityID = model:GetAttribute("EntityID")
 
-          local entityID
-          entityID = model:GetAttribute("EntityID")
+      if not (not entityID or seen[entityID]) then
+        local flag3 = false
 
-          do
-          end
+        if name2 == p3 then
+          if p4 then
+            local health = model:FindFirstChild("Health")
 
-          do
-          end
-
-          if not entityID or v85[entityID] then
+            if health and health:IsA("ValueBase") and health.Value >= p4 then
+              flag3 = true
+            end
           else
-            local v86
-            v86 = false
-
-            if name == p4 then
-              if p5 then
-                local health
-                health = model:FindFirstChild("Health")
-
-                local valueBase
-                valueBase = health
-
-                if health then
-                  do
-                  end
-
-                  do
-                  end
-
-                  valueBase = (health:IsA("ValueBase")) and health.Value >= p5
-                end
-
-                if valueBase then
-                  v86 = true
-                end
-              else
-                v86 = true
-              end
-            end
-
-            if v86 then
-              v85[entityID] = true
-              table.insert(v84, { entityID = entityID })
-            end
+            flag3 = true
           end
         end
-      end
 
-      if #v84 > 0 then
-        v21.SwingTool.send({
-          entityIDs = v84,
-          cframe = humanoidRootPart.CFrame,
-          timestamp = workspace.DistributedGameTime,
-        })
+        if flag3 then
+          seen[entityID] = true
+          table.insert(entityIDs, { entityID = entityID })
+        end
       end
+    end
+  end
 
-      return
+  if #entityIDs > 0 then
+    v2.SwingTool.send({
+      entityIDs = entityIDs,
+      cframe = humanoidRootPart.CFrame,
+      timestamp = workspace.DistributedGameTime,
+    })
+  end
+end
+
+local function f7()
+  if tick() - v7 < 3 then
+    return
+  end
+
+  if not v2 or not v2.EquipTool then
+    return
+  end
+
+  local character3 = getCharacter()
+
+  if character3 and character3:FindFirstChild("Rock") then
+    v7 = tick()
+    return
+  end
+
+  local players2 = workspaceService:FindFirstChild("Players")
+
+  if not players2 then
+    return
+  end
+
+  local findFirstChild2 = players2:FindFirstChild(localPlayer.Name)
+
+  if not findFirstChild2 then
+    return
+  end
+
+  local tools = findFirstChild2:FindFirstChild("Tools")
+
+  if tools and tools:FindFirstChild("Rock") then
+    v7 = tick()
+    return
+  end
+
+  pcall(function() v2.EquipTool.send(1) end)
+  v7 = tick()
+end
+
+local function f8()
+  local items2 = workspaceService:FindFirstChild("Items")
+
+  if not items2 then
+    return
+  end
+
+  local character4 = getCharacter()
+  local humanoidRootPart2 = character4 and character4:FindFirstChild("HumanoidRootPart")
+
+  if not humanoidRootPart2 then
+    return
+  end
+
+  local position = humanoidRootPart2.Position
+
+  for _, value3 in ipairs(items2:GetChildren()) do
+    if value3.Name == "Essence" and value3:IsA("BasePart") then
+      if (value3.Position - position).Magnitude <= 30 then
+        local entityID2 = value3:GetAttribute("EntityID")
+
+        if entityID2 and v2 and v2.Pickup then
+          pcall(function() v2.Pickup.send(entityID2) end)
+        end
+      end
     end
   end
 end
 
 local function f9()
-  local v87, v88
-
-  if (tick()) - v28 < 3 then
+  if tick() - v4 < 0.05 then
     return
-  else
-    do
-    end
+  end
 
-    do
-    end
+  local mainGui2 = playerGui:FindFirstChild("MainGui")
 
-    if not v21 or not v21.EquipTool then
-      return
-    else
-      local v89
-      v89 = f6()
+  if not mainGui2 then
+    return
+  end
 
-      local v90
-      v90 = v89
+  local valueLabel = mainGui2:FindFirstChild("Panels")
+    and mainGui2.Panels:FindFirstChild("Stats") and mainGui2.Panels.Stats:FindFirstChild("Bars")
+    and mainGui2.Panels.Stats.Bars:FindFirstChild("Health")
+    and mainGui2.Panels.Stats.Bars.Health:FindFirstChild("ValueLabel")
 
-      do
-      end
+  local v10 = 100
 
-      if v89 and v89:FindFirstChild("Rock") then
-        v28 = (tick())
-        return
-      else
-        local v91
-        v91 = v16
+  if valueLabel and valueLabel:IsA("TextLabel") then
+    v10 = tonumber(valueLabel.Text) or 100
+  end
 
-        local players2
-        players2 = v16:FindFirstChild("Players")
+  local bloodfruit
 
-        if not players2 then
-          return
-        else
-          local findFirstChild2
-          findFirstChild2 = players2:FindFirstChild(localPlayer.Name)
+  if v10 < 95 then
+    bloodfruit = getLayoutOrder("Bloodfruit")
 
-          if not findFirstChild2 then
-            return
-          else
-            local tools
-            tools = findFirstChild2:FindFirstChild("Tools")
-
-            local v92
-            v92 = tools
-
-            do
-            end
-
-            if tools and tools:FindFirstChild("Rock") then
-              v28 = (tick())
-              return
-            else
-              pcall(function()
-                v21.EquipTool.send(1)
-                return
-              end)
-
-              v28 = (tick())
-              return
-            end
-          end
-        end
-      end
+    if bloodfruit and v2 and v2.UseBagItem then
+      pcall(function() v2.UseBagItem.send(bloodfruit) end)
+      v4 = tick()
     end
   end
-end
-
-local function f10()
-  local v93 = v16
-  local items2 = v16:FindFirstChild("Items")
-  local v94
-
-  if not items2 then
-    return
-  else
-    local v95
-    v95 = f6()
-
-    local v96
-    v96 = v95
-
-    do
-    end
-
-    local humanoidRootPart2
-    humanoidRootPart2 = v95 and v95:FindFirstChild("HumanoidRootPart")
-
-    if not humanoidRootPart2 then
-      return
-    else
-      local position
-      position = humanoidRootPart2.Position
-
-      for index4, value4 in ipairs(items2:GetChildren()) do
-        local v97
-        v97 = value4.Name == "Essence"
-
-        local v98
-        v98 = v97
-
-        do
-        end
-
-        if v97 and value4:IsA("BasePart") then
-          if (value4.Position - position).Magnitude <= 30 then
-            local entityID2 = (value4:GetAttribute("EntityID"))
-
-            local v99
-            v99 = entityID2
-
-            local pickup
-            pickup = entityID2
-
-            if entityID2 then
-              local v100
-              v100 = v21
-
-              do
-              end
-
-              pickup = v21 and v21.Pickup
-            end
-
-            if pickup then
-              pcall(function()
-                v21.Pickup.send(entityID2)
-                return
-              end)
-            end
-          end
-        end
-      end
-
-      return
-    end
-  end
-end
-
-local v101 = f7
-local v102 = f10
-local v103 = f8
-local v104 = f4
-
-local function f11()
-  local v105, v106, v107, v108, v109, bloodfruit
-
-  if (tick()) - v25 < 0.05 then
-    return
-  else
-    local v110
-    v110 = playerGui
-
-    local mainGui2
-    mainGui2 = playerGui:FindFirstChild("MainGui")
-
-    if not mainGui2 then
-      return
-    else
-      local panels
-      panels = mainGui2:FindFirstChild("Panels")
-
-      local v111
-      v111 = panels
-
-      if panels then
-        do
-        end
-
-        local stats
-        stats = mainGui2.Panels:FindFirstChild("Stats")
-
-        local v112
-        v112 = stats
-
-        if stats then
-          do
-          end
-
-          local bars
-          bars = mainGui2.Panels.Stats:FindFirstChild("Bars")
-
-          local v113
-          v113 = bars
-
-          if bars then
-            do
-            end
-
-            local health2
-            health2 = mainGui2.Panels.Stats.Bars:FindFirstChild("Health")
-
-            local valueLabel
-            valueLabel = health2
-
-            if health2 then
-              do
-              end
-
-              valueLabel = mainGui2.Panels.Stats.Bars.Health:FindFirstChild("ValueLabel")
-            end
-
-            v113 = valueLabel
-          end
-
-          v112 = v113
-        end
-
-        v111 = v112
-      end
-
-      local v114
-      v114 = 100
-
-      local v115
-      v115 = v111
-
-      local v116
-      v116 = v115
-
-      do
-      end
-
-      if v115 and v115:IsA("TextLabel") then
-        v114 = (tonumber(v115.Text)) or 100
-      end
-
-      if v114 < 95 then
-        bloodfruit = (f4("Bloodfruit"))
-
-        local v117
-        v117 = bloodfruit
-
-        local useBagItem
-        useBagItem = bloodfruit
-
-        if bloodfruit then
-          local v118
-          v118 = v21
-
-          do
-          end
-
-          useBagItem = v21 and v21.UseBagItem
-        end
-
-        if useBagItem then
-          pcall(function()
-            v21.UseBagItem.send(bloodfruit)
-            return
-          end)
-
-          v25 = (tick())
-        end
-      end
-
-      return
-    end
-  end
-end
-
-local v119 = f9
-local v120 = f2
-local v121 = f1
-local v122 = f3
-
-do
 end
 
 instance3.MouseButton1Click:Connect(function()
-  local v123
-
-  local v124, v125 = pcall(function()
-    local v126 = marketplaceService
+  local ok2, result2 = pcall(function()
     return marketplaceService:UserOwnsGamePassAsync(localPlayer.UserId, 1768193888)
   end)
 
-  do
-  end
-
-  local text
-
-  if v124 and v125 then
+  if ok2 and result2 then
     f3("Tank")
     return
-  else
-    if (f5(localPlayer.Name)) then
-      f3("Tank")
-      return
-    else
-      text = instance3.Text
-
-      instance3.Text = "Gamepass or whitelist required"
-      instance3.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
-
-      task.delay(2, function()
-        instance3.Text = text
-        local v127 = instance3
-        local v128 = instance3
-        local v129 = v22
-
-        local color3 = v129
-        color3 = v129 and Color3.fromRGB(40, 100, 40)
-
-        local v130 = color3
-
-        do
-        end
-
-        instance3.BackgroundColor3 = color3 or Color3.fromRGB(50, 50, 50)
-        return
-      end)
-
-      return
-    end
   end
+
+  if f4(localPlayer.Name) then
+    f3("Tank")
+    return
+  end
+
+  local text = instance3.Text
+
+  instance3.Text = "Gamepass or whitelist required"
+  instance3.BackgroundColor3 = Color3.fromRGB(150, 50, 50)
+
+  task.delay(2, function()
+    instance3.Text = text
+
+    instance3.BackgroundColor3 = flag and Color3.fromRGB(40, 100, 40)
+      or Color3.fromRGB(50, 50, 50)
+  end)
 end)
 
-do
-end
-
 instance4.MouseButton1Click:Connect(function()
-  if not v23 then
+  if not flag2 then
     mojoConfirm.Enabled = true
   else
     f3("Mojo")
   end
-
-  return
 end)
-
-do
-end
 
 instance7.MouseButton1Click:Connect(function()
   mojoConfirm.Enabled = false
   f3("Mojo")
-  return
 end)
 
-do
-end
-
-instance8.MouseButton1Click:Connect(function()
-  mojoConfirm.Enabled = false
-  return
-end)
+instance8.MouseButton1Click:Connect(function() mojoConfirm.Enabled = false end)
 
 task.spawn(function()
   while true do
     task.wait(0.05)
 
-    if v22 then
-      if (tick()) - v24 >= 0.05 then
-        f8("Queen Ant", 120)
-        v24 = (tick())
+    if flag then
+      if tick() - v3 >= 0.05 then
+        f6("Queen Ant", 120)
+        v3 = tick()
       end
 
-      f11()
+      f9()
 
-      if (tick()) - v26 >= 2 then
-        f7()
-        v26 = (tick())
+      if tick() - v5 >= 2 then
+        f5()
+        v5 = tick()
       end
     end
   end
@@ -972,29 +490,27 @@ task.spawn(function()
   while true do
     task.wait(0.05)
 
-    if v23 then
-      f9()
+    if flag2 then
+      f7()
 
-      if (tick()) - v24 >= 0.05 then
-        f8("Queen Ant's Servant", nil)
-        v24 = (tick())
+      if tick() - v3 >= 0.05 then
+        f6("Queen Ant's Servant", nil)
+        v3 = tick()
       end
 
-      if (tick()) - v26 >= 2 then
-        f7()
-        f10()
-        v26 = (tick())
+      if tick() - v5 >= 2 then
+        f5()
+        f8()
+        v5 = tick()
       end
 
-      if (tick()) - v27 >= 5 then
-        if (f2()) >= 100 then
+      if tick() - v6 >= 5 then
+        if f2() >= 100 then
           f1()
         end
 
-        v27 = (tick())
+        v6 = tick()
       end
     end
   end
 end)
-
-return
