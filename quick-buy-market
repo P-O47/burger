@@ -1,27 +1,10 @@
-local v1 = game
-
-do
-end
-
-local v2 = v1.GetService(v1, "Players")
-
-do
-end
-
 local replicatedStorage = game:GetService("ReplicatedStorage")
+local userInputService = game:GetService("UserInputService")
+local players = game:GetService("Players")
+local localPlayer = players.LocalPlayer
+local v1 = require(replicatedStorage:WaitForChild("Modules"):WaitForChild("Packets"))
 
-do
-end
-
-local userInputService = (game:GetService("UserInputService"))
-local localPlayer = v2.LocalPlayer
-
-do
-end
-
-local v3 = (require((replicatedStorage:WaitForChild("Modules")):WaitForChild("Packets")))
-
-local v4 = {
+local map = {
   Gold = { 597, 15, 1 },
   ["Crystal Chunk"] = { 436, 18, 1 },
   Log = { 320, 6, 2 },
@@ -44,14 +27,13 @@ local v4 = {
   Rope = { 973, 12, 2 },
 }
 
-local v5 = {}
-local v6, v7, v8, v9, v10, v11, v12, v13, v14
+local v2 = {}
 
-for key, value in pairs(v4) do
-  v5[value[1]] = { key, value[2], value[3] }
+for key, value in pairs(map) do
+  v2[value[1]] = { key, value[2], value[3] }
 end
 
-local autoCompleteFrame = (Instance.new("Frame"))
+local autoCompleteFrame = Instance.new("Frame")
 autoCompleteFrame.Name = "AutoCompleteFrame"
 autoCompleteFrame.Size = UDim2.new(0, 200, 0, 120)
 autoCompleteFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -60,7 +42,7 @@ autoCompleteFrame.BorderColor3 = Color3.fromRGB(100, 100, 100)
 autoCompleteFrame.Visible = false
 autoCompleteFrame.ZIndex = 2
 
-local autoCompleteList = (Instance.new("ScrollingFrame"))
+local autoCompleteList = Instance.new("ScrollingFrame")
 autoCompleteList.Name = "AutoCompleteList"
 autoCompleteList.Size = UDim2.new(1, 0, 1, 0)
 autoCompleteList.BackgroundTransparency = 1
@@ -79,7 +61,7 @@ marketBuyerGUI.Name = "MarketBuyerGUI"
 marketBuyerGUI.ResetOnSpawn = false
 marketBuyerGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local mainFrame = (Instance.new("Frame"))
+local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.new(0, 400, 0, 250)
 mainFrame.Position = UDim2.new(0.5, -200, 0.5, -125)
@@ -111,7 +93,7 @@ infoFrame.BorderSizePixel = 1
 infoFrame.BorderColor3 = Color3.fromRGB(100, 100, 100)
 infoFrame.Parent = mainFrame
 
-local priceLabel = (Instance.new("TextLabel"))
+local priceLabel = Instance.new("TextLabel")
 priceLabel.Name = "PriceLabel"
 priceLabel.Size = UDim2.new(1, 0, 0, 25)
 priceLabel.Position = UDim2.new(0, 0, 0, 5)
@@ -122,7 +104,7 @@ priceLabel.TextSize = 16
 priceLabel.Font = Enum.Font.GothamBold
 priceLabel.Parent = infoFrame
 
-local receivedLabel = (Instance.new("TextLabel"))
+local receivedLabel = Instance.new("TextLabel")
 receivedLabel.Name = "ReceivedLabel"
 receivedLabel.Size = UDim2.new(1, 0, 0, 25)
 receivedLabel.Position = UDim2.new(0, 0, 0, 30)
@@ -145,7 +127,7 @@ itemLabel.Font = Enum.Font.GothamBold
 itemLabel.TextXAlignment = Enum.TextXAlignment.Left
 itemLabel.Parent = mainFrame
 
-local itemBox = (Instance.new("TextBox"))
+local itemBox = Instance.new("TextBox")
 itemBox.Name = "ItemBox"
 itemBox.Size = UDim2.new(1, -120, 0, 30)
 itemBox.Position = UDim2.new(0, 110, 0, 118)
@@ -173,7 +155,7 @@ amountLabel.Font = Enum.Font.GothamBold
 amountLabel.TextXAlignment = Enum.TextXAlignment.Left
 amountLabel.Parent = mainFrame
 
-local amountBox = (Instance.new("TextBox"))
+local amountBox = Instance.new("TextBox")
 amountBox.Name = "AmountBox"
 amountBox.Size = UDim2.new(1, -120, 0, 30)
 amountBox.Position = UDim2.new(0, 110, 0, 153)
@@ -185,7 +167,7 @@ amountBox.PlaceholderText = "Enter amount to buy"
 amountBox.Parent = mainFrame
 amountBox.Text = "1"
 
-local buyButton = (Instance.new("TextButton"))
+local buyButton = Instance.new("TextButton")
 buyButton.Name = "BuyButton"
 buyButton.Size = UDim2.new(1, -20, 0, 40)
 buyButton.Position = UDim2.new(0, 10, 0, 195)
@@ -196,7 +178,7 @@ buyButton.Font = Enum.Font.GothamBold
 buyButton.Text = "Quick Buy"
 buyButton.Parent = mainFrame
 
-local closeButton = (Instance.new("TextButton"))
+local closeButton = Instance.new("TextButton")
 closeButton.Name = "CloseButton"
 closeButton.Size = UDim2.new(0, 30, 0, 30)
 closeButton.Position = UDim2.new(1, -30, 0, 5)
@@ -208,18 +190,17 @@ closeButton.Text = "X"
 closeButton.Active = true
 closeButton.Parent = mainFrame
 
-local v15 = localPlayer
 marketBuyerGUI.Parent = localPlayer:WaitForChild("PlayerGui")
-local v16 = false
+local flag = false
 local size = mainFrame.Size
 local position = closeButton.Position
-local v17
+local list = { title, infoFrame, itemLabel, itemBox, amountLabel, amountBox, buyButton }
 
 local function f1()
-  v16 = not v16
+  flag = not flag
 
-  if v16 then
-    for index, value2 in ipairs(v17) do
+  if flag then
+    for _, value2 in ipairs(list) do
       value2.Visible = false
     end
 
@@ -230,7 +211,7 @@ local function f1()
     closeButton.Text = "+"
     closeButton.BackgroundColor3 = Color3.fromRGB(50, 200, 50)
   else
-    for index2, value3 in ipairs(v17) do
+    for _, value3 in ipairs(list) do
       value3.Visible = true
     end
 
@@ -240,251 +221,147 @@ local function f1()
     closeButton.Text = "X"
     closeButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
   end
-
-  return
 end
 
-v17 = { title, infoFrame, itemLabel, itemBox, amountLabel, amountBox, buyButton }
-local v18 = f1
+local function f2(p1, mainFrame2)
+  local flag2 = false
+  local position2, position3
 
-local function f2(p1, p2)
-  local v19 = p1
-  local v20 = p2
-  local v21 = false
-  local v22, v23, v24, position2, position3
+  local function f3(input)
+    local v3 = input.Position - position2
 
-  local function f3(p3)
-    local v25 = p3.Position - position2
-
-    p2.Position = UDim2.new(
-      position3.X.Scale, position3.X.Offset + v25.X, position3.Y.Scale,
-      position3.Y.Offset + v25.Y
+    mainFrame2.Position = UDim2.new(
+      position3.X.Scale, position3.X.Offset + v3.X, position3.Y.Scale, position3.Y.Offset + v3.Y
     )
-
-    return
   end
 
-  do
-  end
-
-  p1.InputBegan:Connect(function(input)
-    local v26 = input
-
-    do
-    end
-
-    local v27 = input.UserInputType == Enum.UserInputType.MouseButton1
-      or input.UserInputType == Enum.UserInputType.Touch
-
-    local v28
-
-    if v27 then
-      if not p2.Visible then
-        return
-      else
-        v21 = true
-        position2 = input.Position
-        position3 = p2.Position
-
-        do
-        end
-
-        input.Changed:Connect(function()
-          if input.UserInputState == Enum.UserInputState.End then
-            v21 = false
-          end
-
-          return
-        end)
-
+  p1.InputBegan:Connect(function(input2)
+    if input2.UserInputType == Enum.UserInputType.MouseButton1
+      or input2.UserInputType == Enum.UserInputType.Touch then
+      if not mainFrame2.Visible then
         return
       end
-    else
-      return
+
+      flag2 = true
+      position2 = input2.Position
+      position3 = mainFrame2.Position
+
+      input2.Changed:Connect(function()
+        if input2.UserInputState == Enum.UserInputState.End then
+          flag2 = false
+        end
+      end)
     end
   end)
 
-  do
-  end
+  local v4
 
-  local v29
-
-  p1.InputChanged:Connect(function(input2)
-    local v30 = input2
-
-    do
+  p1.InputChanged:Connect(function(input3)
+    if input3.UserInputType == Enum.UserInputType.MouseMovement
+      or input3.UserInputType == Enum.UserInputType.Touch then
+      v4 = input3
     end
-
-    do
-    end
-
-    if input2.UserInputType == Enum.UserInputType.MouseMovement
-      or input2.UserInputType == Enum.UserInputType.Touch then
-      v29 = input2
-    end
-
-    return
   end)
 
-  do
-  end
-
-  userInputService.InputChanged:Connect(function(input3)
-    local v31 = input3
-
-    do
+  userInputService.InputChanged:Connect(function(input4)
+    if input4 == v4 and flag2 then
+      f3(input4)
     end
-
-    do
-    end
-
-    if input3 == v29 and v21 then
-      f3(input3)
-    end
-
-    return
   end)
-
-  return
 end
 
 f2(title, mainFrame)
 f2(closeButton, mainFrame)
 
-do
-end
-
 closeButton.MouseButton1Click:Connect(function()
   if mainFrame.Visible then
     f1()
   end
-
-  return
 end)
 
-do
-end
-
-userInputService.InputBegan:Connect(function(input4, p4)
-  local v32 = input4
-
-  if p4 then
+userInputService.InputBegan:Connect(function(input5, p2)
+  if p2 then
     return
-  else
-    if input4.KeyCode == Enum.KeyCode.Z then
-      if mainFrame.Parent then
-        f1()
-      end
+  end
+
+-- https://lua-x.online
+  if input5.KeyCode == Enum.KeyCode.Z then
+    if mainFrame.Parent then
+      f1()
     end
-
-    return
   end
 end)
 
-local v33 = {}
-local v34 = 1
+local v5 = {}
+local v6 = 1
 
-local function f4()
-  local v35 = autoCompleteList
-  local v36, v37, v38
-
-  for index3, value4 in ipairs(autoCompleteList:GetChildren()) do
-    if (value4:IsA("TextButton")) then
+local function makeTextButton()
+  for _, value4 in ipairs(autoCompleteList:GetChildren()) do
+    if value4:IsA("TextButton") then
       value4:Destroy()
     end
   end
 
-  do
-  end
-
   local lower = itemBox.Text:lower()
-  local v39 = {}
+  local list2 = {}
 
-  for key2, value5 in pairs(v4) do
-    do
-    end
-
-    if ((key2:lower()):sub(1, #lower)) == lower then
-      table.insert(v39, key2)
+  for key2, _ in pairs(map) do
+    if key2:lower():sub(1, #lower) == lower then
+      table.insert(list2, key2)
     end
   end
 
-  table.sort(v39)
-  v33 = v39
-  v34 = 1
+  table.sort(list2)
+  v5 = list2
+  v6 = 1
 
-  if #v39 == 0 then
+  if #list2 == 0 then
     autoCompleteFrame.Visible = false
     return
-  else
-    autoCompleteFrame.Visible = true
-    autoCompleteFrame.Size = UDim2.new(1, -120, 0, math.min(120, 30 * #v39 + 10))
-
-    for index4, value6 in ipairs(v39) do
-      local v40 = value6
-
-      local textButton
-      textButton = Instance.new("TextButton")
-      textButton.Name = v40
-      textButton.Size = UDim2.new(1, 0, 0, 28)
-
-      local v41
-      v41 = index4 == v34
-
-      local color
-      color = v41
-      color = v41 and Color3.fromRGB(70, 70, 90)
-
-      local v42
-      v42 = color
-
-      do
-      end
-
-      textButton.BackgroundColor3 = color or Color3.fromRGB(50, 50, 50)
-      textButton.Text = v40
-      textButton.TextColor3 = Color3.new(1, 1, 1)
-      textButton.TextSize = 14
-      textButton.Font = Enum.Font.Gotham
-      textButton.AutoButtonColor = false
-
-      do
-      end
-
-      textButton.MouseButton1Click:Connect(function()
-        itemBox.Text = v40
-        autoCompleteFrame.Visible = false
-        return
-      end)
-
-      textButton.Parent = autoCompleteList
-    end
-
-    autoCompleteList.CanvasSize = UDim2.new(0, 0, 0, #v39 * 30)
-    return
   end
+
+  autoCompleteFrame.Visible = true
+  autoCompleteFrame.Size = UDim2.new(1, -120, 0, math.min(120, 30 * #list2 + 10))
+
+  for index, value5 in ipairs(list2) do
+    local textButton = Instance.new("TextButton")
+    textButton.Name = value5
+    textButton.Size = UDim2.new(1, 0, 0, 28)
+
+    textButton.BackgroundColor3 = index == v6 and Color3.fromRGB(70, 70, 90)
+      or Color3.fromRGB(50, 50, 50)
+
+    textButton.Text = value5
+    textButton.TextColor3 = Color3.new(1, 1, 1)
+    textButton.TextSize = 14
+    textButton.Font = Enum.Font.Gotham
+    textButton.AutoButtonColor = false
+
+    textButton.MouseButton1Click:Connect(function()
+      itemBox.Text = value5
+      autoCompleteFrame.Visible = false
+    end)
+
+    textButton.Parent = autoCompleteList
+  end
+
+  autoCompleteList.CanvasSize = UDim2.new(0, 0, 0, #list2 * 30)
 end
 
-local function f5()
-  local v43 = 1
-  local v44 = autoCompleteList
+local function f4()
+  local v7 = 1
 
-  for index5, value7 in ipairs(autoCompleteList:GetChildren()) do
-    if (value7:IsA("TextButton")) then
-      if v43 == v34 then
-        value7.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
+  for _, value6 in ipairs(autoCompleteList:GetChildren()) do
+    if value6:IsA("TextButton") then
+      if v7 == v6 then
+        value6.BackgroundColor3 = Color3.fromRGB(70, 70, 90)
       else
-        value7.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+        value6.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
       end
 
-      v43 = v43 + 1
+      v7 = v7 + 1
     end
   end
-
-  return
-end
-
-do
 end
 
 itemBox.FocusLost:Connect(function()
@@ -493,374 +370,198 @@ itemBox.FocusLost:Connect(function()
   if autoCompleteFrame.Visible then
     autoCompleteFrame.Visible = false
   end
-
-  return
 end)
 
-do
-end
+itemBox.Focused:Connect(function() makeTextButton() end)
+itemBox:GetPropertyChangedSignal("Text"):Connect(function() makeTextButton() end)
 
-itemBox.Focused:Connect(function()
-  f4()
-  return
-end)
-
-local v45 = itemBox
-
-do
-end
-
-;(itemBox:GetPropertyChangedSignal("Text")):Connect(function()
-  f4()
-  return
-end)
-
-do
-end
-
-userInputService.InputBegan:Connect(function(input5, p5)
-  local v46 = input5
-  local v47, v48
-
-  if p5 then
+userInputService.InputBegan:Connect(function(input6, p3)
+  if p3 then
     return
-  else
-    if not autoCompleteFrame.Visible then
-      return
-    else
-      local keyCode
-      keyCode = input5.KeyCode
+  end
 
-      if keyCode == Enum.KeyCode.Up then
-        v34 = v34 - 1
+  if not autoCompleteFrame.Visible then
+    return
+  end
 
-        if v34 < 1 then
-          v34 = #v33
-        end
+  local keyCode = input6.KeyCode
 
-        f5()
-      else
-        if keyCode == Enum.KeyCode.Down then
-          v34 = v34 + 1
+  if keyCode == Enum.KeyCode.Up then
+    v6 = v6 - 1
 
-          if v34 > #v33 then
-            v34 = 1
-          end
-
-          f5()
-        else
-          do
-          end
-
-          do
-          end
-
-          if keyCode == Enum.KeyCode.Return or keyCode == Enum.KeyCode.Tab then
-            if #v33 >= v34 then
-              itemBox.Text = v33[v34]
-            end
-
-            autoCompleteFrame.Visible = false
-          else
-            if keyCode == Enum.KeyCode.Escape then
-              autoCompleteFrame.Visible = false
-            end
-          end
-        end
-      end
-
-      return
+    if v6 < 1 then
+      v6 = #v5
     end
+
+    f4()
+  elseif keyCode == Enum.KeyCode.Down then
+    v6 = v6 + 1
+
+    if v6 > #v5 then
+      v6 = 1
+    end
+
+    f4()
+  elseif keyCode == Enum.KeyCode.Return or keyCode == Enum.KeyCode.Tab then
+    if #v5 >= v6 then
+      itemBox.Text = v5[v6]
+    end
+
+    autoCompleteFrame.Visible = false
+  elseif keyCode == Enum.KeyCode.Escape then
+    autoCompleteFrame.Visible = false
   end
 end)
 
-local f6
+local f5
 
-local function f7()
+local function f6()
   local text = itemBox.Text
-  local v49 = not text
-  local v50 = tonumber(amountBox.Text)
-  local v51 = v49
-  local v52, v53
+  local v8 = not text
+  local v9 = tonumber(amountBox.Text)
 
-  if not v49 then
-    local v54
-    v54 = text == ""
-
-    local v55
-    v55 = v54
-
-    if not v54 then
-      do
-      end
-
-      do
-      end
-
-      v55 = not v50 or v50 < 1
-    end
-
-    v51 = v55
-  end
-
-  if v51 then
+  if v8 or text == "" or not v9 or v9 < 1 then
     priceLabel.Text = "Total Price: 0 coins"
     receivedLabel.Text = "You will receive: 0 items"
     return
-  else
-    local v56
-    v56 = f6(text)
-
-    if not v56 then
-      priceLabel.Text = "Total Price: Item not found!"
-      priceLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
-
-      receivedLabel.Text = "You will receive: 0 items"
-      return
-    else
-      priceLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
-
-      local received
-      received = v56.received
-
-      priceLabel.Text = string.format("Total Price: %d coins", v56.price * v50)
-      receivedLabel.Text = string.format("You will receive: %d %s", received * v50, v56.name)
-      return
-    end
   end
+
+  local v10 = f5(text)
+
+  if not v10 then
+    priceLabel.Text = "Total Price: Item not found!"
+    priceLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+
+    receivedLabel.Text = "You will receive: 0 items"
+    return
+  end
+
+  priceLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+  local price = v10.price
+  local received = v10.received
+  priceLabel.Text = string.format("Total Price: %d coins", price * v9)
+  receivedLabel.Text = string.format("You will receive: %d %s", received * v9, v10.name)
 end
 
-function f6(p6)
-  do
-  end
+function f5(p4)
+  local sS = tostring(p4):lower():match("^%s*(.-)%s*$")
 
-  do
-  end
-
-  local sS = ((tostring(p6)):lower()):match("^%s*(.-)%s*$")
-  local v57
-
-  for key3, value8 in pairs(v4) do
-    if (key3:lower()) == sS then
+  for key3, value7 in pairs(map) do
+    if key3:lower() == sS then
       return {
-        id = value8[1],
-        price = value8[2],
-        received = value8[3],
+        id = value7[1],
+        price = value7[2],
+        received = value7[3],
         name = key3,
       }
     end
   end
 
-  local v58 = tonumber(sS)
+  local v11 = tonumber(sS)
 
-  do
-  end
-
-  if v58 and v5[v58] then
+  if v11 and v2[v11] then
     return {
-      id = v58,
-      price = v5[v58][2],
-      received = v5[v58][3],
-      name = v5[v58][1],
+      id = v2[v11][1],
+      price = v2[v11][2],
+      received = v2[v11][3],
+      name = v2[v11][1],
     }
-  else
-    return nil
-  end
-end
-
-local v59 = f7
-
-do
-end
-
-itemBox.Changed:Connect(function(p7)
-  if p7 == "Text" then
-    f7()
   end
 
-  return
+  return nil
+end
+
+itemBox.Changed:Connect(function(p5)
+  if p5 == "Text" then
+    f6()
+  end
 end)
 
-do
-end
-
-amountBox.Changed:Connect(function(p8)
-  if p8 == "Text" then
-    f7()
+amountBox.Changed:Connect(function(p6)
+  if p6 == "Text" then
+    f6()
   end
-
-  return
 end)
 
-local function f8(p9)
-  local v60 = p9
-
-  do
-  end
-
+local function f7(name)
   local mainGui = localPlayer.PlayerGui:FindFirstChild("MainGui")
-  local v61, v62, v63
 
   if not mainGui then
     return nil
-  else
-    local rightPanel
-    rightPanel = mainGui:FindFirstChild("RightPanel")
+  end
 
-    local v64
-    v64 = rightPanel
+  local list3 = mainGui:FindFirstChild("RightPanel")
+    and mainGui.RightPanel:FindFirstChild("Inventory")
+    and mainGui.RightPanel.Inventory:FindFirstChild("List")
 
-    if rightPanel then
-      do
-      end
+  if list3 then
+    local findFirstChild = list3:FindFirstChild(name)
 
-      local inventory
-      inventory = mainGui.RightPanel:FindFirstChild("Inventory")
-
-      local list
-      list = inventory
-
-      if inventory then
-        do
-        end
-
-        list = mainGui.RightPanel.Inventory:FindFirstChild("List")
-      end
-
-      v64 = list
-    end
-
-    local v65
-    v65 = v64
-
-    if v65 then
-      local findFirstChild
-      findFirstChild = v65:FindFirstChild(p9)
-
-      local v66
-      v66 = findFirstChild
-
-      do
-      end
-
-      if findFirstChild and findFirstChild:FindFirstChild("QuantityImage") then
-        do
-        end
-
-        local quantityText = findFirstChild.QuantityImage:FindFirstChild("QuantityText")
-        return quantityText and tonumber(quantityText.Text) or 0
-      else
-        return 0
-      end
-    else
-      return 0
+    if findFirstChild and findFirstChild:FindFirstChild("QuantityImage") then
+      return tonumber(findFirstChild.QuantityImage:FindFirstChild("QuantityText").Text) or 0
     end
   end
-end
 
-do
+  return 0
 end
 
 buyButton.MouseButton1Click:Connect(function()
   local text2 = itemBox.Text
-  local v67 = not text2
-  local v68 = tonumber(amountBox.Text)
-  local v69 = v67
-  local v70, v71
+  local v12 = not text2
+  local v13 = tonumber(amountBox.Text)
 
-  if not v67 then
-    local v72
-    v72 = text2 == ""
-
-    local v73
-    v73 = v72
-
-    if not v72 then
-      do
-      end
-
-      do
-      end
-
-      v73 = not v68 or v68 < 1
-    end
-
-    v69 = v73
-  end
-
-  local v74
-
-  if v69 then
+  if v12 or text2 == "" or not v13 or v13 < 1 then
     return
-  else
-    v74 = (f6(text2))
+  end
 
-    if not v74 then
-      return
-    else
-      buyButton.Interactable = false
-      buyButton.Text = "Buying..."
-      buyButton.BackgroundColor3 = Color3.fromRGB(150, 150, 0)
+  local v14 = f5(text2)
 
-      local v75
-      v75 = ((f8(v74.name)) or 0) + v68 * v74.received
+  if not v14 then
+    return
+  end
 
-      local function f9(p10, p11)
-        local v76 = p11
-        local v77 = p10
-        local v78
+  buyButton.Interactable = false
+  buyButton.Text = "Buying..."
+  buyButton.BackgroundColor3 = Color3.fromRGB(150, 150, 0)
 
-        for i = 1, p10 do
-          do
-          end
+  local v15 = (f7(v14.name) or 0) + v13 * v14.received
 
-          if not (localPlayer.PlayerGui:FindFirstChild("MainGui")) then
-            return false
-          else
-            pcall(function()
-              v3.PurchaseFromShop.send(v74.id, 1)
-              return
-            end)
-
-            task.wait(p11)
-          end
-        end
-
-        return true
+  local function f8(rounded, p7)
+    for i = 1, rounded do
+      if not localPlayer.PlayerGui:FindFirstChild("MainGui") then
+        return false
       end
 
-      f9(v68, 0.02)
+      pcall(function() v1.PurchaseFromShop.send(v14.id, 1) end)
+      task.wait(p7)
+    end
 
-      task.wait(0.5)
+    return true
+  end
 
-      local v79
-      v79 = f8(v74.name)
+  f8(v13, 0.02)
 
-      if v79 then
-        local v80
-        v80 = v75 - v79
+  task.wait(0.5)
+  local v16 = f7(v14.name)
 
-        if v80 > 0 then
-          local v81
-          v81 = math.ceil(v80 / v74.received)
+  if v16 then
+    local v17 = v15 - v16
 
-          buyButton.Text = "Recovering (" .. v81 .. ")..."
-          buyButton.BackgroundColor3 = Color3.fromRGB(200, 100, 0)
+    if v17 > 0 then
+      local rounded2 = math.ceil(v17 / v14.received)
 
-          f9(v81, 0.045)
-        end
-      end
+      buyButton.Text = "Recovering (" .. rounded2 .. ")..."
+      buyButton.BackgroundColor3 = Color3.fromRGB(200, 100, 0)
 
-      buyButton.Text = "Quick Buy"
-      buyButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
-      buyButton.Interactable = true
-
-      return
+      f8(rounded2, 0.045)
     end
   end
+
+  buyButton.Text = "Quick Buy"
+  buyButton.BackgroundColor3 = Color3.fromRGB(0, 150, 0)
+  buyButton.Interactable = true
 end)
 
 f1()
 mainFrame.Visible = true
-f7()
-return
+f6()
